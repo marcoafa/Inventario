@@ -1,0 +1,72 @@
+C:\Users\MARCOAF\Documents\Visual Studio 2013\Projects\Inventario\Inventario\bin\Inventario.dll.config
+C:\Users\MARCOAF\Documents\Visual Studio 2013\Projects\Inventario\Inventario\bin\Inventario.dll
+C:\Users\MARCOAF\Documents\Visual Studio 2013\Projects\Inventario\Inventario\bin\Inventario.pdb
+C:\Users\MARCOAF\Documents\Visual Studio 2013\Projects\Inventario\Inventario\bin\Antlr3.Runtime.dll
+C:\Users\MARCOAF\Documents\Visual Studio 2013\Projects\Inventario\Inventario\bin\EntityFramework.dll
+C:\Users\MARCOAF\Documents\Visual Studio 2013\Projects\Inventario\Inventario\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\MARCOAF\Documents\Visual Studio 2013\Projects\Inventario\Inventario\bin\Newtonsoft.Json.dll
+C:\Users\MARCOAF\Documents\Visual Studio 2013\Projects\Inventario\Inventario\bin\System.Net.Http.Formatting.dll
+C:\Users\MARCOAF\Documents\Visual Studio 2013\Projects\Inventario\Inventario\bin\System.Web.Helpers.dll
+C:\Users\MARCOAF\Documents\Visual Studio 2013\Projects\Inventario\Inventario\bin\System.Web.Http.dll
+C:\Users\MARCOAF\Documents\Visual Studio 2013\Projects\Inventario\Inventario\bin\System.Web.Http.WebHost.dll
+C:\Users\MARCOAF\Documents\Visual Studio 2013\Projects\Inventario\Inventario\bin\System.Web.Mvc.dll
+C:\Users\MARCOAF\Documents\Visual Studio 2013\Projects\Inventario\Inventario\bin\System.Web.Optimization.dll
+C:\Users\MARCOAF\Documents\Visual Studio 2013\Projects\Inventario\Inventario\bin\System.Web.Razor.dll
+C:\Users\MARCOAF\Documents\Visual Studio 2013\Projects\Inventario\Inventario\bin\System.Web.WebPages.Deployment.dll
+C:\Users\MARCOAF\Documents\Visual Studio 2013\Projects\Inventario\Inventario\bin\System.Web.WebPages.dll
+C:\Users\MARCOAF\Documents\Visual Studio 2013\Projects\Inventario\Inventario\bin\System.Web.WebPages.Razor.dll
+C:\Users\MARCOAF\Documents\Visual Studio 2013\Projects\Inventario\Inventario\bin\WebGrease.dll
+C:\Users\MARCOAF\Documents\Visual Studio 2013\Projects\Inventario\Inventario\bin\EntityFramework.xml
+C:\Users\MARCOAF\Documents\Visual Studio 2013\Projects\Inventario\Inventario\bin\Newtonsoft.Json.xml
+C:\Users\MARCOAF\Documents\Visual Studio 2013\Projects\Inventario\Inventario\bin\System.Net.Http.Formatting.xml
+C:\Users\MARCOAF\Documents\Visual Studio 2013\Projects\Inventario\Inventario\bin\System.Web.Helpers.xml
+C:\Users\MARCOAF\Documents\Visual Studio 2013\Projects\Inventario\Inventario\bin\System.Web.Http.xml
+C:\Users\MARCOAF\Documents\Visual Studio 2013\Projects\Inventario\Inventario\bin\System.Web.Http.WebHost.xml
+C:\Users\MARCOAF\Documents\Visual Studio 2013\Projects\Inventario\Inventario\bin\System.Web.Mvc.xml
+C:\Users\MARCOAF\Documents\Visual Studio 2013\Projects\Inventario\Inventario\bin\System.Web.Optimization.xml
+C:\Users\MARCOAF\Documents\Visual Studio 2013\Projects\Inventario\Inventario\bin\System.Web.Razor.xml
+C:\Users\MARCOAF\Documents\Visual Studio 2013\Projects\Inventario\Inventario\bin\System.Web.WebPages.xml
+C:\Users\MARCOAF\Documents\Visual Studio 2013\Projects\Inventario\Inventario\bin\System.Web.WebPages.Deployment.xml
+C:\Users\MARCOAF\Documents\Visual Studio 2013\Projects\Inventario\Inventario\bin\System.Web.WebPages.Razor.xml
+C:\Users\MARCOAF\Documents\Visual Studio 2013\Projects\Inventario\Inventario\bin\Antlr3.Runtime.pdb
+C:\Users\MARCOAF\Documents\Visual Studio 2013\Projects\Inventario\Inventario\obj\Debug\Inventario.dll
+C:\Users\MARCOAF\Documents\Visual Studio 2013\Projects\Inventario\Inventario\obj\Debug\Inventario.pdb
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\bin\Inventario.dll.config
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\bin\Inventario.dll
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\bin\Inventario.pdb
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\bin\Antlr3.Runtime.dll
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\bin\EntityFramework.dll
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\bin\Gma.QrCodeNet.Encoding.dll
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\bin\Microsoft.Web.Infrastructure.dll
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\bin\Newtonsoft.Json.dll
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\bin\System.Net.Http.Formatting.dll
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\bin\System.Web.Helpers.dll
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\bin\System.Web.Http.dll
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\bin\System.Web.Http.WebHost.dll
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\bin\System.Web.Mvc.dll
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\bin\System.Web.Optimization.dll
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\bin\System.Web.Razor.dll
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\bin\System.Web.WebPages.Deployment.dll
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\bin\System.Web.WebPages.dll
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\bin\System.Web.WebPages.Razor.dll
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\bin\WebGrease.dll
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\bin\EntityFramework.xml
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\bin\Gma.QrCodeNet.Encoding.pdb
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\bin\Gma.QrCodeNet.Encoding.xml
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\bin\Newtonsoft.Json.xml
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\bin\System.Net.Http.Formatting.xml
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\bin\System.Web.Helpers.xml
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\bin\System.Web.Http.xml
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\bin\System.Web.Http.WebHost.xml
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\bin\System.Web.Mvc.xml
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\bin\System.Web.Optimization.xml
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\bin\System.Web.Razor.xml
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\bin\System.Web.WebPages.xml
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\bin\System.Web.WebPages.Deployment.xml
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\bin\System.Web.WebPages.Razor.xml
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\bin\Antlr3.Runtime.pdb
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\obj\Debug\Inventario.dll
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\obj\Debug\Inventario.pdb
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\obj\Debug\Inventario.csprojResolveAssemblyReference.cache
+\\S07dc2\it\Users\Aplicaciones\Inventario\Inventario\bin\EntityFramework.SqlServer.dll
+\\S07dc2\it\Users\Aplicaciones\Inventario\Inventario\bin\EntityFramework.SqlServer.xml

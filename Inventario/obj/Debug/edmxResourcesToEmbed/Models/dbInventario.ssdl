@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="InventoryBDMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Area">
+    <Key>
+      <PropertyRef Name="AreaID" />
+    </Key>
+    <Property Name="AreaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Floor" Type="int" Nullable="false" />
+    <Property Name="DivisionID" Type="int" />
+  </EntityType>
+  <EntityType Name="Brand">
+    <Key>
+      <PropertyRef Name="BrandID" />
+    </Key>
+    <Property Name="BrandID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Division">
+    <Key>
+      <PropertyRef Name="DivisionID" />
+    </Key>
+    <Property Name="DivisionID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Hardware">
+    <Key>
+      <PropertyRef Name="SerialNumber" />
+    </Key>
+    <Property Name="SerialNumber" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Model" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="BrandID" Type="int" Nullable="false" />
+    <Property Name="TypeHardwareID" Type="int" Nullable="false" />
+    <Property Name="AreaID" Type="int" Nullable="false" />
+    <Property Name="InvoiceID" Type="int" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="UserNetworkName" Type="nvarchar" MaxLength="300" />
+    <Property Name="NameEquip" Type="nvarchar" MaxLength="300" />
+    <Property Name="CriticEquip" Type="bit" Nullable="false" />
+    <Property Name="SerialAssigned" Type="nvarchar" MaxLength="300" />
+  </EntityType>
+  <EntityType Name="Invoice">
+    <Key>
+      <PropertyRef Name="PO" />
+    </Key>
+    <Property Name="PO" Type="int" Nullable="false" />
+    <Property Name="RequestDocument" Type="nvarchar" MaxLength="50" />
+    <Property Name="rutaArchivo" Type="varchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="Responsables">
+    <Key>
+      <PropertyRef Name="username" />
+    </Key>
+    <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TypeHardware">
+    <Key>
+      <PropertyRef Name="TypeHardwareID" />
+    </Key>
+    <Property Name="TypeHardwareID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Area__DivisionID__30F848ED">
+    <End Role="Division" Type="Self.Division" Multiplicity="0..1" />
+    <End Role="Area" Type="Self.Area" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Division">
+        <PropertyRef Name="DivisionID" />
+      </Principal>
+      <Dependent Role="Area">
+        <PropertyRef Name="DivisionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Hardware__AreaID__440B1D61">
+    <End Role="Area" Type="Self.Area" Multiplicity="1" />
+    <End Role="Hardware" Type="Self.Hardware" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Area">
+        <PropertyRef Name="AreaID" />
+      </Principal>
+      <Dependent Role="Hardware">
+        <PropertyRef Name="AreaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Hardware__BrandI__4222D4EF">
+    <End Role="Brand" Type="Self.Brand" Multiplicity="1" />
+    <End Role="Hardware" Type="Self.Hardware" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Brand">
+        <PropertyRef Name="BrandID" />
+      </Principal>
+      <Dependent Role="Hardware">
+        <PropertyRef Name="BrandID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Hardware__Invoic__44FF419A">
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="0..1" />
+    <End Role="Hardware" Type="Self.Hardware" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Invoice">
+        <PropertyRef Name="PO" />
+      </Principal>
+      <Dependent Role="Hardware">
+        <PropertyRef Name="InvoiceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Hardware__TypeHa__4316F928">
+    <End Role="TypeHardware" Type="Self.TypeHardware" Multiplicity="1" />
+    <End Role="Hardware" Type="Self.Hardware" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeHardware">
+        <PropertyRef Name="TypeHardwareID" />
+      </Principal>
+      <Dependent Role="Hardware">
+        <PropertyRef Name="TypeHardwareID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Hardware_Hardware">
+    <End Role="Hardware" Type="Self.Hardware" Multiplicity="0..1" />
+    <End Role="Hardware1" Type="Self.Hardware" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hardware">
+        <PropertyRef Name="SerialNumber" />
+      </Principal>
+      <Dependent Role="Hardware1">
+        <PropertyRef Name="SerialAssigned" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="InventoryBDMModelStoreContainer">
+    <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Division" EntityType="Self.Division" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Hardware" EntityType="Self.Hardware" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Responsables" EntityType="Self.Responsables" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TypeHardware" EntityType="Self.TypeHardware" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Area__DivisionID__30F848ED" Association="Self.FK__Area__DivisionID__30F848ED">
+      <End Role="Division" EntitySet="Division" />
+      <End Role="Area" EntitySet="Area" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Hardware__AreaID__440B1D61" Association="Self.FK__Hardware__AreaID__440B1D61">
+      <End Role="Area" EntitySet="Area" />
+      <End Role="Hardware" EntitySet="Hardware" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Hardware__BrandI__4222D4EF" Association="Self.FK__Hardware__BrandI__4222D4EF">
+      <End Role="Brand" EntitySet="Brand" />
+      <End Role="Hardware" EntitySet="Hardware" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Hardware__Invoic__44FF419A" Association="Self.FK__Hardware__Invoic__44FF419A">
+      <End Role="Invoice" EntitySet="Invoice" />
+      <End Role="Hardware" EntitySet="Hardware" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Hardware__TypeHa__4316F928" Association="Self.FK__Hardware__TypeHa__4316F928">
+      <End Role="TypeHardware" EntitySet="TypeHardware" />
+      <End Role="Hardware" EntitySet="Hardware" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Hardware_Hardware" Association="Self.FK_Hardware_Hardware">
+      <End Role="Hardware" EntitySet="Hardware" />
+      <End Role="Hardware1" EntitySet="Hardware" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
