@@ -48,33 +48,53 @@ namespace Inventario.Controllers
         public ActionResult EditarInventario(string id)
         {
 
-                var componentes = (from p in entidad.Hardwares
-                            where p.SerialAssigned == id
-                            select p).ToList();
+            //entidad.Configuration.ProxyCreationEnabled = false;
+            //var componentes = (from p in entidad.Hardwares
+            //                   where p.SerialAssigned == id
+            //                   select new SmallHardware
+            //                   {
 
-                //Dictionary<Hardware;List<Hardware> hardwareComponents = new Dictionary<Hardware,List<Hardware>>();
-                
-               var registro = (from p in entidad.Hardwares
-                                where p.SerialNumber == id
-                                select new
-                                {
-                                    SerialNumber = p.SerialNumber,
-                                    User = p.UserName,
-                                    Model = p.Model,
-                                    NameEquip = p.NameEquip,
-                                    CriticEquip = p.CriticEquip,
-                                    Factura = p.InvoiceID,
-                                    idArea = p.AreaID,
-                                    idBrand = p.BrandID,
-                                    idSerialA = p.SerialAssigned,
-                                    idHardware = p.TypeHardwareID,
-                                    componentes = componentes
+            //                       SerialNumber = p.SerialNumber,
+            //                       Model = p.Model,
+            //                       Brand = p.Brand.Name,
+            //                       TypeHardware = p.TypeHardware.Description
 
-                                }).FirstOrDefault();
+            //                   }).ToList();
+
+
+
+            var registro = (from p in entidad.Hardwares
+                            where p.SerialNumber == id
+                            select new {
+                                SerialNumber = p.SerialNumber,
+                                Model = p.Model,
+                                BrandID = p.BrandID,
+                                TypeHardwareID = p.TypeHardwareID,
+                                AreaID = p.AreaID,
+                                InvoiceID = p.InvoiceID,
+                                UserName = p.UserName,
+                                UserNetworkName = p.UserNetworkName,
+                                NameEquip = p.NameEquip,
+                                CriticEquip = p.CriticEquip,
+                                SerialAssigned = p.SerialAssigned,
+                                Components = p.Hardware1.Select(h => new {
+                                    TypeHardware = h.TypeHardware.Description,
+                                    Brand = h.Brand.Name,
+                                    Model = h.Model,
+                                    SerialNumber = h.SerialNumber
+                                }).ToList(),
+                            }).FirstOrDefault();
             
 
+            //var r = new hardwareWithComnponents
+            //{
+            //    r = registro,
+            //    components = componentes
 
-           
+            //};
+
+
+
             return Json(registro, JsonRequestBehavior.AllowGet);
         }
         public ActionResult EditarFactura(string id)

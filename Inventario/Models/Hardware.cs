@@ -11,7 +11,7 @@ namespace Inventario.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Hardware
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -31,7 +31,8 @@ namespace Inventario.Models
         public string NameEquip { get; set; }
         public bool CriticEquip { get; set; }
         public string SerialAssigned { get; set; }
-    
+
+
         public virtual Area Area { get; set; }
         public virtual Brand Brand { get; set; }
         public virtual Invoice Invoice { get; set; }

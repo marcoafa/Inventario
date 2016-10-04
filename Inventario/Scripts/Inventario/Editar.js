@@ -59,18 +59,18 @@ $("body").on("click", ".editarInvetario", function () {
         debugger;
         
         $('#modalSerie').val(r.SerialNumber);
-        $('#modalUsuario').val(r.User);
+        $('#modalUsuario').val(r.UserName);
         $('#modalModelo').val(r.Model);
         $('#modalNoEquipo').val(r.NameEquip);
         $('#modalEquipoCritico').attr('checked', r.CriticEquip);
-        $('#modalFactura').val(r.Factura);
-        //$('#modalMarca').val(r[0].Brand);
+        $('#modalFactura').val(r.InvoiceID);
+        $('#modalMarca').val(r.BrandID);
         
-        $('#modalAreaSelect').val(r.idArea).change();
-        $('#modalMarcaSelect').val(r.idBrand).change();
+        $('#modalAreaSelect').val(r.AreaID).change();
+        $('#modalMarcaSelect').val(r.BrandID).change();
        
-        if (r[0].SerialAsig != null) {
-            $('#modalSerieASelect').val(r.idSerialA).change();
+        if (r.SerialAssigned != null) {
+            $('#modalSerieASelect').val(r.SerialAssigned).change();
         }
         else {
             $('#modalSerieASelect').val('N/A').change();
@@ -79,8 +79,14 @@ $("body").on("click", ".editarInvetario", function () {
         $('#modalhardware').val(r.idHardware);
         $('#modalserialorig').val(r.SerialNumber);
 
-        $(".listaComponentes").append();
-
+        if (r.Components.length == 0) {
+           // $('#componentesHardware').append("<div class='col-sm-12'><h4 class='text-center'>Empty Components</h4></div>");
+        }
+        else {
+            r.Components.forEach(function (value, index) {
+                createComponent(value);
+            });
+        }
      
     });
    
@@ -90,17 +96,18 @@ $("body").on("click", ".editarInvetario", function () {
 
 function createComponent(component)
 {
+    debugger;
     var structureComponent = `<div class=" col-sm-2">
-                                       <label>${component.}</label>
+                                       <label>${component.TypeHardware}</label>
                                     </div>
                                         <div class="col-sm-2">
-                                            <label>${}</label>
+                                            <label>${component.Brand}</label>
                                         </div>
                                         <div class="col-sm-2">
-                                            <label>${}</label>
+                                            <label>${component.Model}</label>
                                         </div>
                                         <div class="col-sm-2">
-                                            <label>${}</label>
+                                            <label>${component.SerialNumber}</label>
                                         </div>
 
                                         <div class="col-sm-4">
@@ -111,6 +118,8 @@ function createComponent(component)
                                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                             </button>
                                         </div>`;
+
+    $('#componentesHardware').append(structureComponent);
 }
 
 $("body").on("click", ".Eliminar", function () {
