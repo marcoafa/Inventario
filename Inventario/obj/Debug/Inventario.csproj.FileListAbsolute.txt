@@ -106,6 +106,6 @@ Y:\Inventario\Inventario\bin\System.Web.WebPages.xml
 Y:\Inventario\Inventario\bin\System.Web.WebPages.Deployment.xml
 Y:\Inventario\Inventario\bin\System.Web.WebPages.Razor.xml
 Y:\Inventario\Inventario\bin\Antlr3.Runtime.pdb
-Y:\Inventario\Inventario\obj\Debug\Inventario.csprojResolveAssemblyReference.cache
 Y:\Inventario\Inventario\obj\Debug\Inventario.dll
 Y:\Inventario\Inventario\obj\Debug\Inventario.pdb
+Y:\Inventario\Inventario\obj\Debug\Inventario.csprojResolveAssemblyReference.cache

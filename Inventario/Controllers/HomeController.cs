@@ -198,6 +198,8 @@ namespace Inventario.Controllers
 
             if (clSerialAsignar == "" || clSerialAsignar == null || clSerialAsignar == "N/A")
                 clSerialAsignar = null;
+            if (clFactura == "" || clFactura == null || clFactura == "N/A")
+                clFactura = null;
             try
             {
                 Hardware H = new Hardware

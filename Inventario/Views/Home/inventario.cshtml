@@ -21,17 +21,18 @@
                     <ul class="dropdown-menu" aria-labelledby="myTabDrop1" id="myTabDrop1-contents">
                         @{foreach (var item in Model.listaTypeHardware)
                         {
-                            if (@item.Description == "CPU")
+                            if (@item.Description == "Desktop" || @item.Description == "Laptop" || @item.Description == "Server" || @item.Description == "Touch" || @item.Description == "Impresora")
                             {
-                                <li class="">
-                                    <a class="titulo" href="#computadora" role="tab" id="dropdown1-tab" data-id="@item.TypeHardwareID" data-toggle="tab" aria-controls="dropdown1" aria-expanded="false">@item.Description</a>
+                                 <li class="">
+                                    <a class="titulo" href="#Opciones" role="tab" id="dropdown1-tab" data-id="@item.TypeHardwareID" data-toggle="tab" aria-controls="dropdown1" aria-expanded="false">@item.Description</a>
                                 </li>
+                                @*<li class="">
+                                    <a class="titulo" href="#computadora" role="tab" id="dropdown1-tab" data-id="@item.TypeHardwareID" data-toggle="tab" aria-controls="dropdown1" aria-expanded="false">@item.Description</a>
+                                </li>*@
                             }
                             else
                             {
-                                <li class="">
-                                    <a class="titulo" href="#Opciones" role="tab" id="dropdown1-tab" data-id="@item.TypeHardwareID" data-toggle="tab" aria-controls="dropdown1" aria-expanded="false">@item.Description</a>
-                                </li>
+                               
                             }
                         }
                         }
@@ -795,7 +796,7 @@
                                                     {
 
 
-                                                        if (item.TypeHardware.Description != "CPU" && item.TypeHardware.Description != "Laptop" && item.TypeHardware.Description != "AIO" && item.SerialAssigned == null)
+                                                        if (item.TypeHardware.Description != "Desktop" && item.TypeHardware.Description != "Laptop" && item.TypeHardware.Description != "Touch" && item.SerialAssigned == null)
                                                         {
                                                             <tr>
                                                                 <td data-sortable="true" class="text-center">@item.TypeHardware.Description</td>
