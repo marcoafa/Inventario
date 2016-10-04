@@ -47,8 +47,14 @@ namespace Inventario.Controllers
         }
         public ActionResult EditarInventario(string id)
         {
-           
-                var registro = (from p in entidad.Hardwares
+
+                var componentes = (from p in entidad.Hardwares
+                            where p.SerialAssigned == id
+                            select p).ToList();
+
+                //Dictionary<Hardware;List<Hardware> hardwareComponents = new Dictionary<Hardware,List<Hardware>>();
+                
+               var registro = (from p in entidad.Hardwares
                                 where p.SerialNumber == id
                                 select new
                                 {
@@ -61,10 +67,13 @@ namespace Inventario.Controllers
                                     idArea = p.AreaID,
                                     idBrand = p.BrandID,
                                     idSerialA = p.SerialAssigned,
-                                    idHardware = p.TypeHardwareID
+                                    idHardware = p.TypeHardwareID,
+                                    componentes = componentes
 
-                                }).ToList();
+                                }).FirstOrDefault();
             
+
+
            
             return Json(registro, JsonRequestBehavior.AllowGet);
         }

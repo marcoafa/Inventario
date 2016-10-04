@@ -58,33 +58,60 @@ $("body").on("click", ".editarInvetario", function () {
                               
         debugger;
         
-        $('#modalSerie').val(r[0].SerialNumber);
-        $('#modalUsuario').val(r[0].User);
-        $('#modalModelo').val(r[0].Model);
-        $('#modalNoEquipo').val(r[0].NameEquip);
-        $('#modalEquipoCritico').attr('checked', r[0].CriticEquip);
-        $('#modalFactura').val(r[0].Factura);
+        $('#modalSerie').val(r.SerialNumber);
+        $('#modalUsuario').val(r.User);
+        $('#modalModelo').val(r.Model);
+        $('#modalNoEquipo').val(r.NameEquip);
+        $('#modalEquipoCritico').attr('checked', r.CriticEquip);
+        $('#modalFactura').val(r.Factura);
         //$('#modalMarca').val(r[0].Brand);
         
-        $('#modalAreaSelect').val(r[0].idArea).change();
-        $('#modalMarcaSelect').val(r[0].idBrand).change();
+        $('#modalAreaSelect').val(r.idArea).change();
+        $('#modalMarcaSelect').val(r.idBrand).change();
        
         if (r[0].SerialAsig != null) {
-            $('#modalSerieASelect').val(r[0].idSerialA).change();
+            $('#modalSerieASelect').val(r.idSerialA).change();
         }
         else {
             $('#modalSerieASelect').val('N/A').change();
         }
        
-        $('#modalhardware').val(r[0].idHardware);
-        $('#modalserialorig').val(r[0].SerialNumber);
-       
-       
+        $('#modalhardware').val(r.idHardware);
+        $('#modalserialorig').val(r.SerialNumber);
+
+        $(".listaComponentes").append();
+
+     
     });
    
 });
 
 //Eliminar row
+
+function createComponent(component)
+{
+    var structureComponent = `<div class=" col-sm-2">
+                                       <label>${component.}</label>
+                                    </div>
+                                        <div class="col-sm-2">
+                                            <label>${}</label>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label>${}</label>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label>${}</label>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <button type="button" class="btn btn-success" aria-label="Left Align">
+                                                <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
+                                            </button>
+                                            <button type="button" class="btn btn-danger"  aria-label="Left Align">
+                                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                            </button>
+                                        </div>`;
+}
 
 $("body").on("click", ".Eliminar", function () {
 
