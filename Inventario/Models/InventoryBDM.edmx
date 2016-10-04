@@ -37,7 +37,7 @@
           <Property Name="BrandID" Type="int" Nullable="false" />
           <Property Name="TypeHardwareID" Type="int" Nullable="false" />
           <Property Name="AreaID" Type="int" Nullable="false" />
-          <Property Name="InvoiceID" Type="varchar" MaxLength="250" />
+          <Property Name="InvoiceID" Type="nvarchar" MaxLength="300" />
           <Property Name="UserName" Type="nvarchar" MaxLength="300" Nullable="false" />
           <Property Name="UserNetworkName" Type="nvarchar" MaxLength="300" />
           <Property Name="NameEquip" Type="nvarchar" MaxLength="300" />
@@ -48,7 +48,7 @@
           <Key>
             <PropertyRef Name="PO" />
           </Key>
-          <Property Name="PO" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="PO" Type="nvarchar" MaxLength="300" Nullable="false" />
           <Property Name="RequestDocument" Type="nvarchar" MaxLength="50" />
           <Property Name="rutaArchivo" Type="varchar" MaxLength="250" />
         </EntityType>
@@ -108,18 +108,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Hardware__Invoic__44FF419A">
-          <End Role="Invoice" Type="Self.Invoice" Multiplicity="0..1" />
-          <End Role="Hardware" Type="Self.Hardware" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Invoice">
-              <PropertyRef Name="PO" />
-            </Principal>
-            <Dependent Role="Hardware">
-              <PropertyRef Name="InvoiceID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Hardware__TypeHa__4316F928">
           <End Role="TypeHardware" Type="Self.TypeHardware" Multiplicity="1" />
           <End Role="Hardware" Type="Self.Hardware" Multiplicity="*" />
@@ -144,6 +132,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Hardware_Invoice">
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="0..1" />
+          <End Role="Hardware" Type="Self.Hardware" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoice">
+              <PropertyRef Name="PO" />
+            </Principal>
+            <Dependent Role="Hardware">
+              <PropertyRef Name="InvoiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="InventoryBDMModelStoreContainer">
           <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
@@ -165,10 +165,6 @@
             <End Role="Brand" EntitySet="Brand" />
             <End Role="Hardware" EntitySet="Hardware" />
           </AssociationSet>
-          <AssociationSet Name="FK__Hardware__Invoic__44FF419A" Association="Self.FK__Hardware__Invoic__44FF419A">
-            <End Role="Invoice" EntitySet="Invoice" />
-            <End Role="Hardware" EntitySet="Hardware" />
-          </AssociationSet>
           <AssociationSet Name="FK__Hardware__TypeHa__4316F928" Association="Self.FK__Hardware__TypeHa__4316F928">
             <End Role="TypeHardware" EntitySet="TypeHardware" />
             <End Role="Hardware" EntitySet="Hardware" />
@@ -176,6 +172,10 @@
           <AssociationSet Name="FK_Hardware_Hardware" Association="Self.FK_Hardware_Hardware">
             <End Role="Hardware" EntitySet="Hardware" />
             <End Role="Hardware1" EntitySet="Hardware" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hardware_Invoice" Association="Self.FK_Hardware_Invoice">
+            <End Role="Invoice" EntitySet="Invoice" />
+            <End Role="Hardware" EntitySet="Hardware" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -203,10 +203,6 @@
             <End Role="Brand" EntitySet="Brands" />
             <End Role="Hardware" EntitySet="Hardwares" />
           </AssociationSet>
-          <AssociationSet Name="FK__Hardware__Invoic__44FF419A" Association="InventoryBDMModel.FK__Hardware__Invoic__44FF419A">
-            <End Role="Invoice" EntitySet="Invoices" />
-            <End Role="Hardware" EntitySet="Hardwares" />
-          </AssociationSet>
           <AssociationSet Name="FK__Hardware__TypeHa__4316F928" Association="InventoryBDMModel.FK__Hardware__TypeHa__4316F928">
             <End Role="TypeHardware" EntitySet="TypeHardwares" />
             <End Role="Hardware" EntitySet="Hardwares" />
@@ -214,6 +210,10 @@
           <AssociationSet Name="FK_Hardware_Hardware" Association="InventoryBDMModel.FK_Hardware_Hardware">
             <End Role="Hardware" EntitySet="Hardwares" />
             <End Role="Hardware1" EntitySet="Hardwares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hardware_Invoice" Association="InventoryBDMModel.FK_Hardware_Invoice">
+            <End Role="Invoice" EntitySet="Invoices" />
+            <End Role="Hardware" EntitySet="Hardwares" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Area">
@@ -252,7 +252,7 @@
           <Property Name="BrandID" Type="Int32" Nullable="false" />
           <Property Name="TypeHardwareID" Type="Int32" Nullable="false" />
           <Property Name="AreaID" Type="Int32" Nullable="false" />
-          <Property Name="InvoiceID" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="InvoiceID" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="UserNetworkName" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="NameEquip" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
@@ -260,19 +260,19 @@
           <Property Name="SerialAssigned" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Area" Relationship="InventoryBDMModel.FK__Hardware__AreaID__440B1D61" FromRole="Hardware" ToRole="Area" />
           <NavigationProperty Name="Brand" Relationship="InventoryBDMModel.FK__Hardware__BrandI__4222D4EF" FromRole="Hardware" ToRole="Brand" />
-          <NavigationProperty Name="Invoice" Relationship="InventoryBDMModel.FK__Hardware__Invoic__44FF419A" FromRole="Hardware" ToRole="Invoice" />
           <NavigationProperty Name="TypeHardware" Relationship="InventoryBDMModel.FK__Hardware__TypeHa__4316F928" FromRole="Hardware" ToRole="TypeHardware" />
           <NavigationProperty Name="Hardware1" Relationship="InventoryBDMModel.FK_Hardware_Hardware" FromRole="Hardware" ToRole="Hardware1" />
           <NavigationProperty Name="Hardware2" Relationship="InventoryBDMModel.FK_Hardware_Hardware" FromRole="Hardware1" ToRole="Hardware" />
+          <NavigationProperty Name="Invoice" Relationship="InventoryBDMModel.FK_Hardware_Invoice" FromRole="Hardware" ToRole="Invoice" />
         </EntityType>
         <EntityType Name="Invoice">
           <Key>
             <PropertyRef Name="PO" />
           </Key>
-          <Property Name="PO" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="PO" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="RequestDocument" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="rutaArchivo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Hardwares" Relationship="InventoryBDMModel.FK__Hardware__Invoic__44FF419A" FromRole="Invoice" ToRole="Hardware" />
+          <NavigationProperty Name="Hardwares" Relationship="InventoryBDMModel.FK_Hardware_Invoice" FromRole="Invoice" ToRole="Hardware" />
         </EntityType>
         <EntityType Name="Responsable">
           <Key>
@@ -331,18 +331,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Hardware__Invoic__44FF419A">
-          <End Type="InventoryBDMModel.Invoice" Role="Invoice" Multiplicity="0..1" />
-          <End Type="InventoryBDMModel.Hardware" Role="Hardware" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Invoice">
-              <PropertyRef Name="PO" />
-            </Principal>
-            <Dependent Role="Hardware">
-              <PropertyRef Name="InvoiceID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Hardware__TypeHa__4316F928">
           <End Type="InventoryBDMModel.TypeHardware" Role="TypeHardware" Multiplicity="1" />
           <End Type="InventoryBDMModel.Hardware" Role="Hardware" Multiplicity="*" />
@@ -367,7 +355,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <Association Name="FK_Hardware_Invoice">
+          <End Type="InventoryBDMModel.Invoice" Role="Invoice" Multiplicity="0..1" />
+          <End Type="InventoryBDMModel.Hardware" Role="Hardware" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoice">
+              <PropertyRef Name="PO" />
+            </Principal>
+            <Dependent Role="Hardware">
+              <PropertyRef Name="InvoiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>

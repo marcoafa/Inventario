@@ -167,6 +167,9 @@
     <Compile Include="Models\Hardware.cs">
       <DependentUpon>InventoryBDM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\hardwarenew.cs">
+      <DependentUpon>InventoryBDM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\InventarioModal.cs" />
     <Compile Include="Models\InventoryBDM.Context.cs">
       <AutoGen>True</AutoGen>

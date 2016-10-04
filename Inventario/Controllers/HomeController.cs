@@ -189,6 +189,9 @@ namespace Inventario.Controllers
 
             if (clSerialAsignar == "" || clSerialAsignar == null || clSerialAsignar == "N/A")
                 clSerialAsignar = null;
+
+            if (clFactura == "" || clFactura == null || clFactura == "N/A")
+                clFactura = null;
             try
             {
                 Hardware H = new Hardware
@@ -200,9 +203,10 @@ namespace Inventario.Controllers
                     AreaID = clArea,
                     InvoiceID = clFactura,
                     UserName = clUsuario,
+                    UserNetworkName = clUsuario,
                     NameEquip = clNoEquipo,
                     CriticEquip = criticoOpcion,
-                    SerialAssigned = clSerialAsignar
+                    SerialAssigned = null
 
                 };
                

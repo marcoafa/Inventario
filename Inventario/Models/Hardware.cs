@@ -34,10 +34,10 @@ namespace Inventario.Models
     
         public virtual Area Area { get; set; }
         public virtual Brand Brand { get; set; }
-        public virtual Invoice Invoice { get; set; }
         public virtual TypeHardware TypeHardware { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Hardware> Hardware1 { get; set; }
         public virtual Hardware Hardware2 { get; set; }
+        public virtual Invoice Invoice { get; set; }
     }
 }
