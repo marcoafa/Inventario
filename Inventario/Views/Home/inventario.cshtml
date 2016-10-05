@@ -10,34 +10,96 @@
 @model InventarioModal
 
 @*CONTROL TAB PAGE*@
-<div id="exTab2" class="container" style="padding-top: 10px; max-width:94%;">
-    <div class="panel panel-default">
+<div id="exTab2" class="container" style="padding-top: 20px; max-width:94%;">
+    
+    <div class="panel panel-default">   
         
         <div class="panel-body">
             
             <h2 class="text-center">Inventario</h2>
             <ul id="myTabs" class="nav nav-tabs">
-                <li class="active"><a class="Buscar" href="#OpcionesB">Stock</a></li>
-                <li class=""><a class="Equipo" href="#Opciones">Agregar Equipo</a></li>
+                <li class="active"><a class="Buscar" href="#stock">Stock</a></li>
+                <li class=""><a class="Equipo" href="#registro">Agregar Equipo</a></li>
                 <li class=""><a class="Facturas" href="#Facturas">Facturas</a></li>
             </ul>
 
             <div class="tab-content">
                
-                
-                 <div class="tab-pane fade" id="Opciones">
+                @* Stock y busqueda de Hardware *@
+                <div class="tab-pane fade in active" id="stock">
+
+                    <h3 class="text-center" style="margin:40px;">Buscar Equipo</h3>
+
+                    <table data-toggle="table" data-search="true" data-toolbar="#toolbar"
+                           data-show-refresh="true"
+                           data-show-toggle="true"
+                           data-show-columns="true"
+                           data-show-export="true"
+                           data-minimum-count-columns="2"
+                           data-show-pagination-switch="true"
+                           data-pagination="true"
+                           data-id-field="id"
+                           data-page-list="[10, 25, 50, 100, ALL]"
+                           data-show-footer="false">
+                        <thead>
+                            <tr>
+                                <th data-sortable="true">Serial</th>
+                                <th data-sortable="true">Usuario (Nombre)</th>
+                                <th data-sortable="true">Usuario (Red)</th>
+                                <th data-sortable="true">Marca</th>
+                                <th data-sortable="true">Modelo</th>
+                                <th data-sortable="true">Nombre Equipo</th>
+                                <th data-sortable="true">Area</th>
+                                <th data-sortable="true">Crítico</th>
+                                <th data-sortable="true">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.listaHardware != null)
+                            {
+                                foreach (var item in Model.listaHardware)
+                                {
+                                    <tr>
+                                        <td class="text-center">
+                                            <button data-id="@item.SerialNumber" type="button" class="editarInvetario btn btn-primary btn-lg" data-toggle="modal" data-target="#modal1" style="width:80%">
+                                                @item.SerialNumber
+                                            </button>
+                                        </td>
+                                        <td>@item.UserName</td>
+                                        <td>@item.UserNetworkName</td>
+                                        <td>@item.Brand.Name</td>
+                                        <td>@item.Model</td>
+                                        <td>@item.NameEquip</td>
+                                        <td>@item.Area.Name</td>
+                                        <td>@item.CriticEquip</td>
+                                        <td>
+                                            <button data-id="@item.SerialNumber" type="button" class="editarInvetario btn btn-default" data-toggle="modal" data-target="#modallapiz" style="width:80%">
+                                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                            </button>
+
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+
+                @* Registro de Hardware en Inventario *@
+                <div class="tab-pane fade row" id="registro">
                     
                     <form id="FormPrincipal" method="post" class="form-horizontal" action="~/home/Registro">
                         
                         <h3 id="tituloHardware" class="text-center" style="margin:30px;">Alta de Equipo</h3>
                       
                         <!-- TIPO DISPOSITIVO -->
-                        <div class="form-group">
+                        <div class="form-group form-group-lg">
                             <label class="col-md-2 control-label">Tipo Dispositivo:</label>
                             <div class="col-md-4 selectContainer">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-facetime-video"></i></span>
-                                    <select name="TypeHardware" class="form-control selectpicker">
+                                    <select name="TypeHardwareID" class="form-control selectpicker input-lg">
                                         <option value="">Selecciona un Dispositivo</option>
                                         @{foreach (var item in Model.listaTypeHardware)
                                             {
@@ -81,12 +143,10 @@
                             <div class="col-md-4 inputGroupContainer">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-                                    <input type="text" name="clUsuarioNombre" class="form-control cajas input-lg" placeholder="Serie">
+                                    <input type="text" name="SerialNumber" class="form-control cajas input-lg" placeholder="Serie">
                                 </div>
                             </div>
                         </div>
-
-
 
                         <!-- MODELO -->
                         <div class="form-group form-group-lg">
@@ -94,11 +154,10 @@
                             <div class="col-md-4 inputGroupContainer">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-tag"></i></span>
-                                    <input type="text" name="clUsuarioNombre" class="form-control cajas input-lg" placeholder="Modelo">
+                                    <input type="text" name="Model" class="form-control cajas input-lg" placeholder="Modelo">
                                 </div>
                             </div>
                         </div>
-
 
                         <!-- NOMBRE DEL EQUIPO -->
                         <div class="form-group form-group-lg">
@@ -106,7 +165,7 @@
                             <div class="col-md-4 inputGroupContainer">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
-                                    <input type="text" name="clUsuarioNombre" class="form-control cajas input-lg" placeholder="Nombre del Equipo">
+                                    <input type="text" name="NameEquip" class="form-control cajas input-lg" placeholder="Nombre del Equipo">
                                 </div>
                             </div>
                         </div>
@@ -117,7 +176,7 @@
                             <div class="col-md-4 inputGroupContainer">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-file"></i></span>
-                                    <input type="text" name="clFactura" class="form-control cajas input-lg autocomplete" placeholder="Factura">
+                                    <input type="text" name="InvoiceID" class="form-control cajas input-lg autocomplete" placeholder="Factura">
                                 </div>
                             </div>
                             <button type="button" class="btn btn-primary" aria-label="Left Align" data-toggle="modal" data-target="#modal2">
@@ -125,23 +184,21 @@
                             </button>
                         </div>
 
-
                         <!-- EQUIPO CRITICO-->
                         <div class="form-group form-group-lg">
                             <label class="col-md-2 control-label">Equipo Crítico:</label>
                             <div class="col-md-4">
-                                <input type="checkbox" name="clEquipoCritico" class="micheckbox">
+                                <input type="checkbox" name="CriticalEquip" class="micheckbox">
                             </div>
                         </div>
 
-                     
                         <!-- AREA -->
-                        <div class="form-group">
+                        <div class="form-group form-group-lg">
                             <label class="col-md-2 control-label">Area:</label>
                             <div class="col-md-4 selectContainer">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                                    <select name="clArea" class="form-control selectpicker">
+                                    <select name="AreaID" class="form-control selectpicker input-lg">
                                         <option value="">Selecciona una Area</option>
                                         @foreach (var item in Model.listaAreas)
                                         {
@@ -154,12 +211,12 @@
                         </div>
 
                         <!-- MARCA -->
-                        <div class="form-group">
+                        <div class="form-group form-group-lg">
                             <label class="col-md-2 control-label">Marca:</label>
                             <div class="col-md-4 selectContainer">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-log-in"></i></span>
-                                    <select name="clMarca" class="form-control selectpicker">
+                                    <select name="BrandID" class="form-control selectpicker input-lg">
                                         <option value="">Selecciona una Marca</option>
                                         @{foreach (var item in Model.listaBrand)
                                             {
@@ -172,31 +229,25 @@
                             </div>
                         </div>
 
-
-
-                            @* input escondido para saber el tipo de hardaware en la base de Datos *@
-                            <div class="col-md-8">
-                                <input value="1" type="text" id="Hardware" name="tipoHardware" hidden>
-                            </div>
+                        @* input escondido para saber el tipo de hardaware en la base de Datos *@
+                        <div class="col-md-8">
+                            <input value="1" type="text" id="Hardware" name="tipoHardware" hidden>
+                        </div>
+                        
                         @* input escondido para mandar la alerta *@
                         <div class="col-md-8">
                             <input type="text" class="Ver" value="@Model.veriFicacion" hidden />
                         </div>
                         
                         @*../Home/BarcodeImage?barcodeText=HolaMundo*@
-                            <div class="col-md-2 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary btn-lg" name="action">Registrar Equipo</button>
-                            </div>
+                        <div class="col-md-2 col-md-offset-4">
+                            <button type="submit" class="btn btn-primary btn-lg" name="action">Registrar Equipo</button>
+                        </div>
                         @*<div class="col-md-2">
                             <button id="QrFactura" class="btn btn-primary">Generar QR</button>
                         </div>*@
-                </form>
-
-
+                    </form>
                 </div>
-
-
-
 
                 <div class="tab-pane fade" id="computadora">
                     <div class="contenedorflex">
@@ -365,67 +416,6 @@
                     <button id="crearComponentes" type="submit" class="btn btn-primary">Submit</button>
                 </div>
 
-
-                @* Opciones para Buscar Hardware *@
-
-                
-                <div class="tab-pane face in active" id="OpcionesB">
-
-                    <h3 class="text-center" style="margin:40px;">Busqueda de Equipo</h3>
-
-                    <table data-toggle="table" data-search="true" data-toolbar="#toolbar"
-                           data-show-refresh="true"
-                           data-show-toggle="true"
-                           data-show-columns="true"
-                           data-show-export="true"
-                           data-minimum-count-columns="2"
-                           data-show-pagination-switch="true"
-                           data-pagination="true"
-                           data-id-field="id"
-                           data-page-list="[10, 25, 50, 100, ALL]"
-                           data-show-footer="false">
-                        <thead>
-                            <tr>
-                                <th data-sortable="true">Serial</th>
-                                <th data-sortable="true">Usuario (Nombre)</th>
-                                <th data-sortable="true">Usuario (Red)</th>
-                                <th data-sortable="true">Marca</th>
-                                <th data-sortable="true">Modelo</th>
-                                <th data-sortable="true">Nombre Equipo</th>
-                                <th data-sortable="true">Area</th>
-                                <th data-sortable="true">Crítico</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if (Model.listaHardware != null)
-                            {
-                                foreach (var item in Model.listaHardware)
-                                {
-                                    <tr>
-                                        <td class="text-center">
-                                            <button data-id="@item.SerialNumber" type="button" class="editarInvetario btn btn-primary btn-lg" data-toggle="modal" data-target="#modal1" style="width:80%">
-                                                @item.SerialNumber
-                                            </button>
-                                        </td>
-                                        <td>@item.UserName</td>
-                                        <td>@item.UserNetworkName</td>
-                                        <td>@item.Brand.Name</td>
-                                        <td>@item.Model</td>
-                                        <td>@item.NameEquip</td>
-                                        <td>@item.Area.Name</td>
-                                        <td>@item.CriticEquip</td>
-                                    </tr>
-                                }
-                            }
-                        </tbody>
-                    </table>
-
-
-
-
-
-                </div>
-
                 @* Opciones para Facturas *@
                 <div class="tab-pane" id="Facturas">
                     
@@ -498,12 +488,13 @@
                 </div>
                
             </div>
-            </div>
-        </div>
+
+         </div>
+    </div>
 </div>
 
 
-@*EDITAR ARCHIVOS *@
+@*EDITAR HARDWARE *@
 <div id="modal1" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document" style="width:90%;">
         <div class="modal-content">
@@ -515,254 +506,181 @@
             <div class="modal-body">
                 <div class="row">
                     @*EDITAR COMPONENTE*@
-                    <div class="col-md-7">
+                    <div class="col-md-6">
                         <div class="row">
                             <form id="f1" class="form-horizontal" method="post" action="~/home/RegistroEditar">
+
+
+                                @*USUARIO EDITAR*@
 
                                 <div class="form-group">
 
                                     <label class="col-md-2 col-md-offset-1 text-left">USUARIO:</label>
 
                                     <div class="col-md-8">
-                                        <input id="modalUsuario" name="clUsuario" type="text" class="form-control" placeholder="Usuario" required>
+                                        <input id="modalUsuario" name="clUsuario" type="text" class="form-control" placeholder="Usuario" required disabled>
                                     </div>
                                 </div>
+
+                                @*SERIE EDITAR*@
+
                                 <div class="form-group">
                                     <label class="col-md-2 col-md-offset-1 text-left">SERIE:</label>
 
                                     <div class="col-md-8">
-                                        <input id="modalSerie" name="clSerie" type="text" class="form-control cajas" placeholder="Serie" required>
+                                        <input id="modalSerie" name="clSerie" type="text" class="form-control cajas" placeholder="Serie" required disabled>
                                     </div>
                                 </div>
 
 
+                                @*SERIE MODELO*@
 
                                 <div class="form-group">
                                     <label class="col-md-2 col-md-offset-1 text-left">MODELO:</label>
                                     <div class="col-md-8">
-                                        <input id="modalModelo" name="clModelo" type="text" class="form-control cajas" placeholder="Modelo" required>
+                                        <input id="modalModelo" name="clModelo" type="text" class="form-control cajas" placeholder="Modelo" required disabled>
                                     </div>
                                 </div>
+
+                                @*NOMBREQUIPO EDITAR*@
+
                                 <div class="form-group">
                                     <label class="col-md-2 col-md-offset-1 text-left">NOM.EQUIPO:</label>
                                     <div class="col-md-8">
-                                        <input id="modalNoEquipo" name="clNoEquipo" type="text" class="form-control cajas" placeholder="Nombre del Equipo">
+                                        <input id="modalNoEquipo" name="clNoEquipo" type="text" class="form-control cajas" placeholder="Nombre del Equipo" disabled>
                                     </div>
                                 </div>
                              
-                                <div class="form-group">
-                                    <label class="col-md-2 col-md-offset-1 text-left" style="padding-right:20px;">
-                                        AREA:
-                                    </label>
-
+                             
+                               
+                                @*AREA EDITAR*@
+                                <div class="form-group form-group-lg">
+                                    <label class="col-md-2 control-label col-md-offset-1">Area:</label>
                                     <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-log-in"></i></span>
+                                            <select name="clArea" id="modalAreaSelect" class="form-control selectpicker input-lg" data-style="btn-primary" disabled>
+
+                                                @{foreach (var item in Model.listaAreas)
+                                                {
+                                                    <option value="@item.AreaID">@item.Name</option>
+
+                                                }
+                                                }
 
 
-                                        <select name="clArea" id="modalAreaSelect" class="selectpicker" data-style="btn-primary">
 
-                                            @{foreach (var item in Model.listaAreas)
-                                            {
-                                                <option value="@item.AreaID">@item.Name</option>
-
-                                            }
-                                            }
-
-
-
-                                        </select>
-
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-md-2 col-md-offset-1 text-left">
+
+                                @*MARCA EDITAR*@
+                                <div class="form-group form-group-lg">
+                                    <label class="col-md-2 control-label col-md-offset-1">
                                         MARCA:
                                     </label>
 
                                     <div class="col-md-6">
-                                        <select name="clMarca" id="modalMarcaSelect" class="selectpicker" data-style="btn-primary">
-                                            @{foreach (var item in Model.listaBrand)
-                                            {
-                                                <option value="@item.BrandID">@item.Name</option>
-                                            }
-
-                                            }
-
-                                        </select>
-
-                                    </div>
-                                </div>
-                                @*<div class="form-group">
-                                    <label class="col-md-2 col-md-offset-1 text-left">
-                                        ASIGNAR A SERIAL:
-                                    </label>
-
-                                    <div class="col-md-6">
-                                        <select name="clSerialAsignar" id="modalSerieASelect" class="selectpicker" data-style="btn-primary">
-                                            <option value="N/A">N/A</option>
-                                            @if (Model.listaHardware != null)
-                                            {
-                                                foreach (var item in Model.listaHardware.Where(x => x.TypeHardware.Description == "CPU"))
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-tag"></i></span>
+                                            <select name="clMarca" id="modalMarcaSelect" class="form-control selectpicker input-lg" data-style="btn-primary" disabled>
+                                                @{foreach (var item in Model.listaBrand)
                                                 {
-                                                    <option value="@item.SerialNumber">@item.SerialNumber</option>
+                                                    <option value="@item.BrandID">@item.Name</option>
                                                 }
 
-                                            }
+                                                }
 
-                                        </select>
+                                            </select>
+                                        </div>
+                                        </div>
+                                    </div>
+                                 
+                                     @*input escondido para saber el tipo de hardaware en la base de Datos 
+                                    <div class="col-md-6">
+                                        <input id="modalhardware" type="text" name="tipoHardware" hidden>
+                                    </div>*@
+                                    <div class="col-md-12">
+                                        <input id="modalserialorig" type="text" name="serialoriginal" hidden>
+                                    </div>
 
+                                  @*FACTURA EDITAR*@
+                                    <div id="divfactura" class="form-group">
+                                        <label class="col-md-2 col-md-offset-1 text-left">FACTURA:</label>
+                                        <div class="col-md-4">
+                                            <input id="modalFactura" name="clFactura" type="text" class="form-control cajas autocomplete" placeholder="Factura del Equipo" disabled>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <button type="button" class="btn btn-default" aria-label="Left Align" data-toggle="modal" data-target="#modal2">
+                                                <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span> Agregar
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>*@
-                                @* input escondido para saber el tipo de hardaware en la base de Datos *@
-                                <div class="col-md-6">
-                                    <input id="modalhardware" type="text" name="tipoHardware" hidden>
-                                </div>
-                                <div class="col-md-6">
-                                    <input id="modalserialorig" type="text" name="serialoriginal" hidden>
-                                </div>
-
-                                <div id="divfactura" class="form-group">
-                                    <label class="col-md-2 col-md-offset-1 text-left">FACTURA:</label>
-                                    <div class="col-md-4">
-                                        <input id="modalFactura" name="clFactura" type="text" class="form-control cajas autocomplete" placeholder="Factura del Equipo">
+                                 @*EQUIPO CRITICO EDITAR*@
+                                    <div class="form-group">
+                                        <label class="col-md-2 col-md-offset-1 text-left">EQUIPO CRITICO:</label>
+                                        <div class="col-md-8">
+                                            <input id="modalEquipoCritico" name="clEquipoCritico" type="checkbox" class="micheckbox" disabled>
+                                        </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <button type="button" class="btn btn-default" aria-label="Left Align" data-toggle="modal" data-target="#modal2">
-                                            <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span> Agregar
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-2 col-md-offset-1 text-left">EQUIPO CRITICO:</label>
-                                    <div class="col-md-8">
-                                        <input id="modalEquipoCritico" name="clEquipoCritico" type="checkbox" class="micheckbox">
-                                    </div>
-                                </div>
 
                             </form>
-
-                            @*CARGAR DATOS QUE TIENE EL USUARIO *@
-                            <div class="col-md-10 col-md-offset-1">
-                                <div class="panel panel-success">
-                                    <div class="panel-heading">
-                                        Componentes del Equipo
-                                    </div>
-
-                                    <div class="row" style="margin:0px; background-color:#428bca;color:white;">
-                                        <div class="col-md-2 text-center">
-                                            Tipo
-                                        </div>
-                                        <div class="col-md-2 text-center">
-                                            Marca
-                                        </div>
-                                        <div class="col-md-2 text-center">
-                                            Modelo
-                                        </div>
-                                        <div class="col-md-2 text-center">
-                                            Serie
-                                        </div>
-                                       
-                                        <div class="col-md-4 text-center">
-                                           Acciones
-                                        </div>
-
-                                    </div>
-                                        
-                                    <div class="row listaComponentes" id="componentesHardware" style="margin:10px;">
-                                        @*<div class=" col-md-2">
-                                       <label></label>
-                                    </div>
-                                        <div class="col-md-2">
-                                            <label></label>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <label></label>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <label></label>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <button type="button" class="btn btn-success" aria-label="Left Align">
-                                                <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
-                                            </button>
-                                            <button type="button" class="btn btn-danger"  aria-label="Left Align">
-                                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                            </button>
-                                        </div>*@
-                                      
-                                    </div>
-                                </div>
-                            </div>
-
 
                             </div>
                     </div>
 
                     @*STOCK DISPONIBLE *@
-                    <div class="col-md-5">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="panel panel-primary">
-                                    <div class="panel-heading">
-                                        Equipo Disponible
-                                    </div>
-                                    <div class="row" style="margin:10px;">
-                                        <table data-toggle="table" data-search="true" data-toolbar="#toolbar"
-                                               data-show-refresh="true"
-                                               data-show-toggle="true"
-                                               data-show-columns="true"
-                                               data-show-export="true"
-                                               data-minimum-count-columns="2"
-                                               data-show-pagination-switch="true"
-                                               data-pagination="true"
-                                               data-id-field="id"
-                                               data-page-list="[10, 25, 50, 100, ALL]"
-                                               data-show-footer="false">
-                                            <thead>
-                                                <tr>
-                                                    <th data-sortable="true" class="text-center">TIPO</th>
-                                                    <th data-sortable="true" class="text-center">MARCA</th>
-                                                    <th data-sortable="true" class="text-center">MODELO</th>
-                                                    <th data-sortable="true" class="text-center">SERIE</th>
-                                                    <th data-sortable="true" class="text-center">ACCIONES</th>
-                                                    
-                                                </tr>
-                                            </thead>
-                                            <tbody class="text-center">
-                                               
-                                                    @foreach (var item in Model.listaHardware)
-                                                    {
+                    @*CARGAR DATOS QUE TIENE EL USUARIO *@
+                    <div class="col-md-6">
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                Componentes del Equipo
+                            </div>
 
-
-                                                        if (item.TypeHardware.Description != "Desktop" && item.TypeHardware.Description != "Laptop" && item.TypeHardware.Description != "Touch" && item.SerialAssigned == null)
-                                                        {
-                                                            <tr>
-                                                                <td data-sortable="true" class="text-center">@item.TypeHardware.Description</td>
-                                                                <td data-sortable="true" class="text-center">@item.Brand.Name</td>
-                                                                <td data-sortable="true" class="text-center">@item.Model</td>
-                                                                <td data-sortable="true" class="text-center">@item.SerialNumber</td>
-                                                                <td class="text-center">
-                                                                    <button type="button" class="btn btn-info" aria-label="Left Align">
-                                                                        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
-                                                                    </button>
-                                                                    <button type="button" class="btn btn-primary" @*style="margin-left:10px;"*@ aria-label="Left Align">
-                                                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                                                    </button>
-                                                                </td>
-                                                            </tr>
-
-                                                        }
-                                                       
-                                                    }
-                                                
-                                            </tbody>
-                                        </table>
-                                       
-
-                                    </div>
-
-                                   
+                            <div class="row" style="margin:0px; background-color:#428bca;color:white;">
+                                <div class="col-md-2 text-center">
+                                    Tipo
                                 </div>
+                                <div class="col-md-2 text-center">
+                                    Marca
+                                </div>
+                                <div class="col-md-2 text-center">
+                                    Modelo
+                                </div>
+                                <div class="col-md-2 text-center">
+                                    Serie
+                                </div>
+
+                                <div class="col-md-4 text-center">
+                                    Acciones
+                                </div>
+
+                            </div>
+
+                            <div class="row listaComponentes" id="componentesHardware" style="margin:10px;">
+                                @*<div class=" col-md-2">
+                       <label></label>
+                    </div>
+                        <div class="col-md-2">
+                            <label></label>
+                        </div>
+                        <div class="col-md-2">
+                            <label></label>
+                        </div>
+                        <div class="col-md-2">
+                            <label></label>
+                        </div>
+
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-success" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-danger"  aria-label="Left Align">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button>
+                        </div>*@
+
                             </div>
                         </div>
                     </div>
@@ -770,6 +688,7 @@
 
             </div>
             <div class="modal-footer">
+                <button id="Change" type="button" class="btn btn-default">Editar</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                 <button type="button" class="btn btn-primary guardarCambios">Guardar Cambios</button>
             </div>
@@ -913,6 +832,96 @@
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div id="modallapiz" class="modal fade" tabindex="-1" role="dialog">
+<div class="modal-dialog" role="document" style="width:90%;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+            <h3 class="modal-title text-center">Editar Inventario</h3>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+           
+                @*STOCK DISPONIBLE *@
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    Equipo Disponible
+                                </div>
+                                <div class="row" style="margin:10px;">
+                                    <table data-toggle="table" data-search="true" data-toolbar="#toolbar"
+                                           data-show-refresh="true"
+                                           data-show-toggle="true"
+                                           data-show-columns="true"
+                                           data-show-export="true"
+                                           data-minimum-count-columns="2"
+                                           data-show-pagination-switch="true"
+                                           data-pagination="true"
+                                           data-id-field="id"
+                                           data-page-list="[10, 25, 50, 100, ALL]"
+                                           data-show-footer="false">
+                                        <thead>
+                                            <tr>
+                                                <th data-sortable="true" class="text-center">TIPO</th>
+                                                <th data-sortable="true" class="text-center">MARCA</th>
+                                                <th data-sortable="true" class="text-center">MODELO</th>
+                                                <th data-sortable="true" class="text-center">SERIE</th>
+                                                <th data-sortable="true" class="text-center">ACCIONES</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody class="text-center">
+
+                                            @foreach (var item in Model.listaHardware)
+                                            {
+
+
+                                                if (item.TypeHardware.Description != "Desktop" && item.TypeHardware.Description != "Laptop" && item.TypeHardware.Description != "Touch" && item.SerialAssigned == null)
+                                                {
+                                                    <tr>
+                                                        <td data-sortable="true" class="text-center">@item.TypeHardware.Description</td>
+                                                        <td data-sortable="true" class="text-center">@item.Brand.Name</td>
+                                                        <td data-sortable="true" class="text-center">@item.Model</td>
+                                                        <td data-sortable="true" class="text-center">@item.SerialNumber</td>
+                                                        <td class="text-center">
+                                                            <button type="button" class="btn btn-info" aria-label="Left Align">
+                                                                <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
+                                                            </button>
+                                                            <button type="button" class="btn btn-primary" @*style="margin-left:10px;"*@ aria-label="Left Align">
+                                                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+
+                                                }
+
+                                            }
+
+                                        </tbody>
+                                    </table>
+
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary guardarCambios">Guardar Cambios</button>
+        </div>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
 

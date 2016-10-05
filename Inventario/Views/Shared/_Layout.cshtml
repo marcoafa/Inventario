@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
    
-    @*<link href="~/Content/bootstrap.min.css" rel="stylesheet" />*@
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    @*<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" />*@
     <link href="~/Content/EstilosPersonalizados/Contenedor.css" rel="stylesheet" />
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.0/css/bootstrap-select.min.css">
+    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.0/css/bootstrap-select.min.css">*@
 
     <link href="~/Content/EstilosPersonalizados/PaginaInicial.css" rel="stylesheet" />
 
@@ -20,7 +20,7 @@
     <link href="~/Content/EstilosPersonalizados/tabla.css" rel="stylesheet" />
 
     <link href="~/Content/fileinput.min.css" rel="stylesheet" />
-    <link href="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css" rel="stylesheet" />
+    @*<link href="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css" rel="stylesheet" />*@
 </head>
 <body>
     
@@ -63,12 +63,13 @@
     }
     
 
-    <div>
+    <div class="row">
         @RenderBody()
     </div>
 
     <script src="~/Scripts/jquery-2.1.4.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.2.0/js/transition.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js"></script>
  
 
@@ -76,7 +77,7 @@
     <script src="~/Scripts/jquery.autocomplete.js"></script>
 
     <script src="~/Scripts/Inventario/Computadoras.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.0/js/bootstrap-select.min.js"></script>
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.0/js/bootstrap-select.min.js"></script>*@
     <!-- Latest compiled and minified JavaScript -->
 
   

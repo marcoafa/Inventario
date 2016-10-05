@@ -48,18 +48,7 @@ namespace Inventario.Controllers
         public ActionResult EditarInventario(string id)
         {
 
-            //entidad.Configuration.ProxyCreationEnabled = false;
-            //var componentes = (from p in entidad.Hardwares
-            //                   where p.SerialAssigned == id
-            //                   select new SmallHardware
-            //                   {
-
-            //                       SerialNumber = p.SerialNumber,
-            //                       Model = p.Model,
-            //                       Brand = p.Brand.Name,
-            //                       TypeHardware = p.TypeHardware.Description
-
-            //                   }).ToList();
+            
 
 
 
@@ -201,40 +190,39 @@ namespace Inventario.Controllers
             }
         }
         //Guardar registro de un solo item
-        public ActionResult Registro(string clUsuario, string clSerie, string clModelo, string clNoEquipo, string clEquipoCritico, int clArea, int clMarca, int tipoHardware, string clSerialAsignar, string clFactura)
+        public ActionResult Registro(string UserName,string UserNetworkName, string SerialNumber, string Model, string NameEquip, string CriticalEquip, int AreaID, int BrandID, int TypeHardwareID,  string InvoiceID)
         {
-            bool criticoOpcion;
+            bool CriticEquip;
             
 
-            if(clEquipoCritico=="on")
+            if(CriticalEquip=="on")
             {
-                criticoOpcion = true;
+                CriticEquip = true;
             }
             else
             {
-                criticoOpcion = false;
+                CriticEquip = false;
                     
             }
 
-            if (clSerialAsignar == "" || clSerialAsignar == null || clSerialAsignar == "N/A")
-                clSerialAsignar = null;
-            if (clFactura == "" || clFactura == null || clFactura == "N/A")
-                clFactura = null;
+           
+            if (InvoiceID == "" || InvoiceID == null || InvoiceID == "N/A")
+                InvoiceID = null;
+
             try
             {
                 Hardware H = new Hardware
                 {
-                    SerialNumber = clSerie,
-                    Model = clModelo,
-                    BrandID = clMarca,
-                    TypeHardwareID = tipoHardware,
-                    AreaID = clArea,
-                    InvoiceID = clFactura,
-                    UserName = clUsuario,
-                    NameEquip = clNoEquipo,
-                    CriticEquip = criticoOpcion,
-                    SerialAssigned = clSerialAsignar
-
+                    SerialNumber = SerialNumber,
+                    Model = Model,
+                    BrandID = BrandID,
+                    TypeHardwareID = TypeHardwareID,
+                    AreaID = AreaID,
+                    InvoiceID = InvoiceID,
+                    UserName = UserName,
+                    NameEquip = NameEquip,
+                    CriticEquip = CriticEquip,
+                    SerialAssigned = null
                 };
                
                
@@ -244,9 +232,10 @@ namespace Inventario.Controllers
                 TempData["verificacion"] = "Guardar";
                
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 TempData["verificacion"] = "False";
+                TempData["error"] = ex.Message;
                 
             }
 
@@ -308,7 +297,7 @@ namespace Inventario.Controllers
 
            
         }
-        public ActionResult RegistroEditar(string clUsuario, string clSerie, string clModelo, string clNoEquipo, string clEquipoCritico, int clArea, int clMarca, int tipoHardware, string clSerialAsignar, string serialoriginal, int? clFactura)
+        public ActionResult RegistroEditar(string clUsuario, string clSerie, string clModelo, string clNoEquipo, int clArea, int clMarca,int? clFactura, string clEquipoCritico, string serialoriginal)
         {
             bool criticoOpcion;
             if(clEquipoCritico=="on")
@@ -323,8 +312,7 @@ namespace Inventario.Controllers
 
             
 
-            if (clSerialAsignar == "" || clSerialAsignar == null || clSerialAsignar == "N/A")
-                clSerialAsignar = null;
+           
             // Consultar hardware asignados a ese serial y ponerlos en null
             var asignados = (from h in entidad.Hardwares
                             where h.SerialAssigned == serialoriginal
@@ -337,7 +325,7 @@ namespace Inventario.Controllers
                 }
                 entidad.SaveChanges();
                 // Actualizar hardware principal
-                var updateReg = entidad.Database.ExecuteSqlCommand("UPDATE Hardware SET SerialNumber = {0}, Model = {1}, BrandID = {2}, TypeHardwareID = {3}, AreaID = {4}, InvoiceID = {10}, [User] = {5}, NameEquip = {6}, CriticEquip = {7}, SerialAssigned = {8} where SerialNumber = {9}", clSerie, clModelo, clMarca, tipoHardware, clArea, clUsuario, clNoEquipo, criticoOpcion, clSerialAsignar, serialoriginal, clFactura);
+                var updateReg = entidad.Database.ExecuteSqlCommand("UPDATE Hardware SET SerialNumber = {0}, Model = {1}, BrandID = {2}, AreaID = {3}, InvoiceID = {8}, UserName = {4}, NameEquip = {5}, CriticEquip = {6} where SerialNumber = {7}", clSerie, clModelo, clMarca, clArea, clUsuario, clNoEquipo, criticoOpcion, serialoriginal, clFactura);
 
                 // Reasignar serial a hardware asignados
                 foreach (var a in asignados)
@@ -347,7 +335,7 @@ namespace Inventario.Controllers
                 entidad.SaveChanges();
                 TempData["verificacion"] = "Editar";
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 TempData["verificacion"] = "False";
             }
@@ -420,6 +408,7 @@ namespace Inventario.Controllers
             return RedirectToAction("inventario");
         }
 
+        [HttpPost]
         public ActionResult CrearFactura(string clPO, string clNumPedimento, HttpPostedFileBase fileup)
         {
 
@@ -441,7 +430,6 @@ namespace Inventario.Controllers
 
                     Invoice I = new Invoice
                     {
-                       
                         PO = clPO,
                         RequestDocument = clNumPedimento,
                         rutaArchivo = path
@@ -454,11 +442,12 @@ namespace Inventario.Controllers
 
                     
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    Response.Write("<script>alert('Error al guardar la información.');</script>");
+                    //Response.Write("<script>alert('Error al guardar la información.');</script>");
+                    return Json(ex);
                 }
-              return Json(I.PO, JsonRequestBehavior.AllowGet);
+              return Json(I.PO);
             }
             else
             {
@@ -482,7 +471,7 @@ namespace Inventario.Controllers
         }
         public ActionResult Login(string username, string password)
         {
-           
+
             UserVerification LogIn = new UserVerification();
             UserPrincipal usuario = LogIn.ValidateADUser(username, password);
 

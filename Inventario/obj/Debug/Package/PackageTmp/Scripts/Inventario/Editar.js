@@ -53,7 +53,15 @@ $("body").on("click", ".editarInvetario", function () {
     
     var url;
     url = "../Home/EditarInventario?id=" + $(this).data("id");
-   
+    $("#modalUsuario").attr('disabled','disabled');
+    $("#modalSerie").attr('disabled','disabled');
+    $("#modalModelo").attr('disabled','disabled');
+    $("#modalNoEquipo").attr('disabled','disabled');
+    $("#modalAreaSelect").attr('disabled','disabled');
+    $("#modalMarcaSelect").attr('disabled','disabled');
+    $("#modalFactura").attr('disabled','disabled');
+    $("#modalEquipoCritico").attr('disabled','disabled');
+
     $.getJSON(url, function (r) {
                               
         debugger;
@@ -145,8 +153,24 @@ $("body").on("click", ".EliminarFactura", function () {
 
 $(".guardarCambios").on("click", function () {
 
-
+   
+    
     $("#f1").submit();
+   
+});
+
+$("body").on("click", "#Change", function () {
+
+ 
+    $("#modalUsuario").removeAttr('disabled');
+    $("#modalSerie").removeAttr('disabled');
+    $("#modalModelo").removeAttr('disabled');
+    $("#modalNoEquipo").removeAttr('disabled');
+    $("#modalAreaSelect").removeAttr('disabled');
+    $("#modalMarcaSelect").removeAttr('disabled');
+    $("#modalFactura").removeAttr('disabled');
+    $("#modalEquipoCritico").removeAttr('disabled');
+   
    
 });
 
@@ -192,14 +216,17 @@ $(".guardarFactura").on("click", function () {
                            $(this).val("");
                        });
 
+                       debugger;
 
 
                         $(".close").click();
 
                     },
-                    error: function () {
+                    error: function (xhr, ajaxOptions, thrownError) {
                
-                        alert("Error en la creacion de factura");
+                        console.log(xhr);
+                        console.log(ajaxOptions);
+                        alert('Error Al Guardar');
                     }
                 });
         }
@@ -256,5 +283,138 @@ $(document).ready(function () {
     }
    
 
+
+
+
 });
 
+
+//$(document).ready(function () {
+//    $('#FormPrincipal').bootstrapValidator({
+//        // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
+//        feedbackIcons: {
+//            valid: 'glyphicon glyphicon-ok',
+//            invalid: 'glyphicon glyphicon-remove',
+//            validating: 'glyphicon glyphicon-refresh'
+//        },
+//        fields: {
+
+//            TypeHardware: {
+//                validators: {
+//                    notEmpty: {
+//                        message: 'Seleccione un tipo de dispositivo'
+//                    }
+//                }
+//            },
+//            UserName: {
+//                validators: {
+//                    stringLength: {
+//                        min: 2,
+//                    },
+//                    notEmpty: {
+//                        message: 'Por favor, supla un nombre de usuario'
+//                    }
+//                }
+//            },
+//            UserNetworkName: {
+//                validators: {
+//                    stringLength: {
+//                        min: 2,
+//                    },
+//                    notEmpty: {
+//                        message: 'Please supply your last name'
+//                    }
+//                }
+//            //},
+//            //email: {
+//            //    validators: {
+//            //        notEmpty: {
+//            //            message: 'Please supply your email address'
+//            //        },
+//            //        emailAddress: {
+//            //            message: 'Please supply a valid email address'
+//            //        }
+//            //    }
+//            //},
+//            //phone: {
+//            //    validators: {
+//            //        notEmpty: {
+//            //            message: 'Please supply your phone number'
+//            //        },
+//            //        phone: {
+//            //            country: 'US',
+//            //            message: 'Please supply a vaild phone number with area code'
+//            //        }
+//            //    }
+//            //},
+//            //address: {
+//            //    validators: {
+//            //        stringLength: {
+//            //            min: 8,
+//            //        },
+//            //        notEmpty: {
+//            //            message: 'Please supply your street address'
+//            //        }
+//            //    }
+//            //},
+//            //city: {
+//            //    validators: {
+//            //        stringLength: {
+//            //            min: 4,
+//            //        },
+//            //        notEmpty: {
+//            //            message: 'Please supply your city'
+//            //        }
+//            //    }
+//            //},
+//            //state: {
+//            //    validators: {
+//            //        notEmpty: {
+//            //            message: 'Please select your state'
+//            //        }
+//            //    }
+//            //},
+//            //zip: {
+//            //    validators: {
+//            //        notEmpty: {
+//            //            message: 'Please supply your zip code'
+//            //        },
+//            //        zipCode: {
+//            //            country: 'US',
+//            //            message: 'Please supply a vaild zip code'
+//            //        }
+//            //    }
+//            //},
+//            //comment: {
+//            //    validators: {
+//            //        stringLength: {
+//            //            min: 10,
+//            //            max: 200,
+//            //            message: 'Please enter at least 10 characters and no more than 200'
+//            //        },
+//            //        notEmpty: {
+//            //            message: 'Please supply a description of your project'
+//            //        }
+//            //    }
+//            }
+//        }
+//    })
+//        .on('success.form.bv', function (e) {
+//            $('#success_message').slideDown({ opacity: "show" }, "slow") // Do something ...
+//            $('#contact_form').data('bootstrapValidator').resetForm();
+
+//            // Prevent form submission
+//            e.preventDefault();
+
+//            // Get the form instance
+//            var $form = $(e.target);
+
+//            // Get the BootstrapValidator instance
+//            var bv = $form.data('bootstrapValidator');
+
+//            // Use Ajax to submit form data
+//            $.post($form.attr('action'), $form.serialize(), function (result) {
+//                console.log(result);
+//            }, 'json');
+//        });
+//});
