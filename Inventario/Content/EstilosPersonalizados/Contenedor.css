@@ -96,3 +96,5 @@ body
     text-align: center;
 }
 
+/********************************************* VALIDACION ALTA DE EQUIPO **********************/
+#success_message{ display: none;}
