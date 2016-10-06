@@ -193,6 +193,9 @@
     <Compile Include="Models\Responsable.cs">
       <DependentUpon>InventoryBDM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SubArea.cs">
+      <DependentUpon>InventoryBDM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\suggestion.cs" />
     <Compile Include="Models\TypeHardware.cs">
       <DependentUpon>InventoryBDM.tt</DependentUpon>

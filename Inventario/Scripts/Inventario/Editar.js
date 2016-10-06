@@ -1,4 +1,6 @@
-﻿
+﻿var global = {
+    SubAreaID : 0
+}
 
 $("body").on("click", "#QrFactura", function(e){
     e.preventDefault();
@@ -57,17 +59,22 @@ $("body").on("click", ".editarInvetario", function () {
     $("#modalSerie").attr('disabled','disabled');
     $("#modalModelo").attr('disabled','disabled');
     $("#modalNoEquipo").attr('disabled','disabled');
-    $("#modalAreaSelect").attr('disabled','disabled');
+    $("#modalAreaSelect").attr('disabled', 'disabled');
+    $("#modalSubAreaSelect").attr('disabled', 'disabled');
     $("#modalMarcaSelect").attr('disabled','disabled');
     $("#modalFactura").attr('disabled','disabled');
     $("#modalEquipoCritico").attr('disabled','disabled');
-
+    $("#modalUsuarioRed").attr('disabled','disabled');
     $.getJSON(url, function (r) {
                               
-        debugger;
+        global.SubAreaID = parseInt(r.SubAreaID);
         $('#componentesHardware').empty();
         $('#modalSerie').val(r.SerialNumber);
         $('#modalUsuario').val(r.UserName);
+        if (r.UserNetworkName != null) {
+            $('#modalUsuarioRed').val(r.UserNetworkName);
+        }
+        
         $('#modalModelo').val(r.Model);
         $('#modalNoEquipo').val(r.NameEquip);
         $('#modalEquipoCritico').attr('checked', r.CriticEquip);
@@ -75,10 +82,12 @@ $("body").on("click", ".editarInvetario", function () {
         $('#modalMarca').val(r.BrandID);
         
         $('#modalAreaSelect').val(r.AreaID).change();
+        
+
         $('#modalMarcaSelect').val(r.BrandID).change();
-       
+     
         if (r.SerialAssigned != null) {
-            $('#modalSerieASelect').val(r.SerialAssigned).change();
+            
         }
         else {
             $('#modalSerieASelect').val('N/A').change();
@@ -86,6 +95,11 @@ $("body").on("click", ".editarInvetario", function () {
        
         $('#modalhardware').val(r.idHardware);
         $('#modalserialorig').val(r.SerialNumber);
+
+
+        if (r.SubAreaID != null) {
+           
+        }
 
         if (r.Components.length == 0) {
            // $('#componentesHardware').append("<div class='col-sm-12'><h4 class='text-center'>Empty Components</h4></div>");
@@ -161,15 +175,17 @@ $(".guardarCambios").on("click", function () {
 
 $("body").on("click", "#Change", function () {
 
- 
+    
     $("#modalUsuario").removeAttr('disabled');
     $("#modalSerie").removeAttr('disabled');
     $("#modalModelo").removeAttr('disabled');
     $("#modalNoEquipo").removeAttr('disabled');
     $("#modalAreaSelect").removeAttr('disabled');
+    $("#modalSubAreaSelect").removeAttr('disabled');
     $("#modalMarcaSelect").removeAttr('disabled');
     $("#modalFactura").removeAttr('disabled');
     $("#modalEquipoCritico").removeAttr('disabled');
+    $("#modalUsuarioRed").removeAttr('disabled');
    
    
 });
@@ -281,8 +297,82 @@ $(document).ready(function () {
                 }
             }
     }
-   
+    
+    /* AGREGAR COMBO SUBAREA SI EXISTEN ELEMENTOS */
+    $("#registro,#f1").on('change', '#areaID,#modalAreaSelect', function () {
+        debugger;
+        var areaID = parseInt($(this).val());
+        var selectChange = $(this).attr("id");
+        //alert(areaID);
+        if ((areaID != "" && areaID != null && !isNaN(areaID)) || areaID == 0)
+        {
+            $.post("../Home/ObtenerSubAreas", { areaID: areaID }, function (subAreas) {
+                debugger;
+                if ($('#containerSubAreas').length) {
+                    $('#containerSubAreas').remove();
+                }
 
+                if ($('#containerSubAreasEdit').length) {
+                    $('#containerSubAreasEdit').remove();
+                }
+
+                if (subAreas.length != 0) {
+
+                    var optionSubAreas = '';
+                    subAreas.forEach(function (value, index) {
+                        optionSubAreas += '<option value="' + value.SubAreaID + '">' + value.Name + '</option>';
+                    });
+
+                    var idContainerSubAreas = '';
+                    var divSubAreas = '';
+                    if (selectChange == "modalAreaSelect") {
+                        divSubAreas =
+                        '<div class="form-group form-group-lg" id="containerSubAreasEdit">' +
+                            '<label class="col-md-2 col-md-offset-1 control-label">Sub-Area:</label>' +
+                            '<div class="col-md-6 selectContainer">' +
+                                '<div class="input-group">' +
+                                    '<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>' +
+                                    '<select name="clSubAreaID" class="form-control selectpicker input-lg" id="modalSubAreaSelect">' +
+                                        '<option value="">Selecciona una SubArea</option>' +
+                                         optionSubAreas +
+                                '</select>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>';
+                    }
+                    else {
+                        divSubAreas =
+                        '<div class="form-group form-group-lg" id="containerSubAreas">' +
+                            '<label class="col-md-2 control-label">Sub-Area:</label>' +
+                            '<div class="col-md-4 selectContainer">' +
+                                '<div class="input-group">' +
+                                    '<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>' +
+                                    '<select name="clSubAreaID" class="form-control selectpicker input-lg" id="subAreaID" >' +
+                                        '<option value="">Selecciona una SubArea</option>' +
+                                         optionSubAreas +
+                                '</select>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>';
+                    }
+                    
+
+                    if (selectChange == "modalAreaSelect") {
+                        debugger;
+                        $('#editContainerArea').after(divSubAreas);
+                        $('#modalSubAreaSelect').val(global.SubAreaID);
+                        if ($('#modalAreaSelect').attr('disabled'))
+                            $('#modalSubAreaSelect').attr('disabled','disabled');
+                    }
+                    else
+                        $('#containerArea').after(divSubAreas);
+                }
+            })
+            .error(function (xhr, errorText, errorThrow) {
+                console.log(xhr.responseText);
+            });
+        }
+    });
 
 
 

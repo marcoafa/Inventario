@@ -12,24 +12,20 @@ namespace Inventario.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Area
+    public partial class SubArea
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Area()
+        public SubArea()
         {
             this.Hardwares = new HashSet<Hardware>();
-            this.SubAreas = new HashSet<SubArea>();
         }
     
-        public int AreaID { get; set; }
+        public int SubAreaID { get; set; }
         public string Name { get; set; }
-        public Nullable<int> Floor { get; set; }
-        public Nullable<int> DivisionID { get; set; }
+        public int AreaID { get; set; }
     
-        public virtual Division Division { get; set; }
+        public virtual Area Area { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Hardware> Hardwares { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SubArea> SubAreas { get; set; }
     }
 }

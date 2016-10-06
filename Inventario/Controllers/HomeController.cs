@@ -60,6 +60,7 @@ namespace Inventario.Controllers
                                 BrandID = p.BrandID,
                                 TypeHardwareID = p.TypeHardwareID,
                                 AreaID = p.AreaID,
+                                SubAreaID = p.SubAreaID,
                                 InvoiceID = p.InvoiceID,
                                 UserName = p.UserName,
                                 UserNetworkName = p.UserNetworkName,
@@ -190,20 +191,15 @@ namespace Inventario.Controllers
             }
         }
         //Guardar registro de un solo item
-        public ActionResult Registro(string UserName,string UserNetworkName, string SerialNumber, string Model, string NameEquip, string CriticalEquip, int AreaID, int BrandID, int TypeHardwareID,  string InvoiceID)
+        public ActionResult Registro(string UserName,string UserNetworkName, string SerialNumber, string Model, string NameEquip, string CriticalEquip, int AreaID,int? SubAreaID, int BrandID, int TypeHardwareID,  string InvoiceID)
         {
             bool CriticEquip;
             
 
             if(CriticalEquip=="on")
-            {
                 CriticEquip = true;
-            }
             else
-            {
                 CriticEquip = false;
-                    
-            }
 
            
             if (InvoiceID == "" || InvoiceID == null || InvoiceID == "N/A")
@@ -218,8 +214,10 @@ namespace Inventario.Controllers
                     BrandID = BrandID,
                     TypeHardwareID = TypeHardwareID,
                     AreaID = AreaID,
+                    SubAreaID = SubAreaID,
                     InvoiceID = InvoiceID,
                     UserName = UserName,
+                    UserNetworkName = UserNetworkName,
                     NameEquip = NameEquip,
                     CriticEquip = CriticEquip,
                     SerialAssigned = null
@@ -238,9 +236,6 @@ namespace Inventario.Controllers
                 TempData["error"] = ex.Message;
                 
             }
-
-        
-
 
                 return RedirectToAction("inventario");
         }
@@ -297,7 +292,7 @@ namespace Inventario.Controllers
 
            
         }
-        public ActionResult RegistroEditar(string clUsuario, string clSerie, string clModelo, string clNoEquipo, int clArea, int clMarca,int? clFactura, string clEquipoCritico, string serialoriginal)
+        public ActionResult RegistroEditar(string clUsuario,string clUsuarioRed, string clSerie, string clModelo, string clNoEquipo, int clArea,int? clSubAreaID, int clMarca,int? clFactura, string clEquipoCritico, string serialoriginal)
         {
             bool criticoOpcion;
             if(clEquipoCritico=="on")
@@ -309,7 +304,6 @@ namespace Inventario.Controllers
                 criticoOpcion = false;
                     
             }
-
             
 
            
@@ -325,7 +319,7 @@ namespace Inventario.Controllers
                 }
                 entidad.SaveChanges();
                 // Actualizar hardware principal
-                var updateReg = entidad.Database.ExecuteSqlCommand("UPDATE Hardware SET SerialNumber = {0}, Model = {1}, BrandID = {2}, AreaID = {3}, InvoiceID = {8}, UserName = {4}, NameEquip = {5}, CriticEquip = {6} where SerialNumber = {7}", clSerie, clModelo, clMarca, clArea, clUsuario, clNoEquipo, criticoOpcion, serialoriginal, clFactura);
+                var updateReg = entidad.Database.ExecuteSqlCommand("UPDATE Hardware SET SerialNumber = {0}, Model = {1}, BrandID = {2}, AreaID = {3}, SubAreaID = {10}, InvoiceID = {9}, UserName = {4},UserNetworkName = {5}, NameEquip = {6}, CriticEquip = {7} where SerialNumber = {8}", clSerie, clModelo, clMarca, clArea, clUsuario, clUsuarioRed, clNoEquipo, criticoOpcion, serialoriginal, clFactura,clSubAreaID);
 
                 // Reasignar serial a hardware asignados
                 foreach (var a in asignados)
@@ -503,6 +497,20 @@ namespace Inventario.Controllers
                 return View("Index");
             }
         }
+
+        [HttpPost]
+        public ActionResult ObtenerSubAreas(int areaID)
+        {
+            var subAreas = (from sa in entidad.SubAreas
+                            where sa.AreaID == areaID
+                            select new {
+                                SubAreaID = sa.SubAreaID,
+                                Name = sa.Name
+                            }).ToList();
+
+            return Json(subAreas);
+        }
+
     }
     
 }

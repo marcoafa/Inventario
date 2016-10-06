@@ -5,8 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-
 @model InventarioModal
 
 @*CONTROL TAB PAGE*@
@@ -20,7 +18,7 @@
             <ul id="myTabs" class="nav nav-tabs">
                 <li class="active"><a class="Buscar" href="#stock">Stock</a></li>
                 <li class=""><a class="Equipo" href="#registro">Agregar Equipo</a></li>
-                <li class=""><a class="Facturas" href="#Facturas">Facturas</a></li>
+                <li class=""><a class="Facturas" href="#facturas">Facturas</a></li>
             </ul>
 
             <div class="tab-content">
@@ -193,12 +191,12 @@
                         </div>
 
                         <!-- AREA -->
-                        <div class="form-group form-group-lg">
+                        <div class="form-group form-group-lg" id="containerArea">
                             <label class="col-md-2 control-label">Area:</label>
                             <div class="col-md-4 selectContainer">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                                    <select name="AreaID" class="form-control selectpicker input-lg">
+                                    <select name="AreaID" class="form-control selectpicker input-lg" id="areaID">
                                         <option value="">Selecciona una Area</option>
                                         @foreach (var item in Model.listaAreas)
                                         {
@@ -417,7 +415,7 @@
                 </div>
 
                 @* Opciones para Facturas *@
-                <div class="tab-pane" id="Facturas">
+                <div class="tab-pane" id="facturas">
                     
                     <h3 class="text-center" style="margin:40px;">Facturas</h3>
                   
@@ -494,7 +492,7 @@
 </div>
 
 
-@*EDITAR HARDWARE *@
+@*EDITAR HARDWARE (INVENTARIO) *@
 <div id="modal1" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document" style="width:90%;">
         <div class="modal-content">
@@ -515,10 +513,21 @@
 
                                 <div class="form-group">
 
-                                    <label class="col-md-2 col-md-offset-1 text-left">USUARIO:</label>
+                                    <label class="col-md-2 col-md-offset-1">Usuario (Nombre):</label>
 
                                     <div class="col-md-8">
-                                        <input id="modalUsuario" name="clUsuario" type="text" class="form-control" placeholder="Usuario" required disabled>
+                                        <input id="modalUsuario" name="clUsuario" type="text" class="form-control" placeholder="Usuario (Nombre)" required disabled>
+                                    </div>
+                                </div>
+
+                                @*USUARIO RED EDITAR*@
+
+                                <div class="form-group">
+
+                                    <label class="col-md-2 col-md-offset-1">Usuario (Red):</label>
+
+                                    <div class="col-md-8">
+                                        <input id="modalUsuarioRed" name="clUsuarioRed" type="text" class="form-control" placeholder="Usuario (Red)" required disabled>
                                     </div>
                                 </div>
 
@@ -554,23 +563,20 @@
                              
                                
                                 @*AREA EDITAR*@
-                                <div class="form-group form-group-lg">
+                                <div class="form-group form-group-lg" id="editContainerArea">
                                     <label class="col-md-2 control-label col-md-offset-1">Area:</label>
                                     <div class="col-md-6">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-log-in"></i></span>
                                             <select name="clArea" id="modalAreaSelect" class="form-control selectpicker input-lg" data-style="btn-primary" disabled>
-
                                                 @{foreach (var item in Model.listaAreas)
                                                 {
                                                     <option value="@item.AreaID">@item.Name</option>
 
                                                 }
                                                 }
-
-
-
                                             </select>
+                                           
                                         </div>
                                     </div>
                                 </div>
@@ -612,8 +618,8 @@
                                             <input id="modalFactura" name="clFactura" type="text" class="form-control cajas autocomplete" placeholder="Factura del Equipo" disabled>
                                         </div>
                                         <div class="col-md-3">
-                                            <button type="button" class="btn btn-default" aria-label="Left Align" data-toggle="modal" data-target="#modal2">
-                                                <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span> Agregar
+                                            <button type="button" class="btn btn-success" aria-label="Left Align" data-toggle="modal" data-target="#modal2">
+                                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar
                                             </button>
                                         </div>
                                     </div>
@@ -767,9 +773,12 @@
 </div><!-- /.modal -->
 
 
+
+
+
 @* CREAR FACTURAS *@
 <div id="modal2" class="modal fade" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document" style="width:75%;">
+    <div class="modal-dialog" role="document" style="width:50%;">
         
         <div class="modal-content">
             <div class="modal-header">
@@ -780,46 +789,34 @@
             <div class="modal-body">
                 <form id="Factura" method="post" enctype="multipart/form-data" class="form-horizontal" action="">
 
-
-                    @*<div class="form-group">
-
-                        <label class="col-md-2 text-right">FOLIO:</label>
-
-                        <div class="col-md-8">
-                            <input type="text" name="clFolio" class="form-control cajas" placeholder="Folio" required>
-                        </div>
-                    </div>*@
-
-                    <div class="form-group">
-                        <label class="col-md-2 text-right">PO:</label>
-
-                        <div class="col-md-8">
-                            <input type="number" name="clPO" class="form-control cajas" placeholder="P.O" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-2 text-right">NUMERO DE PEDIMENTO:</label>
-
-                        <div class="col-md-8">
-                            <input type="text" name="clNumPedimento" class="form-control cajas" placeholder="Numero de Pedimento">
+                    <!-- PO AGREGAR FACTURA EN ALTA DE EQUIPO -->
+                    <div class="form-group form-group-lg">
+                        <label class="col-md-3 control-label">PO:</label>
+                        <div class="col-md-8 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input type="number" name="clPO" class="form-control cajas input-lg" placeholder="P.O." required>
+                            </div>
                         </div>
                     </div>
 
-                    @*<div class="form-group">
-                        <label class="col-md-2 text-right">FECHA:</label>
-
-                        <div class="col-md-3">
-                            <input id="modalFechaFactura" name="FechaFactura" type="date" class="form-control cajas" placeholder="Fecha de la Factura" required>
+                    <!-- NUMERO DE PEDIMENTO (OPCIONAL) -->
+                    <div class="form-group form-group-lg">
+                        <label class="col-md-3 control-label">No. Pedimento:</label>
+                        <div class="col-md-8 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input type="text" name="clNumPedimento" class="form-control cajas input-lg" placeholder="No. Pedimento" required>
+                            </div>
                         </div>
+                    </div>
 
-                    </div>*@
+                    <!-- FACTURA -->
+                    <div class="form-group form-group-lg">
+                        <label class="col-md-3 text-right control-label">Factura (PDF):</label>
 
-
-                    <div class="form-group">
-                        <label class="col-md-2 text-right">SUBIR FACTURA:</label>
-
-                        <div class="col-md-6">
-                            <input id="input-1" name="fileup" type="file" class="file" accept="application/pdf">
+                        <div class="col-md-8">
+                            <input id="input-1" name="fileup" type="file" class="file input-lg" accept="application/pdf">
                         </div>
 
                     </div>

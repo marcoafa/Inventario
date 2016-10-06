@@ -11,7 +11,7 @@ namespace Inventario.Models
 {
     using System;
     using System.Collections.Generic;
-
+    
     public partial class Hardware
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -25,20 +25,21 @@ namespace Inventario.Models
         public int BrandID { get; set; }
         public int TypeHardwareID { get; set; }
         public int AreaID { get; set; }
+        public Nullable<int> SubAreaID { get; set; }
         public string InvoiceID { get; set; }
         public string UserName { get; set; }
         public string UserNetworkName { get; set; }
         public string NameEquip { get; set; }
         public bool CriticEquip { get; set; }
         public string SerialAssigned { get; set; }
-
-
+    
         public virtual Area Area { get; set; }
         public virtual Brand Brand { get; set; }
-        public virtual Invoice Invoice { get; set; }
         public virtual TypeHardware TypeHardware { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Hardware> Hardware1 { get; set; }
         public virtual Hardware Hardware2 { get; set; }
+        public virtual Invoice Invoice { get; set; }
+        public virtual SubArea SubArea { get; set; }
     }
 }

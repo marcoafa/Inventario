@@ -4,14 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="InventoryBDMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="InventoryBDMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Area">
           <Key>
             <PropertyRef Name="AreaID" />
           </Key>
           <Property Name="AreaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
-          <Property Name="Floor" Type="int" Nullable="false" />
+          <Property Name="Floor" Type="int" />
           <Property Name="DivisionID" Type="int" />
         </EntityType>
         <EntityType Name="Brand">
@@ -37,7 +37,8 @@
           <Property Name="BrandID" Type="int" Nullable="false" />
           <Property Name="TypeHardwareID" Type="int" Nullable="false" />
           <Property Name="AreaID" Type="int" Nullable="false" />
-          <Property Name="InvoiceID" Type="varchar" MaxLength="250" />
+          <Property Name="SubAreaID" Type="int" />
+          <Property Name="InvoiceID" Type="nvarchar" MaxLength="300" />
           <Property Name="UserName" Type="nvarchar" MaxLength="300" Nullable="false" />
           <Property Name="UserNetworkName" Type="nvarchar" MaxLength="300" />
           <Property Name="NameEquip" Type="nvarchar" MaxLength="300" />
@@ -48,7 +49,7 @@
           <Key>
             <PropertyRef Name="PO" />
           </Key>
-          <Property Name="PO" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="PO" Type="nvarchar" MaxLength="300" Nullable="false" />
           <Property Name="RequestDocument" Type="nvarchar" MaxLength="50" />
           <Property Name="rutaArchivo" Type="varchar" MaxLength="250" />
         </EntityType>
@@ -57,6 +58,14 @@
             <PropertyRef Name="username" />
           </Key>
           <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SubArea">
+          <Key>
+            <PropertyRef Name="SubAreaID" />
+          </Key>
+          <Property Name="SubAreaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="300" />
+          <Property Name="AreaID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TypeHardware">
           <Key>
@@ -108,18 +117,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Hardware__Invoic__44FF419A">
-          <End Role="Invoice" Type="Self.Invoice" Multiplicity="0..1" />
-          <End Role="Hardware" Type="Self.Hardware" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Invoice">
-              <PropertyRef Name="PO" />
-            </Principal>
-            <Dependent Role="Hardware">
-              <PropertyRef Name="InvoiceID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Hardware__TypeHa__4316F928">
           <End Role="TypeHardware" Type="Self.TypeHardware" Multiplicity="1" />
           <End Role="Hardware" Type="Self.Hardware" Multiplicity="*" />
@@ -144,6 +141,44 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Hardware_Invoice">
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="0..1" />
+          <End Role="Hardware" Type="Self.Hardware" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoice">
+              <PropertyRef Name="PO" />
+            </Principal>
+            <Dependent Role="Hardware">
+              <PropertyRef Name="InvoiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hardware_SubArea">
+          <End Role="SubArea" Type="Self.SubArea" Multiplicity="0..1" />
+          <End Role="Hardware" Type="Self.Hardware" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubArea">
+              <PropertyRef Name="SubAreaID" />
+            </Principal>
+            <Dependent Role="Hardware">
+              <PropertyRef Name="SubAreaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubArea_Area">
+          <End Role="Area" Type="Self.Area" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SubArea" Type="Self.SubArea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="AreaID" />
+            </Principal>
+            <Dependent Role="SubArea">
+              <PropertyRef Name="AreaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="InventoryBDMModelStoreContainer">
           <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
@@ -151,6 +186,7 @@
           <EntitySet Name="Hardware" EntityType="Self.Hardware" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Responsables" EntityType="Self.Responsables" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubArea" EntityType="Self.SubArea" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeHardware" EntityType="Self.TypeHardware" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Area__DivisionID__30F848ED" Association="Self.FK__Area__DivisionID__30F848ED">
@@ -165,10 +201,6 @@
             <End Role="Brand" EntitySet="Brand" />
             <End Role="Hardware" EntitySet="Hardware" />
           </AssociationSet>
-          <AssociationSet Name="FK__Hardware__Invoic__44FF419A" Association="Self.FK__Hardware__Invoic__44FF419A">
-            <End Role="Invoice" EntitySet="Invoice" />
-            <End Role="Hardware" EntitySet="Hardware" />
-          </AssociationSet>
           <AssociationSet Name="FK__Hardware__TypeHa__4316F928" Association="Self.FK__Hardware__TypeHa__4316F928">
             <End Role="TypeHardware" EntitySet="TypeHardware" />
             <End Role="Hardware" EntitySet="Hardware" />
@@ -176,6 +208,18 @@
           <AssociationSet Name="FK_Hardware_Hardware" Association="Self.FK_Hardware_Hardware">
             <End Role="Hardware" EntitySet="Hardware" />
             <End Role="Hardware1" EntitySet="Hardware" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hardware_Invoice" Association="Self.FK_Hardware_Invoice">
+            <End Role="Invoice" EntitySet="Invoice" />
+            <End Role="Hardware" EntitySet="Hardware" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hardware_SubArea" Association="Self.FK_Hardware_SubArea">
+            <End Role="SubArea" EntitySet="SubArea" />
+            <End Role="Hardware" EntitySet="Hardware" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubArea_Area" Association="Self.FK_SubArea_Area">
+            <End Role="Area" EntitySet="Area" />
+            <End Role="SubArea" EntitySet="SubArea" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -189,6 +233,7 @@
           <EntitySet Name="Hardwares" EntityType="InventoryBDMModel.Hardware" />
           <EntitySet Name="Invoices" EntityType="InventoryBDMModel.Invoice" />
           <EntitySet Name="Responsables" EntityType="InventoryBDMModel.Responsable" />
+          <EntitySet Name="SubAreas" EntityType="InventoryBDMModel.SubArea" />
           <EntitySet Name="TypeHardwares" EntityType="InventoryBDMModel.TypeHardware" />
           <EntitySet Name="Users" EntityType="InventoryBDMModel.User" />
           <AssociationSet Name="FK__Area__DivisionID__30F848ED" Association="InventoryBDMModel.FK__Area__DivisionID__30F848ED">
@@ -199,12 +244,12 @@
             <End Role="Area" EntitySet="Areas" />
             <End Role="Hardware" EntitySet="Hardwares" />
           </AssociationSet>
+          <AssociationSet Name="FK_SubArea_Area" Association="InventoryBDMModel.FK_SubArea_Area">
+            <End Role="Area" EntitySet="Areas" />
+            <End Role="SubArea" EntitySet="SubAreas" />
+          </AssociationSet>
           <AssociationSet Name="FK__Hardware__BrandI__4222D4EF" Association="InventoryBDMModel.FK__Hardware__BrandI__4222D4EF">
             <End Role="Brand" EntitySet="Brands" />
-            <End Role="Hardware" EntitySet="Hardwares" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Hardware__Invoic__44FF419A" Association="InventoryBDMModel.FK__Hardware__Invoic__44FF419A">
-            <End Role="Invoice" EntitySet="Invoices" />
             <End Role="Hardware" EntitySet="Hardwares" />
           </AssociationSet>
           <AssociationSet Name="FK__Hardware__TypeHa__4316F928" Association="InventoryBDMModel.FK__Hardware__TypeHa__4316F928">
@@ -215,6 +260,14 @@
             <End Role="Hardware" EntitySet="Hardwares" />
             <End Role="Hardware1" EntitySet="Hardwares" />
           </AssociationSet>
+          <AssociationSet Name="FK_Hardware_Invoice" Association="InventoryBDMModel.FK_Hardware_Invoice">
+            <End Role="Invoice" EntitySet="Invoices" />
+            <End Role="Hardware" EntitySet="Hardwares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hardware_SubArea" Association="InventoryBDMModel.FK_Hardware_SubArea">
+            <End Role="SubArea" EntitySet="SubAreas" />
+            <End Role="Hardware" EntitySet="Hardwares" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Area">
           <Key>
@@ -222,10 +275,11 @@
           </Key>
           <Property Name="AreaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Floor" Type="Int32" Nullable="false" />
+          <Property Name="Floor" Type="Int32" />
           <Property Name="DivisionID" Type="Int32" />
           <NavigationProperty Name="Division" Relationship="InventoryBDMModel.FK__Area__DivisionID__30F848ED" FromRole="Area" ToRole="Division" />
           <NavigationProperty Name="Hardwares" Relationship="InventoryBDMModel.FK__Hardware__AreaID__440B1D61" FromRole="Area" ToRole="Hardware" />
+          <NavigationProperty Name="SubAreas" Relationship="InventoryBDMModel.FK_SubArea_Area" FromRole="Area" ToRole="SubArea" />
         </EntityType>
         <EntityType Name="Brand">
           <Key>
@@ -252,7 +306,8 @@
           <Property Name="BrandID" Type="Int32" Nullable="false" />
           <Property Name="TypeHardwareID" Type="Int32" Nullable="false" />
           <Property Name="AreaID" Type="Int32" Nullable="false" />
-          <Property Name="InvoiceID" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="SubAreaID" Type="Int32" />
+          <Property Name="InvoiceID" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="UserNetworkName" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="NameEquip" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
@@ -260,25 +315,36 @@
           <Property Name="SerialAssigned" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Area" Relationship="InventoryBDMModel.FK__Hardware__AreaID__440B1D61" FromRole="Hardware" ToRole="Area" />
           <NavigationProperty Name="Brand" Relationship="InventoryBDMModel.FK__Hardware__BrandI__4222D4EF" FromRole="Hardware" ToRole="Brand" />
-          <NavigationProperty Name="Invoice" Relationship="InventoryBDMModel.FK__Hardware__Invoic__44FF419A" FromRole="Hardware" ToRole="Invoice" />
           <NavigationProperty Name="TypeHardware" Relationship="InventoryBDMModel.FK__Hardware__TypeHa__4316F928" FromRole="Hardware" ToRole="TypeHardware" />
           <NavigationProperty Name="Hardware1" Relationship="InventoryBDMModel.FK_Hardware_Hardware" FromRole="Hardware" ToRole="Hardware1" />
           <NavigationProperty Name="Hardware2" Relationship="InventoryBDMModel.FK_Hardware_Hardware" FromRole="Hardware1" ToRole="Hardware" />
+          <NavigationProperty Name="Invoice" Relationship="InventoryBDMModel.FK_Hardware_Invoice" FromRole="Hardware" ToRole="Invoice" />
+          <NavigationProperty Name="SubArea" Relationship="InventoryBDMModel.FK_Hardware_SubArea" FromRole="Hardware" ToRole="SubArea" />
         </EntityType>
         <EntityType Name="Invoice">
           <Key>
             <PropertyRef Name="PO" />
           </Key>
-          <Property Name="PO" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="PO" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="RequestDocument" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="rutaArchivo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Hardwares" Relationship="InventoryBDMModel.FK__Hardware__Invoic__44FF419A" FromRole="Invoice" ToRole="Hardware" />
+          <NavigationProperty Name="Hardwares" Relationship="InventoryBDMModel.FK_Hardware_Invoice" FromRole="Invoice" ToRole="Hardware" />
         </EntityType>
         <EntityType Name="Responsable">
           <Key>
             <PropertyRef Name="username" />
           </Key>
           <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SubArea">
+          <Key>
+            <PropertyRef Name="SubAreaID" />
+          </Key>
+          <Property Name="SubAreaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="AreaID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Area" Relationship="InventoryBDMModel.FK_SubArea_Area" FromRole="SubArea" ToRole="Area" />
+          <NavigationProperty Name="Hardwares" Relationship="InventoryBDMModel.FK_Hardware_SubArea" FromRole="SubArea" ToRole="Hardware" />
         </EntityType>
         <EntityType Name="TypeHardware">
           <Key>
@@ -319,6 +385,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SubArea_Area">
+          <End Type="InventoryBDMModel.Area" Role="Area" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="InventoryBDMModel.SubArea" Role="SubArea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="AreaID" />
+            </Principal>
+            <Dependent Role="SubArea">
+              <PropertyRef Name="AreaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Hardware__BrandI__4222D4EF">
           <End Type="InventoryBDMModel.Brand" Role="Brand" Multiplicity="1" />
           <End Type="InventoryBDMModel.Hardware" Role="Hardware" Multiplicity="*" />
@@ -328,18 +408,6 @@
             </Principal>
             <Dependent Role="Hardware">
               <PropertyRef Name="BrandID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Hardware__Invoic__44FF419A">
-          <End Type="InventoryBDMModel.Invoice" Role="Invoice" Multiplicity="0..1" />
-          <End Type="InventoryBDMModel.Hardware" Role="Hardware" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Invoice">
-              <PropertyRef Name="PO" />
-            </Principal>
-            <Dependent Role="Hardware">
-              <PropertyRef Name="InvoiceID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -367,7 +435,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <Association Name="FK_Hardware_Invoice">
+          <End Type="InventoryBDMModel.Invoice" Role="Invoice" Multiplicity="0..1" />
+          <End Type="InventoryBDMModel.Hardware" Role="Hardware" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoice">
+              <PropertyRef Name="PO" />
+            </Principal>
+            <Dependent Role="Hardware">
+              <PropertyRef Name="InvoiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hardware_SubArea">
+          <End Type="InventoryBDMModel.SubArea" Role="SubArea" Multiplicity="0..1" />
+          <End Type="InventoryBDMModel.Hardware" Role="Hardware" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubArea">
+              <PropertyRef Name="SubAreaID" />
+            </Principal>
+            <Dependent Role="Hardware">
+              <PropertyRef Name="SubAreaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -408,6 +500,7 @@
                 <ScalarProperty Name="UserNetworkName" ColumnName="UserNetworkName" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
+                <ScalarProperty Name="SubAreaID" ColumnName="SubAreaID" />
                 <ScalarProperty Name="AreaID" ColumnName="AreaID" />
                 <ScalarProperty Name="TypeHardwareID" ColumnName="TypeHardwareID" />
                 <ScalarProperty Name="BrandID" ColumnName="BrandID" />
@@ -429,6 +522,15 @@
             <EntityTypeMapping TypeName="InventoryBDMModel.Responsable">
               <MappingFragment StoreEntitySet="Responsables">
                 <ScalarProperty Name="username" ColumnName="username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubAreas">
+            <EntityTypeMapping TypeName="InventoryBDMModel.SubArea">
+              <MappingFragment StoreEntitySet="SubArea">
+                <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SubAreaID" ColumnName="SubAreaID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -31,6 +31,7 @@ namespace Inventario.Models
         public virtual DbSet<Hardware> Hardwares { get; set; }
         public virtual DbSet<Invoice> Invoices { get; set; }
         public virtual DbSet<Responsable> Responsables { get; set; }
+        public virtual DbSet<SubArea> SubAreas { get; set; }
         public virtual DbSet<TypeHardware> TypeHardwares { get; set; }
         public virtual DbSet<User> Users { get; set; }
     }

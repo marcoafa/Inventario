@@ -36,6 +36,7 @@
           <ScalarProperty Name="UserNetworkName" ColumnName="UserNetworkName" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
+          <ScalarProperty Name="SubAreaID" ColumnName="SubAreaID" />
           <ScalarProperty Name="AreaID" ColumnName="AreaID" />
           <ScalarProperty Name="TypeHardwareID" ColumnName="TypeHardwareID" />
           <ScalarProperty Name="BrandID" ColumnName="BrandID" />
@@ -57,6 +58,15 @@
       <EntityTypeMapping TypeName="InventoryBDMModel.Responsable">
         <MappingFragment StoreEntitySet="Responsables">
           <ScalarProperty Name="username" ColumnName="username" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubAreas">
+      <EntityTypeMapping TypeName="InventoryBDMModel.SubArea">
+        <MappingFragment StoreEntitySet="SubArea">
+          <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="SubAreaID" ColumnName="SubAreaID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -61,13 +61,17 @@ $("body").on("click", ".editarInvetario", function () {
     $("#modalMarcaSelect").attr('disabled','disabled');
     $("#modalFactura").attr('disabled','disabled');
     $("#modalEquipoCritico").attr('disabled','disabled');
-
+    $("#modalUsuarioRed").attr('disabled','disabled');
     $.getJSON(url, function (r) {
                               
         debugger;
         $('#componentesHardware').empty();
         $('#modalSerie').val(r.SerialNumber);
         $('#modalUsuario').val(r.UserName);
+        if (r.UserNetworkName != null) {
+            $('#modalUsuarioRed').val(r.UserNetworkName);
+        }
+        
         $('#modalModelo').val(r.Model);
         $('#modalNoEquipo').val(r.NameEquip);
         $('#modalEquipoCritico').attr('checked', r.CriticEquip);
@@ -76,7 +80,7 @@ $("body").on("click", ".editarInvetario", function () {
         
         $('#modalAreaSelect').val(r.AreaID).change();
         $('#modalMarcaSelect').val(r.BrandID).change();
-       
+     
         if (r.SerialAssigned != null) {
             $('#modalSerieASelect').val(r.SerialAssigned).change();
         }
@@ -170,6 +174,7 @@ $("body").on("click", "#Change", function () {
     $("#modalMarcaSelect").removeAttr('disabled');
     $("#modalFactura").removeAttr('disabled');
     $("#modalEquipoCritico").removeAttr('disabled');
+    $("#modalUsuarioRed").removeAttr('disabled');
    
    
 });
