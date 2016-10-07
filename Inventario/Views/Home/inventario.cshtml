@@ -85,168 +85,244 @@
                 </div>
 
                 @* Registro de Hardware en Inventario *@
-                <div class="tab-pane fade row" id="registro">
-                    
-                    <form id="FormPrincipal" method="post" class="form-horizontal" action="~/home/Registro">
-                        
-                        <h3 id="tituloHardware" class="text-center" style="margin:30px;">Alta de Equipo</h3>
-                      
-                        <!-- TIPO DISPOSITIVO -->
-                        <div class="form-group form-group-lg">
-                            <label class="col-md-2 control-label">Tipo Dispositivo:</label>
-                            <div class="col-md-4 selectContainer">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-facetime-video"></i></span>
-                                    <select name="TypeHardwareID" class="form-control selectpicker input-lg">
-                                        <option value="">Selecciona un Dispositivo</option>
-                                        @{foreach (var item in Model.listaTypeHardware)
+                <div class="tab-pane fade" id="registro">
+                    <div class="row">
+                        @* Primera Columna para hardware*@
+                        <div class="col-md-6">
+                            <form id="FormPrincipal" method="post" class="form-horizontal" action="~/home/Registro">
+
+                                <h3 id="tituloHardware" class="text-center" style="margin:30px;">Alta de Equipo</h3>
+
+                                <!-- TIPO DISPOSITIVO -->
+                                <div class="form-group form-group-lg">
+                                    <label class="col-md-4 control-label">Tipo Dispositivo:</label>
+                                    <div class="col-md-8 selectContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-facetime-video"></i></span>
+                                            <select name="TypeHardwareID" class="form-control selectpicker input-lg">
+                                                <option value="">Selecciona un Dispositivo</option>
+                                                @{foreach (var item in Model.listaTypeHardware)
                                             {
                                                 if (@item.Description == "Desktop" || @item.Description == "Laptop" || @item.Description == "Server" || @item.Description == "Touch" || @item.Description == "Impresora")
                                                 {
                                                     <option value="@item.TypeHardwareID">@item.Description</option>
                                                     }
                                                 }
-                                            }
-                                        
-                                    </select>
+                                                }
+
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
 
-                        <!-- USUARIO (NAME)-->
-                        <div class="form-group form-group-lg">
-                            <label class="col-md-2 control-label">Usuario (Nombre):</label>
-                            <div class="col-md-4 inputGroupContainer">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                    <input type="text" name="UserName" class="form-control cajas input-lg" placeholder="Usuario (Nombre)">
+                                <!-- USUARIO (NAME)-->
+                                <div class="form-group form-group-lg">
+                                    <label class="col-md-4 control-label">Usuario (Nombre):</label>
+                                    <div class="col-md-8 inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                            <input type="text" name="UserName" class="form-control cajas input-lg" placeholder="Usuario (Nombre)">
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
 
-                        <!-- USUARIO (RED)-->
-                        <div class="form-group form-group-lg">
-                            <label class="col-md-2 control-label">Usuario (Red):</label>
-                            <div class="col-md-4 inputGroupContainer">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-signal"></i></span>
-                                    <input type="text" name="UserNetworkName" class="form-control cajas input-lg" placeholder="Usuario (Red)">
+                                <!-- USUARIO (RED)-->
+                                <div class="form-group form-group-lg">
+                                    <label class="col-md-4 control-label">Usuario (Red):</label>
+                                    <div class="col-md-8 inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-signal"></i></span>
+                                            <input type="text" name="UserNetworkName" class="form-control cajas input-lg" placeholder="Usuario (Red)">
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
 
-                        <!-- SERIE -->
-                        <div class="form-group form-group-lg">
-                            <label class="col-md-2 control-label">Serie:</label>
-                            <div class="col-md-4 inputGroupContainer">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-                                    <input type="text" name="SerialNumber" class="form-control cajas input-lg" placeholder="Serie">
+                                <!-- SERIE -->
+                                <div class="form-group form-group-lg">
+                                    <label class="col-md-4 control-label">Serie:</label>
+                                    <div class="col-md-8 inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+                                            <input type="text" name="SerialNumber" class="form-control cajas input-lg" placeholder="Serie">
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
 
-                        <!-- MODELO -->
-                        <div class="form-group form-group-lg">
-                            <label class="col-md-2 control-label">Modelo:</label>
-                            <div class="col-md-4 inputGroupContainer">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-tag"></i></span>
-                                    <input type="text" name="Model" class="form-control cajas input-lg" placeholder="Modelo">
+                                <!-- MODELO -->
+                                <div class="form-group form-group-lg">
+                                    <label class="col-md-4 control-label">Modelo:</label>
+                                    <div class="col-md-8 inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-tag"></i></span>
+                                            <input type="text" name="Model" class="form-control cajas input-lg" placeholder="Modelo">
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
 
-                        <!-- NOMBRE DEL EQUIPO -->
-                        <div class="form-group form-group-lg">
-                            <label class="col-md-2 control-label">Nombre del Equipo:</label>
-                            <div class="col-md-4 inputGroupContainer">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
-                                    <input type="text" name="NameEquip" class="form-control cajas input-lg" placeholder="Nombre del Equipo">
+                                <!-- NOMBRE DEL EQUIPO -->
+                                <div class="form-group form-group-lg">
+                                    <label class="col-md-4 control-label">Nombre del Equipo:</label>
+                                    <div class="col-md-8 inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
+                                            <input type="text" name="NameEquip" class="form-control cajas input-lg" placeholder="Nombre del Equipo">
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
 
-                        <!-- FACTURA -->
-                        <div class="form-group form-group-lg" id="divfactura">
-                            <label class="col-md-2 control-label">Factura:</label>
-                            <div class="col-md-4 inputGroupContainer">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-file"></i></span>
-                                    <input type="text" name="InvoiceID" class="form-control cajas input-lg autocomplete" placeholder="Factura">
+                                <!-- FACTURA -->
+                                <div class="form-group form-group-lg" id="divfactura">
+                                    <label class="col-md-4 control-label">Factura:</label>
+                                    <div class="col-md-7 inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-file"></i></span>
+                                            <input type="text" name="InvoiceID" class="form-control cajas input-lg autocomplete" placeholder="Factura">
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-primary" aria-label="Left Align" data-toggle="modal" data-target="#modal2">
+                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                    </button>
                                 </div>
-                            </div>
-                            <button type="button" class="btn btn-primary" aria-label="Left Align" data-toggle="modal" data-target="#modal2">
-                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                            </button>
-                        </div>
 
-                        <!-- EQUIPO CRITICO-->
-                        <div class="form-group form-group-lg">
-                            <label class="col-md-2 control-label">Equipo Crítico:</label>
-                            <div class="col-md-4">
-                                <input type="checkbox" name="CriticalEquip" class="micheckbox">
-                            </div>
-                        </div>
+                                <!-- EQUIPO CRITICO-->
+                                <div class="form-group form-group-lg">
+                                    <label class="col-md-4 control-label">Equipo Crítico:</label>
+                                    <div class="col-md-8">
+                                        <input type="checkbox" name="CriticalEquip" class="micheckbox">
+                                    </div>
+                                </div>
 
-                        <!-- AREA -->
-                        <div class="form-group form-group-lg" id="containerArea">
-                            <label class="col-md-2 control-label">Area:</label>
-                            <div class="col-md-4 selectContainer">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                                    <select name="AreaID" class="form-control selectpicker input-lg" id="areaID">
-                                        <option value="">Selecciona una Area</option>
-                                        @foreach (var item in Model.listaAreas)
+                                <!-- AREA -->
+                                <div class="form-group form-group-lg" id="containerArea">
+                                    <label class="col-md-4 control-label">Area:</label>
+                                    <div class="col-md-8 selectContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                                            <select name="AreaID" class="form-control selectpicker input-lg" id="areaID">
+                                                <option value="">Selecciona una Area</option>
+                                                @foreach (var item in Model.listaAreas)
                                         {
-                                                <option value="@item.AreaID">@item.Name</option>
+                                                    <option value="@item.AreaID">@item.Name</option>
 
                                         }
-                                    </select>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
 
-                        <!-- MARCA -->
-                        <div class="form-group form-group-lg">
-                            <label class="col-md-2 control-label">Marca:</label>
-                            <div class="col-md-4 selectContainer">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-log-in"></i></span>
-                                    <select name="BrandID" class="form-control selectpicker input-lg">
-                                        <option value="">Selecciona una Marca</option>
-                                        @{foreach (var item in Model.listaBrand)
+                                <!-- MARCA -->
+                                <div class="form-group form-group-lg">
+                                    <label class="col-md-4 control-label">Marca:</label>
+                                    <div class="col-md-8 selectContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-log-in"></i></span>
+                                            <select name="BrandID" class="form-control selectpicker input-lg">
+                                                <option value="">Selecciona una Marca</option>
+                                                @{foreach (var item in Model.listaBrand)
                                             {
-                                                <option value="@item.BrandID">@item.Name</option>
+                                                    <option value="@item.BrandID">@item.Name</option>
                                             }
 
-                                        }
-                                    </select>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
 
-                        @* input escondido para saber el tipo de hardaware en la base de Datos *@
-                        <div class="col-md-8">
-                            <input value="1" type="text" id="Hardware" name="tipoHardware" hidden>
-                        </div>
-                        
-                        @* input escondido para mandar la alerta *@
-                        <div class="col-md-8">
-                            <input type="text" class="Ver" value="@Model.veriFicacion" hidden />
-                        </div>
-                        
-                        @*../Home/BarcodeImage?barcodeText=HolaMundo*@
-                        <div class="col-md-2 col-md-offset-4">
-                            <button type="submit" class="btn btn-primary btn-lg" name="action">Registrar Equipo</button>
-                        </div>
-                        @*<div class="col-md-2">
+                                @* input escondido para saber el tipo de hardaware en la base de Datos *@
+                                <div class="col-md-8">
+                                    <input value="1" type="text" id="Hardware" name="tipoHardware" hidden>
+                                </div>
+
+                                @* input escondido para mandar la alerta *@
+                                <div class="col-md-8">
+                                    <input type="text" class="Ver" value="@Model.veriFicacion" hidden />
+                                </div>
+
+                                @*../Home/BarcodeImage?barcodeText=HolaMundo*@
+                                <div class="col-md-2 col-md-offset-4">
+                                    <button type="submit" class="btn btn-primary btn-lg" name="action">Registrar Equipo</button>
+                                </div>
+                                        @*<div class="col-md-2">
                             <button id="QrFactura" class="btn btn-primary">Generar QR</button>
                         </div>*@
-                    </form>
+                            </form>
+                        </div>
+                         
+                        @*Segunda Columna para componentes*@
+                      
+                        <div class="col-md-4 col-lg-offset-1">
+                            <h3 id="tituloHardware" class="text-center" style="margin:30px;">Componentes en equipo</h3>
+
+                            @* boton para agregar el nuevo componente teclado.. mouse.. pantalla.. etc *@
+                            <label class="control-label">Componentes:</label>
+                           
+                            <button id="eliminarComponente" class="btn btn-danger pull-right">
+                                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                            </button>
+                            <button id="agregarComponente" class="btn btn-success pull-right">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            </button>
+                           
+                            <br />  
+                            <br />
+
+                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                <!-- COMPONENT 1--> 
+                                <div class="panel panel-default">
+                                   
+                                    <div class="panel-heading color-header" role="tab" id="headingOne">
+                                        <h4 class="panel-title">
+                                            <a role="button" data-toggle="collapse" data-parent="#accordion"  href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                Item #1
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                        <div class="panel-body">
+                                              
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- COMPONENT 1-->
+                                <!-- COMPONENT 2--> 
+                                <div class="panel panel-default">
+                                    <div class="panel-heading color-header" role="tab" id="headingTwo">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                Item #2
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                        <div class="panel-body">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- COMPONENT 2-->
+                                <!-- COMPONENT 3-->
+                                <div class="panel panel-default">
+                                    <div class="panel-heading color-header" role="tab" id="headingThree">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                Item #3
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                        <div class="panel-body">
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- COMPONENT 3-->
+                            </div>
+                         </div> 
+                    </div>
                 </div>
 
+                @* Registro de Componentes del Hardware *@
                 <div class="tab-pane fade" id="computadora">
                     <div class="contenedorflex">
 
@@ -552,7 +628,6 @@
                                 </div>
 
                                 @*NOMBREQUIPO EDITAR*@
-
                                 <div class="form-group">
                                     <label class="col-md-2 col-md-offset-1 text-left">NOM.EQUIPO:</label>
                                     <div class="col-md-8">
@@ -560,20 +635,16 @@
                                     </div>
                                 </div>
                              
-                             
-                               
                                 @*AREA EDITAR*@
                                 <div class="form-group form-group-lg" id="editContainerArea">
                                     <label class="col-md-2 control-label col-md-offset-1">Area:</label>
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-log-in"></i></span>
                                             <select name="clArea" id="modalAreaSelect" class="form-control selectpicker input-lg" data-style="btn-primary" disabled>
-                                                @{foreach (var item in Model.listaAreas)
+                                                @foreach (var item in Model.listaAreas)
                                                 {
                                                     <option value="@item.AreaID">@item.Name</option>
-
-                                                }
                                                 }
                                             </select>
                                            
@@ -831,6 +902,8 @@
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
+
+@* STOCK DISPONIBLE *@
 <div id="modallapiz" class="modal fade" tabindex="-1" role="dialog">
 <div class="modal-dialog" role="document" style="width:90%;">
     <div class="modal-content">

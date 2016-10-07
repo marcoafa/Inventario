@@ -308,12 +308,11 @@ $(document).ready(function () {
         {
             $.post("../Home/ObtenerSubAreas", { areaID: areaID }, function (subAreas) {
                 debugger;
-                if ($('#containerSubAreas').length) {
-                    $('#containerSubAreas').remove();
-                }
 
-                if ($('#containerSubAreasEdit').length) {
+                if (selectChange == "modalAreaSelect") {
                     $('#containerSubAreasEdit').remove();
+                } else {
+                    $('#containerSubAreas').remove();
                 }
 
                 if (subAreas.length != 0) {
@@ -328,8 +327,8 @@ $(document).ready(function () {
                     if (selectChange == "modalAreaSelect") {
                         divSubAreas =
                         '<div class="form-group form-group-lg" id="containerSubAreasEdit">' +
-                            '<label class="col-md-2 col-md-offset-1 control-label">Sub-Area:</label>' +
-                            '<div class="col-md-6 selectContainer">' +
+                            '<label class="col-md-2 control-label col-md-offset-1">Sub-Area:</label>' +
+                            '<div class="col-md-8 selectContainer">' +
                                 '<div class="input-group">' +
                                     '<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>' +
                                     '<select name="clSubAreaID" class="form-control selectpicker input-lg" id="modalSubAreaSelect">' +
@@ -343,8 +342,8 @@ $(document).ready(function () {
                     else {
                         divSubAreas =
                         '<div class="form-group form-group-lg" id="containerSubAreas">' +
-                            '<label class="col-md-2 control-label">Sub-Area:</label>' +
-                            '<div class="col-md-4 selectContainer">' +
+                            '<label class="col-md-4 control-label">Sub-Area:</label>' +
+                            '<div class="col-md-8 selectContainer">' +
                                 '<div class="input-group">' +
                                     '<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>' +
                                     '<select name="clSubAreaID" class="form-control selectpicker input-lg" id="subAreaID" >' +
@@ -360,9 +359,12 @@ $(document).ready(function () {
                     if (selectChange == "modalAreaSelect") {
                         debugger;
                         $('#editContainerArea').after(divSubAreas);
-                        $('#modalSubAreaSelect').val(global.SubAreaID);
-                        if ($('#modalAreaSelect').attr('disabled'))
-                            $('#modalSubAreaSelect').attr('disabled','disabled');
+                        
+
+                        if ($('#modalAreaSelect').attr('disabled')) {
+                            $('#modalSubAreaSelect').val(global.SubAreaID);
+                            $('#modalSubAreaSelect').attr('disabled', 'disabled');
+                        }
                     }
                     else
                         $('#containerArea').after(divSubAreas);

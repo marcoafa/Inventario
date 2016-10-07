@@ -67,10 +67,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/14/2016 11:54:33</publishTime>
     </File>
     <File Include="bin/Inventario.dll">
-      <publishTime>10/05/2016 13:16:26</publishTime>
+      <publishTime>10/06/2016 11:04:14</publishTime>
     </File>
     <File Include="bin/Inventario.pdb">
-      <publishTime>10/05/2016 13:16:26</publishTime>
+      <publishTime>10/06/2016 11:04:14</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
       <publishTime>08/24/2016 08:37:38</publishTime>
@@ -160,7 +160,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/29/2016 08:59:19</publishTime>
     </File>
     <File Include="Models/InventoryBDM.edmx.diagram">
-      <publishTime>10/04/2016 13:00:20</publishTime>
+      <publishTime>10/05/2016 15:34:36</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>10/04/2016 11:16:44</publishTime>
@@ -175,7 +175,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/29/2016 09:39:29</publishTime>
     </File>
     <File Include="Scripts/Inventario/Editar.js">
-      <publishTime>10/05/2016 13:09:51</publishTime>
+      <publishTime>10/06/2016 11:01:16</publishTime>
     </File>
     <File Include="Scripts/Inventario/TablaBusqueda.js">
       <publishTime>09/29/2016 10:53:12</publishTime>
@@ -208,7 +208,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/24/2016 08:54:10</publishTime>
     </File>
     <File Include="Views/Home/inventario.cshtml">
-      <publishTime>10/05/2016 13:00:57</publishTime>
+      <publishTime>10/06/2016 11:03:56</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>08/24/2016 08:37:07</publishTime>
@@ -223,7 +223,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/24/2016 08:37:07</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/05/2016 13:16:32</publishTime>
+      <publishTime>10/06/2016 11:04:21</publishTime>
     </File>
   </ItemGroup>
 </Project>
