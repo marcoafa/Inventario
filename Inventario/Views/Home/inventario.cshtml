@@ -219,9 +219,9 @@
                                             <select name="BrandID" class="form-control selectpicker input-lg">
                                                 <option value="">Selecciona una Marca</option>
                                                 @{foreach (var item in Model.listaBrand)
-                                            {
+                                                {
                                                     <option value="@item.BrandID">@item.Name</option>
-                                            }
+                                                }
 
                                                 }
                                             </select>
@@ -273,18 +273,94 @@
                                    
                                     <div class="panel-heading color-header" role="tab" id="headingOne">
                                         <h4 class="panel-title">
-                                            <a role="button" data-toggle="collapse" data-parent="#accordion"  href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                                 Item #1
                                             </a>
                                         </h4>
                                     </div>
                                     <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                        <!-- CONTENIDO 1--> 
                                         <div class="panel-body">
-                                              
+                                            <!-- TIPO DE HARDWARE--> 
+                                            <div class="row">
+                                                <label class="col-md-3 control-label">Hardware:</label>
+                                                <div class="col-md-8 selectContainer">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-facetime-video"></i></span>
+                                                        <select @*name="TypeHardwareID"*@ class="form-control selectpicker input-lg">
+                                                            <option value="">Selecciona un Dispositivo</option>
+                                                            @{foreach (var item in Model.listaTypeHardware)
+                                                            {
+                                                                if (@item.Description != "Desktop" || @item.Description != "Laptop" || @item.Description != "Server" || @item.Description != "Touch" || @item.Description != "Impresora")
+                                                                {
+                                                                    <option value="@item.TypeHardwareID">@item.Description</option>
+                                                                }
+                                                            }
+                                                            }
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br />
+                                           
+                                            <!-- SERIE-->
+                                            <div class="row">
+
+                                                <label class="col-md-3 control-label">Serie:</label>
+                                                <div class="col-md-8 inputGroupContainer">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+                                                        <input type="text" name="Model" class="form-control cajas input-lg" placeholder="Serie">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <br />
+                                           
+                                            <!-- MARCA-->
+                                            <div class="row">
+
+                                                <label class="col-md-3 control-label">Marca:</label>
+                                                <div class="col-md-8 selectContainer">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-facetime-video"></i></span>
+                                                        <select @*name="TypeHardwareID"*@ class="form-control selectpicker input-lg">
+                                                            <option value="">Selecciona un Dispositivo</option>
+                                                            @{foreach (var item in Model.listaBrand)
+                                                            {
+                                                               
+                                                                    <option value="@item.BrandID">@item.Name</option>
+                                                                
+                                                            }
+                                                            }
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <br />
+                                          
+                                            <!-- MODELO--> 
+                                            <div class="row">
+                                                
+                                                    <label class="col-md-3 control-label">Modelo:</label>
+                                                    <div class="col-md-8 inputGroupContainer">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="glyphicon glyphicon-tag"></i></span>
+                                                            <input type="text" name="Model" class="form-control cajas input-lg" placeholder="Modelo">
+                                                        </div>
+                                                    </div>
+                                                
+                                            </div>
+
+
+
                                         </div>
                                     </div>
                                 </div>
-                                <!-- COMPONENT 1-->
+                               
                                 <!-- COMPONENT 2--> 
                                 <div class="panel panel-default">
                                     <div class="panel-heading color-header" role="tab" id="headingTwo">
@@ -295,12 +371,88 @@
                                         </h4>
                                     </div>
                                     <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                        <!-- CONTENIDO 2--> 
                                         <div class="panel-body">
-                                            
+                                            <!-- TIPO DE HARDWARE-->
+                                            <div class="row">
+                                                <label class="col-md-3 control-label">Hardware:</label>
+                                                <div class="col-md-8 selectContainer">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-facetime-video"></i></span>
+                                                        <select @*name="TypeHardwareID"*@ class="form-control selectpicker input-lg">
+                                                            <option value="">Selecciona un Dispositivo</option>
+                                                            @{foreach (var item in Model.listaTypeHardware)
+                                                            {
+                                                                if (@item.Description != "Desktop" || @item.Description != "Laptop" || @item.Description != "Server" || @item.Description != "Touch" || @item.Description != "Impresora")
+                                                                {
+                                                                    <option value="@item.TypeHardwareID">@item.Description</option>
+                                                                }
+                                                            }
+                                                            }
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br />
+
+                                            <!-- SERIE-->
+                                            <div class="row">
+
+                                                <label class="col-md-3 control-label">Serie:</label>
+                                                <div class="col-md-8 inputGroupContainer">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+                                                        <input type="text" name="Model" class="form-control cajas input-lg" placeholder="Serie">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <br />
+
+                                            <!-- MARCA-->
+                                            <div class="row">
+
+                                                <label class="col-md-3 control-label">Marca:</label>
+                                                <div class="col-md-8 selectContainer">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-facetime-video"></i></span>
+                                                        <select @*name="TypeHardwareID"*@ class="form-control selectpicker input-lg">
+                                                            <option value="">Selecciona un Dispositivo</option>
+                                                            @{foreach (var item in Model.listaBrand)
+                                                            {
+
+                                                                <option value="@item.BrandID">@item.Name</option>
+
+                                                            }
+                                                            }
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <br />
+
+                                            <!-- MODELO-->
+                                            <div class="row">
+
+                                                <label class="col-md-3 control-label">Modelo:</label>
+                                                <div class="col-md-8 inputGroupContainer">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-tag"></i></span>
+                                                        <input type="text" name="Model" class="form-control cajas input-lg" placeholder="Modelo">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+
                                         </div>
                                     </div>
                                 </div>
-                                <!-- COMPONENT 2-->
+                                
                                 <!-- COMPONENT 3-->
                                 <div class="panel panel-default">
                                     <div class="panel-heading color-header" role="tab" id="headingThree">
@@ -311,12 +463,88 @@
                                         </h4>
                                     </div>
                                     <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                        <!-- CONTENIDO 3--> 
                                         <div class="panel-body">
-                                           
+                                            <!-- TIPO DE HARDWARE-->
+                                            <div class="row">
+                                                <label class="col-md-3 control-label">Hardware:</label>
+                                                <div class="col-md-8 selectContainer">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-facetime-video"></i></span>
+                                                        <select @*name="TypeHardwareID"*@ class="form-control selectpicker input-lg">
+                                                            <option value="">Selecciona un Dispositivo</option>
+                                                            @{foreach (var item in Model.listaTypeHardware)
+                                                            {
+                                                                if (@item.Description != "Desktop" || @item.Description != "Laptop" || @item.Description != "Server" || @item.Description != "Touch" || @item.Description != "Impresora")
+                                                                {
+                                                                    <option value="@item.TypeHardwareID">@item.Description</option>
+                                                                }
+                                                            }
+                                                            }
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br />
+
+                                            <!-- SERIE-->
+                                            <div class="row">
+
+                                                <label class="col-md-3 control-label">Serie:</label>
+                                                <div class="col-md-8 inputGroupContainer">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+                                                        <input type="text" name="Model" class="form-control cajas input-lg" placeholder="Serie">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <br />
+
+                                            <!-- MARCA-->
+                                            <div class="row">
+
+                                                <label class="col-md-3 control-label">Marca:</label>
+                                                <div class="col-md-8 selectContainer">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-facetime-video"></i></span>
+                                                        <select @*name="TypeHardwareID"*@ class="form-control selectpicker input-lg">
+                                                            <option value="">Selecciona un Dispositivo</option>
+                                                            @{foreach (var item in Model.listaBrand)
+                                                            {
+
+                                                                <option value="@item.BrandID">@item.Name</option>
+
+                                                            }
+                                                            }
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <br />
+
+                                            <!-- MODELO-->
+                                            <div class="row">
+
+                                                <label class="col-md-3 control-label">Modelo:</label>
+                                                <div class="col-md-8 inputGroupContainer">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-tag"></i></span>
+                                                        <input type="text" name="Model" class="form-control cajas input-lg" placeholder="Modelo">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+
                                         </div>
                                     </div>
                                 </div>
-                                <!-- COMPONENT 3-->
+
                             </div>
                          </div> 
                     </div>
