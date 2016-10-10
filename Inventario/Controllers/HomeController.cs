@@ -182,7 +182,7 @@ namespace Inventario.Controllers
             {
 
                 InventarioModal ent = new InventarioModal();
-
+              
                 if (TempData["verificacion"] != null)
                 {
                     ent.veriFicacion = TempData["verificacion"].ToString();

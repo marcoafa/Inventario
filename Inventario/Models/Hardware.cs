@@ -33,6 +33,7 @@ namespace Inventario.Models
         public string NameEquip { get; set; }
         public bool CriticEquip { get; set; }
         public string SerialAssigned { get; set; }
+        public Nullable<System.DateTime> DateWarranty { get; set; }
     
         public virtual Area Area { get; set; }
         public virtual Brand Brand { get; set; }

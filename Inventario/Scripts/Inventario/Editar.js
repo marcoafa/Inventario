@@ -602,3 +602,21 @@ $(document).ready(function () {
 //            }, 'json');
 //        });
 //});
+
+
+function rowStyle(row, index)
+{
+    var classes = ['active','danger'];
+    if(row[8] == "Vencidas")
+    {
+        return{classes:'danger'};
+    }
+    else
+    {
+        if(row[8] == "Proceso")
+        {
+            return{classes:'success'};
+        }
+    }
+    return{};
+}

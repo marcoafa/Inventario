@@ -97,6 +97,7 @@
     <NavigationProperty Name="Hardware2" Relationship="InventoryBDMModel.FK_Hardware_Hardware" FromRole="Hardware1" ToRole="Hardware" />
     <NavigationProperty Name="Invoice" Relationship="InventoryBDMModel.FK_Hardware_Invoice" FromRole="Hardware" ToRole="Invoice" />
     <NavigationProperty Name="TypeHardware" Relationship="InventoryBDMModel.FK_Hardware_TypeHardware" FromRole="Hardware" ToRole="TypeHardware" />
+    <Property Name="DateWarranty" Type="DateTime" Precision="0" />
   </EntityType>
   <EntityType Name="Invoice">
     <Key>

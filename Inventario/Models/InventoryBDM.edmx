@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="InventoryBDMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="InventoryBDMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Area">
           <Key>
             <PropertyRef Name="AreaID" />
@@ -46,6 +46,7 @@
           <Property Name="NameEquip" Type="nvarchar" MaxLength="300" />
           <Property Name="CriticEquip" Type="bit" Nullable="false" />
           <Property Name="SerialAssigned" Type="nvarchar" MaxLength="300" />
+          <Property Name="DateWarranty" Type="date" />
         </EntityType>
         <EntityType Name="Invoice">
           <Key>
@@ -335,6 +336,7 @@
           <NavigationProperty Name="Hardware2" Relationship="InventoryBDMModel.FK_Hardware_Hardware" FromRole="Hardware1" ToRole="Hardware" />
           <NavigationProperty Name="Invoice" Relationship="InventoryBDMModel.FK_Hardware_Invoice" FromRole="Hardware" ToRole="Invoice" />
           <NavigationProperty Name="TypeHardware" Relationship="InventoryBDMModel.FK_Hardware_TypeHardware" FromRole="Hardware" ToRole="TypeHardware" />
+          <Property Name="DateWarranty" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="Invoice">
           <Key>
@@ -519,6 +521,7 @@
           <EntitySetMapping Name="Hardwares">
             <EntityTypeMapping TypeName="InventoryBDMModel.Hardware">
               <MappingFragment StoreEntitySet="Hardware">
+                <ScalarProperty Name="DateWarranty" ColumnName="DateWarranty" />
                 <ScalarProperty Name="SerialAssigned" ColumnName="SerialAssigned" />
                 <ScalarProperty Name="CriticEquip" ColumnName="CriticEquip" />
                 <ScalarProperty Name="NameEquip" ColumnName="NameEquip" />

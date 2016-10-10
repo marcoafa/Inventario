@@ -31,6 +31,7 @@
     <EntitySetMapping Name="Hardwares">
       <EntityTypeMapping TypeName="InventoryBDMModel.Hardware">
         <MappingFragment StoreEntitySet="Hardware">
+          <ScalarProperty Name="DateWarranty" ColumnName="DateWarranty" />
           <ScalarProperty Name="SerialAssigned" ColumnName="SerialAssigned" />
           <ScalarProperty Name="CriticEquip" ColumnName="CriticEquip" />
           <ScalarProperty Name="NameEquip" ColumnName="NameEquip" />

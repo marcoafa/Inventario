@@ -23,6 +23,7 @@ namespace Inventario.Models
 
         public string veriFicacion;
        
+        public bool garantia;
 
         public InventarioModal()
         {
@@ -41,7 +42,7 @@ namespace Inventario.Models
             listaTypeHardware = (from a in inv.TypeHardwares
                                  select a).ToList();
 
-             listaHardware = (from a in inv.Hardwares
+            listaHardware = (from a in inv.Hardwares
                           select a).ToList();
 
 
