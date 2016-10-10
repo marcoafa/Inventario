@@ -98,3 +98,15 @@ body
 
 /********************************************* VALIDACION ALTA DE EQUIPO **********************/
 #success_message{ display: none;}
+
+
+/************************************HELPERS **********************/
+
+.color-header {
+    background-color:#337ab7 !important;
+    color:white !important;
+}
+
+.color-header a:link{
+    text-decoration:none;
+}

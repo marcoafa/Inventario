@@ -18,12 +18,16 @@ namespace Inventario.Models
         public Division()
         {
             this.Areas = new HashSet<Area>();
+            this.Hardwares = new HashSet<Hardware>();
         }
     
         public int DivisionID { get; set; }
         public string Name { get; set; }
+        public Nullable<int> Order { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Area> Areas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Hardware> Hardwares { get; set; }
     }
 }

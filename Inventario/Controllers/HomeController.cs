@@ -59,6 +59,7 @@ namespace Inventario.Controllers
                                 Model = p.Model,
                                 BrandID = p.BrandID,
                                 TypeHardwareID = p.TypeHardwareID,
+                                DivisionID = p.DivisionID,
                                 AreaID = p.AreaID,
                                 SubAreaID = p.SubAreaID,
                                 InvoiceID = p.InvoiceID,
@@ -191,7 +192,7 @@ namespace Inventario.Controllers
             }
         }
         //Guardar registro de un solo item
-        public ActionResult Registro(string UserName,string UserNetworkName, string SerialNumber, string Model, string NameEquip, string CriticalEquip, int AreaID,int? SubAreaID, int BrandID, int TypeHardwareID,  string InvoiceID)
+        public ActionResult Registro(string UserName,string UserNetworkName, string SerialNumber, string Model, string NameEquip, string CriticalEquip,int? DivisionID ,int? AreaID,int? SubAreaID, int BrandID, int TypeHardwareID,  string InvoiceID)
         {
             bool CriticEquip;
             
@@ -214,6 +215,7 @@ namespace Inventario.Controllers
                     BrandID = BrandID,
                     TypeHardwareID = TypeHardwareID,
                     AreaID = AreaID,
+                    DivisionID = DivisionID,
                     SubAreaID = SubAreaID,
                     InvoiceID = InvoiceID,
                     UserName = UserName,
@@ -240,15 +242,22 @@ namespace Inventario.Controllers
                 return RedirectToAction("inventario");
         }
         //Guardar registro de un item con varios componentes
-        public ActionResult GuardarComponentes(List<Componentes> listaComponentes)
+        public ActionResult GuardarComponentes(Hardware Principal, List<Componentes> listaComponentes)
         {
             bool criticoOpcion;
 
             try
             {
+
+
+                entidad.Hardwares.Add(Principal);
+                entidad.SaveChanges();
+
+                
+               
                 foreach (var item in listaComponentes)
                 {
-                    if (item.clEquipoCritico == "on")
+                    if (item.ComponentCriticalEquip == "on")
                     {
                         criticoOpcion = true;
                     }
@@ -258,32 +267,37 @@ namespace Inventario.Controllers
 
                     }
 
-                    if (item.clSerie != null)
+                    if (item.ComponentSerial != null)
                     {
                         Hardware H = new Hardware
                         {
-                            SerialNumber = item.clSerie,
-                            Model = item.clModelo,
-                            BrandID = item.clMarca,
-                            TypeHardwareID = item.tipoHardware,
-                            AreaID = item.clArea,
+                            SerialNumber = item.ComponentSerial,
+                            Model = item.ComponentModel,
+                            BrandID = item.ComponentMarca,
+                            TypeHardwareID = item.TipoHardware,
+                            DivisionID = null,
+                            SubAreaID = null,
+                            AreaID = Principal.AreaID,
                             InvoiceID = null,
-                            UserName = item.clUsuario,
-                            NameEquip = item.clNoEquipo,
-                            CriticEquip = criticoOpcion,
-                            SerialAssigned = item.serialAsignacion
+                            UserName = Principal.UserName,
+                            UserNetworkName = Principal.UserNetworkName,
+                            NameEquip = Principal.NameEquip,
+                            CriticEquip = Principal.CriticEquip,
+                            SerialAssigned = Principal.SerialNumber
                         };
                         entidad.Hardwares.Add(H);
                         entidad.SaveChanges();
-                       
+
                     }
                 }
+                TempData["verificacion"] = "Guardar";
                
                 return Json("Registro guardado!",JsonRequestBehavior.AllowGet);
             }
             catch(Exception ex)
             {
-                
+                //TempData["verificacion"] = "False";
+                //TempData["error"] = ex.Message;
                 return Json("Registro guardado con falta de componentes!, " + ex.Message,JsonRequestBehavior.AllowGet);
             }
 
@@ -292,7 +306,7 @@ namespace Inventario.Controllers
 
            
         }
-        public ActionResult RegistroEditar(string clUsuario,string clUsuarioRed, string clSerie, string clModelo, string clNoEquipo, int clArea,int? clSubAreaID, int clMarca,int? clFactura, string clEquipoCritico, string serialoriginal)
+        public ActionResult RegistroEditar(string clUsuario,string clUsuarioRed, string clSerie, string clModelo, string clNoEquipo,int? clDivisionID, int? clAreaID,int? clSubAreaID, int clMarca,int? clFactura, string clEquipoCritico, string serialoriginal)
         {
             bool criticoOpcion;
             if(clEquipoCritico=="on")
@@ -319,7 +333,7 @@ namespace Inventario.Controllers
                 }
                 entidad.SaveChanges();
                 // Actualizar hardware principal
-                var updateReg = entidad.Database.ExecuteSqlCommand("UPDATE Hardware SET SerialNumber = {0}, Model = {1}, BrandID = {2}, AreaID = {3}, SubAreaID = {10}, InvoiceID = {9}, UserName = {4},UserNetworkName = {5}, NameEquip = {6}, CriticEquip = {7} where SerialNumber = {8}", clSerie, clModelo, clMarca, clArea, clUsuario, clUsuarioRed, clNoEquipo, criticoOpcion, serialoriginal, clFactura,clSubAreaID);
+                var updateReg = entidad.Database.ExecuteSqlCommand("UPDATE Hardware SET SerialNumber = {0}, Model = {1}, BrandID = {2},DivisionID = {11}, AreaID = {3}, SubAreaID = {10}, InvoiceID = {9}, UserName = {4},UserNetworkName = {5}, NameEquip = {6}, CriticEquip = {7} where SerialNumber = {8}", clSerie, clModelo, clMarca, clAreaID, clUsuario, clUsuarioRed, clNoEquipo, criticoOpcion, serialoriginal, clFactura,clSubAreaID,clDivisionID);
 
                 // Reasignar serial a hardware asignados
                 foreach (var a in asignados)
@@ -509,6 +523,20 @@ namespace Inventario.Controllers
                             }).ToList();
 
             return Json(subAreas);
+        }
+
+        [HttpPost]
+        public ActionResult ObtenerAreas(int divisionID)
+        {
+            var areas = (from sa in entidad.Areas
+                            where sa.DivisionID == divisionID 
+                            select new
+                            {
+                                AreaID = sa.AreaID,
+                                Name = sa.Name
+                            }).ToList();
+
+            return Json(areas);
         }
 
     }

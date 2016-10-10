@@ -36,156 +36,193 @@ $('.titulo').click(function (e){
     
     
 });
+ 
+
+//$('#FormPrincipal').on('submit',function(e){
+//    //e.preventDefault();
+//    //alert('lerolero no te fuiste');
+//    //Columnas
+//    var columnaComponentes = $("#accordion");  
+//    var columnaCPU = $(columna2).find("#FormPrincipal");
+//    //Numero de Componentes
+//    var num = $('accordion').children().length;
+//    //Arreglo
+//    var listaComponentes = [];
+//    //Datos principales de la Compuradora Principal
+//    var ComponentUser = $(columnaCPU).find("[name='UserName']").val();
+//    var ComponentUserRed = $(columnaCPU).find("[name='UserNetworkName']").val();
+//    var ComponentSerial = $(columnaCPU).find("[name='SerialNumber']").val();
+//    var ComponentModel = $(columnaCPU).find("[name='Model']").val();
+//    //InvoiceID
+//    var ComponentNameEquip = $(columnaCPU).find("[name='NameEquip']").val();
+//    var ComponentCriticalEquip = $(columnaCPU).find("[name='CriticalEquip']").val();
+//    var ComponentArea = parseInt($(columnaCPU).find("#areaID").val());
+//    var ComponentMarca = parseInt($(columnaCPU).find("#marcaID").val()); 
+//    var TipoHardware = parseInt($(columnaCPU).find("[name='TypeHardwareID']").val());
+//    //COMPONENTES    
+//    for(var i = 0; i <= num; i++)
+//    {
+//        TipoHardware =  parseInt($($(columnaComponentes).children())).find(".tipoComponente").val();
+//        Serie = $($(columnaComponentes[i])).find(".SerialNumberComponente").val();
+//        Marca =  parseInt($($($(columnaComponentes[i])).find(".MarcaComponente")).val());
+//        Modelo = $($(columnaComponentes[i])).find(".ModeloComponente").val();         
+//            listaComponentes[i]={
+//                ComponentUser: ComponentUser,
+//                ComponentUserRed: ComponentUserRed,
+//                ComponentSerial  :  Serie,
+//                ComponentModel :  Modelo,
+//                ComponentNameEquip: ComponentNameEquip,
+//                ComponentCriticalEquip: ComponentCriticalEquip,
+//                ComponentArea : ComponentArea,
+//                ComponentMarca : Marca,
+//                TipoHardware :TipoHardware,
+//                serialAsignacion: ComponentSerial
+//            //listaComponentes[i]={
+//            //    clUsuario: Usuario,
+//            //    clSerie : Serie,
+//            //    clModelo : Modelo,
+//            //    clNoEquipo: NombreEquipo,
+//            //    clEquipoCritico: EquipoCritico,
+//            //    clArea : Area,
+//            //    clMarca :Marca,
+//            //    tipoHardware :TipoHardware,
+//            //    serialAsignacion: listaComponentes[0].clSerie
+//        }
+//    }
+//    //Crear Arreglo de Objetos
+//    //Url de la Accion
+//    var url =  "../Home/GuardarComponentes";
+//    listaComponentes = JSON.stringify({ 'listaComponentes': listaComponentes });
+//    $.ajax({
+//        contentType: 'application/json; charset=utf-8',
+//        dataType: 'json',
+//        async: false,
+//        type: 'POST',
+//        url: url,
+//        data: listaComponentes,
+//        success: function (r) {          
+//            debugger;
+//        },
+//        failure: function (response) {          
+//            alert('Error Al Guardar');
+//        }
+//});
+//$("#crearComponentes").on('click', function () {
+//    }); 
+//});
 
 
-$("#crearComponentes").on('click', function () {
-   
-    
-    
-    //Columnas
-    var columna1 = $(".columna1")[0];
-    var columna2 = $(".columna1")[1];
-    
-    var filtroColumna2 = $(columna2).find(".well");
-    var num = $(columna2).children("button").length;
+$('#eliminarComponente').click(function(){
 
-    //Arreglo
-    var listaComponentes = [];
-    //Componentes de la Compuradora Principal
-    var Usuario = $(columna1).find("[name='clusuario']").val();
-    var Serie = $(columna1).find("[name='clserie']").val();
-
-    var Modelo = $(columna1).find("[name='clmodelo']").val();
-
-    var NombreEquipo = $(columna1).find("[name='clnoequipo']").val();
-    var EquipoCritico = $(columna1).find("[name='clequipocritico']").val();
-    var Area = parseInt($($(columna1).find(".selectArea")[1]).val());
-    var Marca = parseInt($($(columna1).find(".selectMarca")[1]).val());
-    
-    var TipoHardware = parseInt($(columna1).find("[name='tipoHardware']").val());
-
-    // clusuario clserie clmodelo clnoequipo clequipocritico
-    
-    for(var i = 0; i <= num; i++)
-    {
-        if(i==0)
-        {
-            listaComponentes[i]={
-                clUsuario: Usuario,
-                clSerie : Serie,
-                clModelo : Modelo,
-                clNoEquipo: NombreEquipo,
-                clEquipoCritico: EquipoCritico,
-                clArea : Area,
-                clMarca :Marca,
-                tipoHardware :TipoHardware,
-                serialAsignacion:null
-            }
-        }
-        else
-        {
-            
-            Serie = $($(filtroColumna2[i-1])).find(".serieComponente").val()
-            Marca =  parseInt($($($(filtroColumna2[i-1])).find(".marcaComponente")[1]).val())
-            Modelo = $($(filtroColumna2[i-1])).find(".modeloComnponente").val()
-            TipoHardware =  parseInt($($(filtroColumna2[i-1])).find(".tipoComponente").val())
-
-
-            listaComponentes[i]={
-                clUsuario: Usuario,
-                clSerie : Serie,
-                clModelo : Modelo,
-                clNoEquipo: NombreEquipo,
-                clEquipoCritico: EquipoCritico,
-                clArea : Area,
-                clMarca :Marca,
-                tipoHardware :TipoHardware,
-                serialAsignacion: listaComponentes[0].clSerie
-            }
-        }
-    }
-    //Crear Arreglo de Objetos
-
-    
-
-    //Url de la Accion
-    var url =  "../Home/GuardarComponentes";
-    listaComponentes = JSON.stringify({ 'listaComponentes': listaComponentes });
-    debugger;
-   
-    $.ajax({
-        contentType: 'application/json; charset=utf-8',
-        dataType: 'json',
-        type: 'POST',
-        url: url,
-        data: listaComponentes,
-        success: function (r) {          
-            alert(r);
-            window.location = "../Home/inventario";
-        },
-        failure: function (response) {          
-            alert('Error Al Guardar');
-        }
-    }); 
-
-
-   
+    //Columna de los componentes
+    var componente = $("#accordion .panel").last()
+    componente.remove();
 });
-
 $('#agregarComponente').click(function ()
 {
-    
-    var columna = $(".columna1")[1];
+    //Columna de los componentes
+    var columna = $("#accordion");
   
 
-    //var num = columna.children("button").length;
-    var num = $(columna).children("button").length;
+    //Tamano de los los componentes
+    var num = $('#accordion').children().length + 1;
 
-    var nuevoComponente = `<button class="btn btn-danger"  type="button" data-toggle="collapse" data-target="#collapseExample${num}" aria-expanded="false" aria-controls="collapseExample" style="width:100%;">Tipo</button>
-  <div class="collapse" id="collapseExample${num}">
-                        <div class="well">
-                            <div class="componente">
+    //Agregar nuevo componente
+    var nuevoComponente = `<div class="panel panel-default">
+                                    <div class="panel-heading color-header" role="tab" id="headingThree">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" role="button" data-toggle="collapse" href="#collapse${num}" aria-expanded="false" aria-controls="collapseThree">
+                                                Item #${num}
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapse${num}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                        <!-- CONTENIDO 3--> 
+                                        <div class="panel-body">
+                                            <!-- TIPO DE HARDWARE-->
+                                            <div class="row">
+                                                <label class="col-md-3 control-label">Hardware:</label>
+                                                <div class="col-md-8 selectContainer">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-facetime-video"></i></span>
+                                                        <select @*name="TypeHardwareID"*@ class="form-control selectpicker input-lg">
+                                                            <option value="">Selecciona un Dispositivo</option>
+                                                            @{foreach (var item in Model.listaTypeHardware)
+                                            {
+                                                if (@item.Description != "Desktop" || @item.Description != "Laptop" || @item.Description != "Server" || @item.Description != "Touch" || @item.Description != "Impresora")
+                                                {
+                                                    <option value="@item.TypeHardwareID">@item.Description</option>
+                                                }
+                                            }
+                                        }
 
-                                <select class="selectTipo">
-                                    <option value="volvo">monitor</option>
-                                    <option value="saab">teclado</option>
-                                    <option value="mercedes">mouse</option>
-                                    <option value="audi">dockin</option>
-                                </select>
-                            </div>
-                            <div class="componente">
-                                <label>serie</label>
-                                <input type="text" class="form-control" placeholder="serie">
-                            </div>
-                            <div class="componente" style="padding-top:15px;padding-bottom:15px;">
-                                <label style="padding-right:20px;">
-        MARCA:
-    </label>
-    <select class="selectpicker" data-style="btn-primary">
-        @{foreach (var item in Model.listaBrand)
-        {
-            <option value="@item.BrandID">@item.Name</option>
-}
+                                        </select>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    <br />
 
-}
+                                    <!-- SERIE-->
+                                    <div class="row">
 
-                                </select>
+                                        <label class="col-md-3 control-label">Serie:</label>
+                                        <div class="col-md-8 inputGroupContainer">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+                                                <input type="text" name="Model" class="form-control cajas input-lg" placeholder="Serie">
+                                            </div>
+                                        </div>
 
-                            </div>
-                            <div class="componente">
-                                <label>MODELO:</label>
-                                <input type="text" class="form-control" placeholder="modelo">
-                            </div>
+                                    </div>
+                                    <br />
+
+                                    <!-- MARCA-->
+                                    <div class="row">
+
+                                        <label class="col-md-3 control-label">Marca:</label>
+                                        <div class="col-md-8 selectContainer">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-facetime-video"></i></span>
+                                                <select @*name="TypeHardwareID"*@ class="form-control selectpicker input-lg">
+                                                    <option value="">Selecciona un Dispositivo</option>
+                                                                                                @{foreach (var item in Model.listaBrand)
+                                            {
+
+                                                <option value="@item.BrandID">@item.Name</option>
+
+                                            }
+                                        }
+
+                                        </select>
+                                    </div>
+                                    </div>
+
+                                    </div>
+                                    <br />
+
+                                    <!-- MODELO-->
+                                    <div class="row">
+
+                                        <label class="col-md-3 control-label">Modelo:</label>
+                                        <div class="col-md-8 inputGroupContainer">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-tag"></i></span>
+                                                <input type="text" name="Model" class="form-control cajas input-lg" placeholder="Modelo">
+                                            </div>
+                                        </div>
+
+                                    </div>
 
 
 
-                        </div>
-  </div>`;
+                                    </div>
+                                    </div>
+                                    </div>`;
 
       
       
 
-        var papa = $('.columna1')[1];
+        var papa = $('#accordion');
         $(papa).append($(nuevoComponente));
 
     

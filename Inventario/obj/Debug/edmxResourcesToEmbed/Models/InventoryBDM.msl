@@ -22,6 +22,7 @@
     <EntitySetMapping Name="Divisions">
       <EntityTypeMapping TypeName="InventoryBDMModel.Division">
         <MappingFragment StoreEntitySet="Division">
+          <ScalarProperty Name="Order" ColumnName="Order" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="DivisionID" ColumnName="DivisionID" />
         </MappingFragment>
@@ -38,6 +39,7 @@
           <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
           <ScalarProperty Name="SubAreaID" ColumnName="SubAreaID" />
           <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+          <ScalarProperty Name="DivisionID" ColumnName="DivisionID" />
           <ScalarProperty Name="TypeHardwareID" ColumnName="TypeHardwareID" />
           <ScalarProperty Name="BrandID" ColumnName="BrandID" />
           <ScalarProperty Name="Model" ColumnName="Model" />

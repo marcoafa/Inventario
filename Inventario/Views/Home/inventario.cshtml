@@ -68,7 +68,13 @@
                                         <td>@item.Brand.Name</td>
                                         <td>@item.Model</td>
                                         <td>@item.NameEquip</td>
-                                        <td>@item.Area.Name</td>
+                                        @if (item.AreaID == null)
+                                        {
+                                            <td>Sin Asignar</td>}
+                                        else
+                                        {
+                                            <td>@item.Area.Name</td>
+                                        }
                                         <td>@item.CriticEquip</td>
                                         <td>
                                             <button data-id="@item.SerialNumber" type="button" class="editarInvetario btn btn-default" data-toggle="modal" data-target="#modallapiz" style="width:80%">
@@ -89,7 +95,7 @@
                     <div class="row">
                         @* Primera Columna para hardware*@
                         <div class="col-md-6">
-                            <form id="FormPrincipal" method="post" class="form-horizontal" action="~/home/Registro">
+                            <form id="FormPrincipal" method="post" class="form-horizontal" @*action="~/home/Registro"*@>
 
                                 <h3 id="tituloHardware" class="text-center" style="margin:30px;">Alta de Equipo</h3>
 
@@ -192,23 +198,28 @@
                                     </div>
                                 </div>
 
-                                <!-- AREA -->
-                                <div class="form-group form-group-lg" id="containerArea">
-                                    <label class="col-md-4 control-label">Area:</label>
+                                <!-- DIVISION -->
+                                <div class="form-group form-group-lg" id="containerDivision">
+                                    <label class="col-md-4 control-label">Division:</label>
                                     <div class="col-md-8 selectContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                                            <select name="AreaID" class="form-control selectpicker input-lg" id="areaID">
-                                                <option value="">Selecciona una Area</option>
-                                                @foreach (var item in Model.listaAreas)
-                                        {
-                                                    <option value="@item.AreaID">@item.Name</option>
+                                            <select name="DivisionID" class="form-control selectpicker input-lg" id="divisionID">
+                                                <option value="">Selecciona una Division</option>
+                                                @foreach (var item in Model.listaDivisions)
+                                                {
+                                                    <option value="@item.DivisionID">@item.Name</option>
 
-                                        }
+                                                }
                                             </select>
                                         </div>
                                     </div>
                                 </div>
+
+
+
+
+                                
 
                                 <!-- MARCA -->
                                 <div class="form-group form-group-lg">
@@ -216,7 +227,7 @@
                                     <div class="col-md-8 selectContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-log-in"></i></span>
-                                            <select name="BrandID" class="form-control selectpicker input-lg">
+                                            <select id="marcaID" name="BrandID" class="form-control selectpicker input-lg">
                                                 <option value="">Selecciona una Marca</option>
                                                 @{foreach (var item in Model.listaBrand)
                                                 {
@@ -240,9 +251,7 @@
                                 </div>
 
                                 @*../Home/BarcodeImage?barcodeText=HolaMundo*@
-                                <div class="col-md-2 col-md-offset-4">
-                                    <button type="submit" class="btn btn-primary btn-lg" name="action">Registrar Equipo</button>
-                                </div>
+                              
                                         @*<div class="col-md-2">
                             <button id="QrFactura" class="btn btn-primary">Generar QR</button>
                         </div>*@
@@ -273,12 +282,12 @@
                                    
                                     <div class="panel-heading color-header" role="tab" id="headingOne">
                                         <h4 class="panel-title">
-                                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            <a role="button" data-toggle="collapse"  href="#collapse1" aria-expanded="true" aria-controls="collapseOne">
                                                 Item #1
                                             </a>
                                         </h4>
                                     </div>
-                                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                    <div id="collapse1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                                         <!-- CONTENIDO 1--> 
                                         <div class="panel-body">
                                             <!-- TIPO DE HARDWARE--> 
@@ -287,11 +296,15 @@
                                                 <div class="col-md-8 selectContainer">
                                                     <div class="input-group">
                                                         <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-facetime-video"></i></span>
-                                                        <select @*name="TypeHardwareID"*@ class="form-control selectpicker input-lg">
+                                                        <select class="form-control selectpicker input-lg tipoComponente">
                                                             <option value="">Selecciona un Dispositivo</option>
                                                             @{foreach (var item in Model.listaTypeHardware)
                                                             {
-                                                                if (@item.Description != "Desktop" || @item.Description != "Laptop" || @item.Description != "Server" || @item.Description != "Touch" || @item.Description != "Impresora")
+                                                                if (@item.Description == "Desktop" || @item.Description == "Laptop" || @item.Description == "Server" || @item.Description == "Touch")
+                                                                {
+
+                                                                }
+                                                                else
                                                                 {
                                                                     <option value="@item.TypeHardwareID">@item.Description</option>
                                                                 }
@@ -299,6 +312,7 @@
                                                             }
 
                                                         </select>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -311,7 +325,7 @@
                                                 <div class="col-md-8 inputGroupContainer">
                                                     <div class="input-group">
                                                         <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-                                                        <input type="text" name="Model" class="form-control cajas input-lg" placeholder="Serie">
+                                                        <input type="text" class="form-control cajas input-lg SerialNumberComponente" placeholder="Serie">
                                                     </div>
                                                 </div>
 
@@ -325,13 +339,13 @@
                                                 <div class="col-md-8 selectContainer">
                                                     <div class="input-group">
                                                         <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-facetime-video"></i></span>
-                                                        <select @*name="TypeHardwareID"*@ class="form-control selectpicker input-lg">
+                                                        <select class="form-control selectpicker input-lg MarcaComponente">
                                                             <option value="">Selecciona un Dispositivo</option>
                                                             @{foreach (var item in Model.listaBrand)
                                                             {
-                                                               
-                                                                    <option value="@item.BrandID">@item.Name</option>
-                                                                
+
+                                                                <option value="@item.BrandID">@item.Name</option>
+
                                                             }
                                                             }
 
@@ -349,7 +363,7 @@
                                                     <div class="col-md-8 inputGroupContainer">
                                                         <div class="input-group">
                                                             <span class="input-group-addon"><i class="glyphicon glyphicon-tag"></i></span>
-                                                            <input type="text" name="Model" class="form-control cajas input-lg" placeholder="Modelo">
+                                                            <input type="text"  class="form-control cajas input-lg ModeloComponente" placeholder="Modelo">
                                                         </div>
                                                     </div>
                                                 
@@ -365,12 +379,12 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading color-header" role="tab" id="headingTwo">
                                         <h4 class="panel-title">
-                                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            <a class="collapsed" role="button" data-toggle="collapse" href="#collapse2" aria-expanded="false" aria-controls="collapseTwo">
                                                 Item #2
                                             </a>
                                         </h4>
                                     </div>
-                                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                    <div id="collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                                         <!-- CONTENIDO 2--> 
                                         <div class="panel-body">
                                             <!-- TIPO DE HARDWARE-->
@@ -457,12 +471,12 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading color-header" role="tab" id="headingThree">
                                         <h4 class="panel-title">
-                                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                            <a class="collapsed" role="button" data-toggle="collapse" href="#collapse3" aria-expanded="false" aria-controls="collapseThree">
                                                 Item #3
                                             </a>
                                         </h4>
                                     </div>
-                                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                    <div id="collapse3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
                                         <!-- CONTENIDO 3--> 
                                         <div class="panel-body">
                                             <!-- TIPO DE HARDWARE-->
@@ -548,175 +562,14 @@
                             </div>
                          </div> 
                     </div>
-                </div>
-
-                @* Registro de Componentes del Hardware *@
-                <div class="tab-pane fade" id="computadora">
-                    <div class="contenedorflex">
-
-                      
-                        <div class="columna1">
-
-                            <div style="padding-bottom:10px;">
-                                <label style="margin:20px;">Componentes</label>
-                                @* boton para agregar el nuevo componente teclado.. mouse.. pantalla.. etc *@
-                                <button id="agregarComponente" class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                            </div>
-
-                            <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#collapseexample" aria-expanded="false" aria-controls="collapseexample" style="width:100%;">
-                                Tipo
-                            </button>
-                            <div class="collapse in" id="collapseexample">
-                                <div class="well">
-                                    <div class="componente">
-
-                                        <select class="tipoComponente">
-                                            @{foreach (var item in Model.listaTypeHardware)
-                                            {
-                                                if (item.TypeHardwareID != 6)
-                                                {
-                                                    <option value="@item.TypeHardwareID">@item.Description</option>
-                                                }
-                                            }
-                                            }
-                                        </select>
-                                    </div>
-                                    <div class="componente">
-                                        <label>serie</label>
-                                        <input type="text" class="form-control serieComponente" placeholder="serie" required>
-                                    </div>
-                                    <div class="componente" style="padding-top:15px;padding-bottom:15px;">
-                                        <label style="padding-right:20px;">
-                                            MARCA:
-                                        </label>
-                                        <select class="selectpicker marcaComponente" data-style="btn-primary">
-                                            @{foreach (var item in Model.listaBrand)
-                                            {
-                                                <option value="@item.BrandID">@item.Name</option>
-                                            }
-
-                                            }
-
-                                        </select>
-
-                                    </div>
-                                    <div class="componente">
-                                        <label>MODELO:</label>
-                                        <input type="text" class="form-control modeloComnponente" placeholder="modelo" required>
-                                    </div>
-
-
-
-                                </div>
-                            </div>
-
-
-
-
-
-                            <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#collapseexample1" aria-expanded="false" aria-controls="collapseexample" style="width:100%;">
-                                Tipo
-                            </button>
-                            <div class="collapse in" id="collapseexample1">
-                                <div class="well">
-                                    <div class="componente">
-
-                                        <select class="tipoComponente">
-                                            @{foreach (var item in Model.listaTypeHardware)
-                                            {
-                                                if (item.TypeHardwareID != 6)
-                                                {
-                                                    <option value="@item.TypeHardwareID">@item.Description</option>
-                                                }
-                                            }
-                                            }
-                                        </select>
-                                    </div>
-                                    <div class="componente">
-                                        <label>serie</label>
-                                        <input type="text" class="form-control serieComponente" placeholder="serie" required>
-                                    </div>
-                                    <div class="componente" style="padding-top:15px;padding-bottom:15px;">
-                                        <label style="padding-right:20px;">
-                                            MARCA:
-                                        </label>
-                                        <select class="selectpicker marcaComponente" data-style="btn-primary">
-                                            @{foreach (var item in Model.listaBrand)
-                                            {
-                                                <option value="@item.BrandID">@item.Name</option>
-                                            }
-
-                                            }
-
-                                        </select>
-
-                                    </div>
-                                    <div class="componente">
-                                        <label>MODELO:</label>
-                                        <input type="text" class="form-control modeloComnponente" placeholder="modelo" required>
-                                    </div>
-
-
-
-                                </div>
-                            </div>
-
-                            <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#collapseexample2" aria-expanded="false" aria-controls="collapseexample" style="width:100%;">
-                                Tipo
-                            </button>
-                            <div class="collapse in" id="collapseexample2">
-                                <div class="well">
-                                    <div class="componente">
-
-                                        <select class="tipoComponente">
-                                            @{foreach (var item in Model.listaTypeHardware)
-                                            {
-                                                if (item.TypeHardwareID != 6)
-                                                {
-                                                    <option value="@item.TypeHardwareID">@item.Description</option>
-                                                }
-                                            }
-                                            }
-                                        </select>
-                                    </div>
-                                    <div class="componente">
-                                        <label>serie</label>
-                                        <input type="text" class="form-control serieComponente" placeholder="serie" required>
-                                    </div>
-                                    <div class="componente" style="padding-top:15px;padding-bottom:15px;">
-                                        <label style="padding-right:20px;">
-                                            MARCA:
-                                        </label>
-                                        <select class="selectpicker marcaComponente" data-style="btn-primary">
-                                            @{foreach (var item in Model.listaBrand)
-                                            {
-                                                <option value="@item.BrandID">@item.Name</option>
-                                            }
-
-                                            }
-
-                                        </select>
-
-                                    </div>
-                                    <div class="componente">
-                                        <label>MODELO:</label>
-                                        <input type="text" class="form-control modeloComnponente" placeholder="modelo" required>
-                                    </div>
-
-
-
-                                </div>
-                            </div>
-
-
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <button id="GuardarEquipo" class="btn btn-primary btn-lg" name="action">Registrar Equipo</button>
                         </div>
-
-                       
-                  
-
                     </div>
-                    <button id="crearComponentes" type="submit" class="btn btn-primary">Submit</button>
                 </div>
+
+
 
                 @* Opciones para Facturas *@
                 <div class="tab-pane" id="facturas">
@@ -862,24 +715,26 @@
                                         <input id="modalNoEquipo" name="clNoEquipo" type="text" class="form-control cajas" placeholder="Nombre del Equipo" disabled>
                                     </div>
                                 </div>
-                             
-                                @*AREA EDITAR*@
-                                <div class="form-group form-group-lg" id="editContainerArea">
-                                    <label class="col-md-2 control-label col-md-offset-1">Area:</label>
-                                    <div class="col-md-8">
+                                
+                                @*DIVISION EDITAR*@
+                                <div class="form-group form-group-lg" id="editContainerDivision">
+                                    <label class="col-md-3 control-label">Division:</label>
+                                    <div class="col-md-8 selectContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-log-in"></i></span>
-                                            <select name="clArea" id="modalAreaSelect" class="form-control selectpicker input-lg" data-style="btn-primary" disabled>
-                                                @foreach (var item in Model.listaAreas)
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                                            <select name="clDivisionID"  id="modalDivisionSelect" class="form-control selectpicker input-lg" disabled>
+                                                <option value="">Selecciona una Division</option>
+                                                @foreach (var item in Model.listaDivisions)
                                                 {
-                                                    <option value="@item.AreaID">@item.Name</option>
+                                                    <option value="@item.DivisionID">@item.Name</option>
+
                                                 }
                                             </select>
-                                           
                                         </div>
                                     </div>
                                 </div>
 
+                               
                                 @*MARCA EDITAR*@
                                 <div class="form-group form-group-lg">
                                     <label class="col-md-2 control-label col-md-offset-1">

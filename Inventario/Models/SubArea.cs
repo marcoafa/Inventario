@@ -14,18 +14,10 @@ namespace Inventario.Models
     
     public partial class SubArea
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public SubArea()
-        {
-            this.Hardwares = new HashSet<Hardware>();
-        }
-    
         public int SubAreaID { get; set; }
         public string Name { get; set; }
         public int AreaID { get; set; }
     
         public virtual Area Area { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Hardware> Hardwares { get; set; }
     }
 }

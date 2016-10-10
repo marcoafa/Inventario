@@ -7,14 +7,15 @@ namespace Inventario.Models
 {
     public class Componentes
     {
-        public string clUsuario { get; set; }
-        public string clSerie { get; set; }
-        public string clModelo { get; set; }
-        public string clNoEquipo { get; set; }
-        public string clEquipoCritico { get; set; }
-        public int clArea { get; set; }
-        public int clMarca { get; set; }
-        public int tipoHardware { get; set; }
+        public string ComponentUser { get; set; }
+        public string ComponentUserRed { get; set; }
+        public string ComponentSerial { get; set; }
+        public string ComponentModel { get; set; }
+        public string ComponentNameEquip { get; set; }
+        public string ComponentCriticalEquip { get; set; }
+        public int ComponentArea { get; set; }
+        public int ComponentMarca { get; set; }
+        public int TipoHardware { get; set; }
         public string serialAsignacion { get; set; }
     }
     

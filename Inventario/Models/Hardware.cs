@@ -24,7 +24,8 @@ namespace Inventario.Models
         public string Model { get; set; }
         public int BrandID { get; set; }
         public int TypeHardwareID { get; set; }
-        public int AreaID { get; set; }
+        public Nullable<int> DivisionID { get; set; }
+        public Nullable<int> AreaID { get; set; }
         public Nullable<int> SubAreaID { get; set; }
         public string InvoiceID { get; set; }
         public string UserName { get; set; }
@@ -35,11 +36,11 @@ namespace Inventario.Models
     
         public virtual Area Area { get; set; }
         public virtual Brand Brand { get; set; }
-        public virtual TypeHardware TypeHardware { get; set; }
+        public virtual Division Division { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Hardware> Hardware1 { get; set; }
         public virtual Hardware Hardware2 { get; set; }
         public virtual Invoice Invoice { get; set; }
-        public virtual SubArea SubArea { get; set; }
+        public virtual TypeHardware TypeHardware { get; set; }
     }
 }

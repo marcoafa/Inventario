@@ -1,4 +1,5 @@
 ﻿var global = {
+    AreaID : 0,
     SubAreaID : 0
 }
 
@@ -58,15 +59,19 @@ $("body").on("click", ".editarInvetario", function () {
     $("#modalUsuario").attr('disabled','disabled');
     $("#modalSerie").attr('disabled','disabled');
     $("#modalModelo").attr('disabled','disabled');
-    $("#modalNoEquipo").attr('disabled','disabled');
+    $("#modalNoEquipo").attr('disabled', 'disabled');
+    $("#modalDivisionSelect").attr('disabled', 'disabled');
     $("#modalAreaSelect").attr('disabled', 'disabled');
     $("#modalSubAreaSelect").attr('disabled', 'disabled');
     $("#modalMarcaSelect").attr('disabled','disabled');
     $("#modalFactura").attr('disabled','disabled');
     $("#modalEquipoCritico").attr('disabled','disabled');
     $("#modalUsuarioRed").attr('disabled','disabled');
+
+    // Petición que regresa la información de la base de datos
     $.getJSON(url, function (r) {
-                              
+        debugger;
+        global.AreaID = parseInt(r.AreaID);
         global.SubAreaID = parseInt(r.SubAreaID);
         $('#componentesHardware').empty();
         $('#modalSerie').val(r.SerialNumber);
@@ -81,7 +86,8 @@ $("body").on("click", ".editarInvetario", function () {
         $('#modalFactura').val(r.InvoiceID);
         $('#modalMarca').val(r.BrandID);
         
-        $('#modalAreaSelect').val(r.AreaID).change();
+        $('#modalDivisionSelect').val(r.DivisionID).change();
+        //$('#modalAreaSelect').val(r.AreaID).change();
         
 
         $('#modalMarcaSelect').val(r.BrandID).change();
@@ -180,6 +186,7 @@ $("body").on("click", "#Change", function () {
     $("#modalSerie").removeAttr('disabled');
     $("#modalModelo").removeAttr('disabled');
     $("#modalNoEquipo").removeAttr('disabled');
+    $("#modalDivisionSelect").removeAttr('disabled');
     $("#modalAreaSelect").removeAttr('disabled');
     $("#modalSubAreaSelect").removeAttr('disabled');
     $("#modalMarcaSelect").removeAttr('disabled');
@@ -297,6 +304,89 @@ $(document).ready(function () {
                 }
             }
     }
+
+    /* AGREGAR COMBO AREA SI EXISTEN ELEMENTOS */
+    $("#registro,#f1").on('change', '#divisionID,#modalDivisionSelect', function () {
+        debugger;
+        var divisionID = parseInt($(this).val());
+        var selectChange = $(this).attr("id");
+        //alert(areaID);
+
+       
+        if ((divisionID != "" && divisionID != null && !isNaN(divisionID)) || divisionID == 0) {
+            $.post("../Home/ObtenerAreas", { divisionID: divisionID }, function (areas) {
+                debugger;
+                if (selectChange == "modalDivisionSelect") {
+                    $('#editContainerAreas').remove();
+                    $('#editContainerSubAreas').remove();
+                } else {
+                    $('#containerAreas').remove();
+                    $('#containerSubAreas').remove();
+                }
+
+
+
+                if (areas.length != 0) {
+
+                    var optionAreas = '';
+                    areas.forEach(function (value, index) {
+                        optionAreas += '<option value="' + value.AreaID + '">' + value.Name + '</option>';
+                    });
+
+                    var idContainerAreas = '';
+                    var divAreas = '';
+                    if (selectChange == "modalDivisionSelect") {
+                        divAreas =
+                          '<div class="form-group form-group-lg" id="editContainerAreas">' +
+                                    '<label class="col-md-3 control-label">Area:</label>' +
+                                    '<div class="col-md-8 selectContainer">' +
+                                        '<div class="input-group">' +
+                                            '<span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>' +
+                                            '<select name="clAreaID" class="form-control selectpicker input-lg" id="modalAreaSelect">' +
+                                                '<option value="">Selecciona una Area</option>' +
+                                               optionAreas +
+                                            '</select>' +
+                                        '</div>' +
+                                    '</div>' +
+                                '</div>';
+                    }
+                    else {
+                        divAreas =
+                         '<div class="form-group form-group-lg" id="containerAreas">' +
+                                    '<label class="col-md-4 control-label">Area:</label>' +
+                                    '<div class="col-md-8 selectContainer">' +
+                                        '<div class="input-group">' +
+                                            '<span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>' +
+                                            '<select name="AreaID" class="form-control selectpicker input-lg" id="areaID">' +
+                                                '<option value="">Selecciona una Area</option>' +
+                                               optionAreas +
+                                            '</select>' +
+                                        '</div>' +
+                                    '</div>' +
+                                '</div>';
+                    }
+
+
+                    if (selectChange == "modalDivisionSelect") {
+                        debugger;
+                        $('#editContainerDivision').after(divAreas);
+
+
+                        if ($('#modalDivisionSelect').attr('disabled')) {
+                            $('#modalAreaSelect').val(global.AreaID).change();
+                            $('#modalAreaSelect').attr('disabled', 'disabled');
+                        }
+                    }
+                    else
+                        $('#containerDivision').after(divAreas);
+                }
+            })
+            .error(function (xhr, errorText, errorThrow) {
+                console.log(xhr.responseText);
+            });
+        }
+    });
+
     
     /* AGREGAR COMBO SUBAREA SI EXISTEN ELEMENTOS */
     $("#registro,#f1").on('change', '#areaID,#modalAreaSelect', function () {
@@ -310,7 +400,7 @@ $(document).ready(function () {
                 debugger;
 
                 if (selectChange == "modalAreaSelect") {
-                    $('#containerSubAreasEdit').remove();
+                    $('#editContainerSubAreas').remove();
                 } else {
                     $('#containerSubAreas').remove();
                 }
@@ -326,7 +416,7 @@ $(document).ready(function () {
                     var divSubAreas = '';
                     if (selectChange == "modalAreaSelect") {
                         divSubAreas =
-                        '<div class="form-group form-group-lg" id="containerSubAreasEdit">' +
+                        '<div class="form-group form-group-lg" id="editContainerSubAreas">' +
                             '<label class="col-md-2 control-label col-md-offset-1">Sub-Area:</label>' +
                             '<div class="col-md-8 selectContainer">' +
                                 '<div class="input-group">' +
@@ -346,7 +436,7 @@ $(document).ready(function () {
                             '<div class="col-md-8 selectContainer">' +
                                 '<div class="input-group">' +
                                     '<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>' +
-                                    '<select name="clSubAreaID" class="form-control selectpicker input-lg" id="subAreaID" >' +
+                                    '<select name="SubAreaID" class="form-control selectpicker input-lg" id="subAreaID" >' +
                                         '<option value="">Selecciona una SubArea</option>' +
                                          optionSubAreas +
                                 '</select>' +
@@ -358,7 +448,7 @@ $(document).ready(function () {
 
                     if (selectChange == "modalAreaSelect") {
                         debugger;
-                        $('#editContainerArea').after(divSubAreas);
+                        $('#editContainerAreas').after(divSubAreas);
                         
 
                         if ($('#modalAreaSelect').attr('disabled')) {
@@ -367,7 +457,7 @@ $(document).ready(function () {
                         }
                     }
                     else
-                        $('#containerArea').after(divSubAreas);
+                        $('#containerAreas').after(divSubAreas);
                 }
             })
             .error(function (xhr, errorText, errorThrow) {
@@ -375,6 +465,8 @@ $(document).ready(function () {
             });
         }
     });
+
+   
 
 
 

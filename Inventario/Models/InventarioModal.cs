@@ -9,6 +9,8 @@ namespace Inventario.Models
 {
     public class InventarioModal
     {
+        public List<Division> listaDivisions;
+
         public List<Area> listaAreas;
       
         public List<Brand> listaBrand;
@@ -25,6 +27,10 @@ namespace Inventario.Models
         public InventarioModal()
         {
             InventoryBDMEntities inv = new InventoryBDMEntities();
+
+            listaDivisions = (from d in inv.Divisions
+                              orderby d.Order ascending
+                              select d).ToList();
 
             listaAreas = (from a in inv.Areas
                           select a).ToList();
