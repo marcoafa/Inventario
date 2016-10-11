@@ -92,7 +92,7 @@ $('#GuardarEquipo').click(function(){
     var columnaComponentes = $("#accordion");  
   
     //Numero de Componentes
-    var num = $('accordion').children().length;
+    var num = $("#accordion").children().length;
     //Arreglo
     var listaComponentes = [];
     //Datos principales de la Compuradora Principal
@@ -103,31 +103,37 @@ $('#GuardarEquipo').click(function(){
     //InvoiceID
     var ComponentNameEquip = $(columnaComponentes).find("[name='NameEquip']").val();
     var ComponentCriticalEquip = $(columnaComponentes).find("[name='CriticalEquip']").val();
+   
     var ComponentArea = parseInt($(columnaComponentes).find("#areaID").val());
     var ComponentMarca = parseInt($(columnaComponentes).find("#marcaID").val()); 
     var TipoHardware = parseInt($(columnaComponentes).find("[name='TypeHardwareID']").val());
     //COMPONENTES    
 
-    for(var i = 0; i <= num; i++)
+    for(var i = 0; i < num; i++)
     {
-        TipoHardware =  parseInt($(columnaComponentes).children().find(".tipoComponente").val());
-        Serie = $($(columnaComponentes[i])).find(".SerialNumberComponente").val();
-        Marca =  parseInt($($($(columnaComponentes[i])).find(".MarcaComponente")).val());
-        Modelo = $($(columnaComponentes[i])).find(".ModeloComponente").val();         
+        
+        TipoHardware =  parseInt($($(columnaComponentes).children()[i]).find(".tipoComponente").val());
+        Serie = $($($(columnaComponentes).children()[i])).find(".SerialNumberComponente").val();
+        Marca =  parseInt($($(columnaComponentes).children()[i]).find(".MarcaComponente").val());
+        Modelo = $($(columnaComponentes).children()[i]).find(".ModeloComponente").val();         
             listaComponentes[i]={
-                ComponentUser: ComponentUser,
-                ComponentUserRed: ComponentUserRed,
+                ComponentUser: UserH,
+                ComponentUserRed: UserHNetwork,
                 ComponentSerial  :  Serie,
                 ComponentModel :  Modelo,
-                ComponentNameEquip: ComponentNameEquip,
-                ComponentCriticalEquip: ComponentCriticalEquip,
-                ComponentArea : ComponentArea,
+                ComponentNameEquip: NameEqH,
+                ComponentCriticalEquip: CriticEquip,
+                ComponentDivision: DivisionH,
+                ComponentArea : AreaH,
+                ComponentSubArea: SubAreaH,
                 ComponentMarca : Marca,
                 TipoHardware :TipoHardware,
-                serialAsignacion: ComponentSerial
+                serialAsignacion: SerialH
           
-        }
+            }
+            debugger;
     }
+    
     //Crear Arreglo de Objetos
     //Url de la Accion
     var url =  "../Home/GuardarComponentes";
@@ -142,12 +148,16 @@ $('#GuardarEquipo').click(function(){
         url: url,
         data: JSON.stringify({Principal:Hardware, listaComponentes:listaComponentes}),
         success: function (r) {          
-            debugger;
+            url = "../Home/inventario";
+
+          window.location = url;
         },
         failure: function (response) {          
             alert('Error Al Guardar');
         }
     });
+
+   
 });
 $("#crearComponentes").on('click', function () {
     }); 

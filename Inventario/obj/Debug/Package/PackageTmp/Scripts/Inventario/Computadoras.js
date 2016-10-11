@@ -38,78 +38,130 @@ $('.titulo').click(function (e){
 });
  
 
-//$('#FormPrincipal').on('submit',function(e){
-//    //e.preventDefault();
-//    //alert('lerolero no te fuiste');
-//    //Columnas
-//    var columnaComponentes = $("#accordion");  
-//    var columnaCPU = $(columna2).find("#FormPrincipal");
-//    //Numero de Componentes
-//    var num = $('accordion').children().length;
-//    //Arreglo
-//    var listaComponentes = [];
-//    //Datos principales de la Compuradora Principal
-//    var ComponentUser = $(columnaCPU).find("[name='UserName']").val();
-//    var ComponentUserRed = $(columnaCPU).find("[name='UserNetworkName']").val();
-//    var ComponentSerial = $(columnaCPU).find("[name='SerialNumber']").val();
-//    var ComponentModel = $(columnaCPU).find("[name='Model']").val();
-//    //InvoiceID
-//    var ComponentNameEquip = $(columnaCPU).find("[name='NameEquip']").val();
-//    var ComponentCriticalEquip = $(columnaCPU).find("[name='CriticalEquip']").val();
-//    var ComponentArea = parseInt($(columnaCPU).find("#areaID").val());
-//    var ComponentMarca = parseInt($(columnaCPU).find("#marcaID").val()); 
-//    var TipoHardware = parseInt($(columnaCPU).find("[name='TypeHardwareID']").val());
-//    //COMPONENTES    
-//    for(var i = 0; i <= num; i++)
-//    {
-//        TipoHardware =  parseInt($($(columnaComponentes).children())).find(".tipoComponente").val();
-//        Serie = $($(columnaComponentes[i])).find(".SerialNumberComponente").val();
-//        Marca =  parseInt($($($(columnaComponentes[i])).find(".MarcaComponente")).val());
-//        Modelo = $($(columnaComponentes[i])).find(".ModeloComponente").val();         
-//            listaComponentes[i]={
-//                ComponentUser: ComponentUser,
-//                ComponentUserRed: ComponentUserRed,
-//                ComponentSerial  :  Serie,
-//                ComponentModel :  Modelo,
-//                ComponentNameEquip: ComponentNameEquip,
-//                ComponentCriticalEquip: ComponentCriticalEquip,
-//                ComponentArea : ComponentArea,
-//                ComponentMarca : Marca,
-//                TipoHardware :TipoHardware,
-//                serialAsignacion: ComponentSerial
-//            //listaComponentes[i]={
-//            //    clUsuario: Usuario,
-//            //    clSerie : Serie,
-//            //    clModelo : Modelo,
-//            //    clNoEquipo: NombreEquipo,
-//            //    clEquipoCritico: EquipoCritico,
-//            //    clArea : Area,
-//            //    clMarca :Marca,
-//            //    tipoHardware :TipoHardware,
-//            //    serialAsignacion: listaComponentes[0].clSerie
-//        }
-//    }
-//    //Crear Arreglo de Objetos
-//    //Url de la Accion
-//    var url =  "../Home/GuardarComponentes";
-//    listaComponentes = JSON.stringify({ 'listaComponentes': listaComponentes });
-//    $.ajax({
-//        contentType: 'application/json; charset=utf-8',
-//        dataType: 'json',
-//        async: false,
-//        type: 'POST',
-//        url: url,
-//        data: listaComponentes,
-//        success: function (r) {          
-//            debugger;
-//        },
-//        failure: function (response) {          
-//            alert('Error Al Guardar');
-//        }
-//});
-//$("#crearComponentes").on('click', function () {
-//    }); 
-//});
+$('#GuardarEquipo').click(function(){
+    
+    //Columna principal del hardware
+    var columnaHardware= $("#FormPrincipal");  
+
+    //Propiedades del Hardware
+    var UserH = $(columnaHardware).find("[name='UserName']").val();
+    var UserHNetwork = $(columnaHardware).find("[name='UserNetworkName']").val();
+    var SerialH = $(columnaHardware).find("[name='SerialNumber']").val();
+    var ModelH = $(columnaHardware).find("[name='Model']").val();
+    var NameEqH = $(columnaHardware).find("[name='NameEquip']").val();
+    var CriticalEquipH =   $(columnaHardware).find("[name='CriticalEquip']").val();
+
+    if(CriticalEquipH=="on")
+        var CriticEquip = true;
+    else
+        var CriticEquip = false;
+
+    var DivisionH =   parseInt($(columnaHardware).find("[name='DivisionID']").val());
+    var AreaH =  parseInt($(columnaHardware).find("[name='AreaID']").val());
+    var SubAreaH = parseInt($(columnaHardware).find("[name='SubAreaID']").val());
+    var BrandH = parseInt($(columnaHardware).find("[name='BrandID']").val());
+    var TipoHardwareH = parseInt($(columnaHardware).find("[name='TypeHardwareID']").val());
+    var FacturaH = $(columnaHardware).find("[name='InvoiceID']").val();
+    if (FacturaH == "" || FacturaH == null || FacturaH == "N/A")
+        FacturaH = null;
+
+    var Hardware ={
+        'SerialNumber' : SerialH,
+        'Model' : ModelH,
+        'BrandID' : BrandH,
+        'TypeHardwareID' : TipoHardwareH,
+        'DivisionID' : null,
+        'AreaID' : AreaH,
+        'SubAreaID' :  null,
+        'InvoiceID' : FacturaH,
+        'UserName': UserH,
+        'UserNetworkName' :UserHNetwork ,
+        'NameEquip' : NameEqH,
+        'CriticEquip' :  CriticEquip,
+        'SerialAssigned': null
+
+
+
+    };
+  
+    
+   
+
+
+    //Columna principal de los Componentes del Hardware
+    var columnaComponentes = $("#accordion");  
+  
+    //Numero de Componentes
+    var num = $("#accordion").children().length;
+    //Arreglo
+    var listaComponentes = [];
+    //Datos principales de la Compuradora Principal
+    var ComponentUser = $(columnaComponentes).find("[name='UserName']").val();
+    var ComponentUserRed = $(columnaComponentes).find("[name='UserNetworkName']").val();
+    var ComponentSerial = $(columnaComponentes).find("[name='SerialNumber']").val();
+    var ComponentModel = $(columnaComponentes).find("[name='Model']").val();
+    //InvoiceID
+    var ComponentNameEquip = $(columnaComponentes).find("[name='NameEquip']").val();
+    var ComponentCriticalEquip = $(columnaComponentes).find("[name='CriticalEquip']").val();
+   
+    var ComponentArea = parseInt($(columnaComponentes).find("#areaID").val());
+    var ComponentMarca = parseInt($(columnaComponentes).find("#marcaID").val()); 
+    var TipoHardware = parseInt($(columnaComponentes).find("[name='TypeHardwareID']").val());
+    //COMPONENTES    
+
+    for(var i = 0; i < num; i++)
+    {
+        
+        TipoHardware =  parseInt($($(columnaComponentes).children()[i]).find(".tipoComponente").val());
+        Serie = $($($(columnaComponentes).children()[i])).find(".SerialNumberComponente").val();
+        Marca =  parseInt($($(columnaComponentes).children()[i]).find(".MarcaComponente").val());
+        Modelo = $($(columnaComponentes).children()[i]).find(".ModeloComponente").val();         
+            listaComponentes[i]={
+                ComponentUser: UserH,
+                ComponentUserRed: UserHNetwork,
+                ComponentSerial  :  Serie,
+                ComponentModel :  Modelo,
+                ComponentNameEquip: NameEqH,
+                ComponentCriticalEquip: CriticEquip,
+                ComponentDivision: DivisionH,
+                ComponentArea : AreaH,
+                ComponentSubArea: SubAreaH,
+                ComponentMarca : Marca,
+                TipoHardware :TipoHardware,
+                serialAsignacion: SerialH
+          
+            }
+            debugger;
+    }
+    
+    //Crear Arreglo de Objetos
+    //Url de la Accion
+    var url =  "../Home/GuardarComponentes";
+    //listaComponentes = JSON.stringify({ 'listaComponentes': listaComponentes });
+    //Hardware = JSON.stringify({ 'Hardware': Hardware });
+    debugger;
+    $.ajax({
+        
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        type: 'POST',
+        url: url,
+        data: JSON.stringify({Principal:Hardware, listaComponentes:listaComponentes}),
+        success: function (r) {          
+            url = "../Home/inventario";
+
+          window.location = url;
+        },
+        failure: function (response) {          
+            alert('Error Al Guardar');
+        }
+    });
+
+   
+});
+$("#crearComponentes").on('click', function () {
+    }); 
+
 
 
 $('#eliminarComponente').click(function(){
