@@ -68,6 +68,7 @@ namespace Inventario.Controllers
                                 NameEquip = p.NameEquip,
                                 CriticEquip = p.CriticEquip,
                                 SerialAssigned = p.SerialAssigned,
+                                DateWarranty = (p.DateWarranty.Value==null)? "" : p.DateWarranty.Value.ToString(),
                                 Components = p.Hardware1.Select(h => new {
                                     TypeHardware = h.TypeHardware.Description,
                                     Brand = h.Brand.Name,
@@ -253,41 +254,43 @@ namespace Inventario.Controllers
                 entidad.Hardwares.Add(Principal);
                 entidad.SaveChanges();
 
-                
-               
-                foreach (var item in listaComponentes)
+
+                if (listaComponentes != null)
                 {
-                    if (item.ComponentCriticalEquip == "on")
+                    foreach (var item in listaComponentes)
                     {
-                        criticoOpcion = true;
-                    }
-                    else
-                    {
-                        criticoOpcion = false;
-
-                    }
-
-                    if (item.ComponentSerial != null)
-                    {
-                        Hardware H = new Hardware
+                        if (item.ComponentCriticalEquip == "on")
                         {
-                            SerialNumber = item.ComponentSerial,
-                            Model = item.ComponentModel,
-                            BrandID = item.ComponentMarca,
-                            TypeHardwareID = item.TipoHardware,
-                            DivisionID = null,
-                            SubAreaID = null,
-                            AreaID = Principal.AreaID,
-                            InvoiceID = null,
-                            UserName = Principal.UserName,
-                            UserNetworkName = Principal.UserNetworkName,
-                            NameEquip = Principal.NameEquip,
-                            CriticEquip = Principal.CriticEquip,
-                            SerialAssigned = Principal.SerialNumber
-                        };
-                        entidad.Hardwares.Add(H);
-                        entidad.SaveChanges();
+                            criticoOpcion = true;
+                        }
+                        else
+                        {
+                            criticoOpcion = false;
 
+                        }
+
+                        if (item.ComponentSerial != null)
+                        {
+                            Hardware H = new Hardware
+                            {
+                                SerialNumber = item.ComponentSerial,
+                                Model = item.ComponentModel,
+                                BrandID = item.ComponentMarca,
+                                TypeHardwareID = item.TipoHardware,
+                                DivisionID = null,
+                                SubAreaID = null,
+                                AreaID = Principal.AreaID,
+                                InvoiceID = null,
+                                UserName = Principal.UserName,
+                                UserNetworkName = Principal.UserNetworkName,
+                                NameEquip = Principal.NameEquip,
+                                CriticEquip = Principal.CriticEquip,
+                                SerialAssigned = Principal.SerialNumber
+                            };
+                            entidad.Hardwares.Add(H);
+                            entidad.SaveChanges();
+
+                        }
                     }
                 }
                 TempData["verificacion"] = "Guardar";

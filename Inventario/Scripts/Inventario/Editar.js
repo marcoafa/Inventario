@@ -64,7 +64,8 @@ $("body").on("click", ".editarInvetario", function () {
     $("#modalAreaSelect").attr('disabled', 'disabled');
     $("#modalSubAreaSelect").attr('disabled', 'disabled');
     $("#modalMarcaSelect").attr('disabled','disabled');
-    $("#modalFactura").attr('disabled','disabled');
+    $("#modalFactura").attr('disabled', 'disabled');
+    $("#modalFechaGarantia").attr('disabled', 'disabled');
     $("#modalEquipoCritico").attr('disabled','disabled');
     $("#modalUsuarioRed").attr('disabled','disabled');
 
@@ -82,6 +83,7 @@ $("body").on("click", ".editarInvetario", function () {
         
         $('#modalModelo').val(r.Model);
         $('#modalNoEquipo').val(r.NameEquip);
+        $('#modalFechaGarantia').val(r.DateWarranty);
         $('#modalEquipoCritico').attr('checked', r.CriticEquip);
         $('#modalFactura').val(r.InvoiceID);
         $('#modalMarca').val(r.BrandID);
@@ -604,19 +606,20 @@ $(document).ready(function () {
 //});
 
 
-function rowStyle(row, index)
+function cellStyle(value,row, index)
 {
-    var classes = ['active','danger'];
-    if(row[8] == "Vencidas")
-    {
-        return{classes:'danger'};
+    debugger;
+    if (row[8].startsWith("Vencida")) {
+        return { classes: 'danger' };
+    }
+    else if (row[8].startsWith("Activa")) {
+        return { classes: 'success' };
+    }
+    else if (row[8].startsWith("Por Vencer")) {
+        return { classes: 'warning' };
     }
     else
-    {
-        if(row[8] == "Proceso")
-        {
-            return{classes:'success'};
-        }
-    }
-    return{};
+        return {};
+        
+   
 }

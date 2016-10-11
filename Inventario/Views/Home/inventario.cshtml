@@ -38,8 +38,7 @@
                            data-pagination="true"
                            data-id-field="id"
                            data-page-list="[10, 25, 50, 100, ALL]"
-                           data-show-footer="false"
-                           data-row-style="rowStyle">
+                           data-show-footer="false">
                         <thead>
                             <tr>
                                 <th data-sortable="true">Serial</th>
@@ -50,7 +49,7 @@
                                 <th data-sortable="true">Nombre Equipo</th>
                                 <th data-sortable="true">Area</th>
                                 <th data-sortable="true">Crítico</th>
-                                <th data-sortable="true">Garantia</th>
+                                <th data-sortable="true" data-cell-style="cellStyle">Garantia</th>
                                 <th data-sortable="true">Acciones</th>
 
                             </tr>
@@ -86,16 +85,22 @@
 
                                             @if (item.DateWarranty != null && item.DateWarranty < DateTime.Now)
                                             {
-                                            <td>Vencidas</td>
-                                                 }
-                                              else
-                                             {
-                                                 if (item.DateWarranty != null && item.DateWarranty > DateTime.Now)
-                                                 {
-                                                     <td>Proceso</td>
-                                                 }
-                                                 else
-                                                 {
+                                            <td>Vencida</td>
+                                            }
+                                            else
+                                            {
+                                                if (item.DateWarranty != null && item.DateWarranty > DateTime.Now)
+                                                {
+
+                                                    var dias = (item.DateWarranty.Value - DateTime.Now).Days ;
+                                                    if (dias >= 100)
+                                                    {<td>Activa (@dias días)</td>}
+                                                    else
+                                                    {<td>Por Vencer (@dias días)</td>}
+
+                                                }
+                                                else
+                                                {
                                                       <td>Sin Garantia</td>
                                                  }
                                             }
@@ -808,6 +813,17 @@
                                             </button>
                                         </div>
                                     </div>
+
+                                @*SERIE MODELO*@
+
+                                <div class="form-group">
+                                    <label class="col-md-2 col-md-offset-1 text-left">Fin Garantía:</label>
+                                    <div class="col-md-8">
+                                        <input id="modalFechaGarantia" name="clFechaGarantia" type="text" class="form-control cajas" placeholder="yyyy-mm-dd" required disabled>
+                                    </div>
+                                </div>
+
+
                                  @*EQUIPO CRITICO EDITAR*@
                                     <div class="form-group">
                                         <label class="col-md-2 col-md-offset-1 text-left">EQUIPO CRITICO:</label>
