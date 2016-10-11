@@ -37,12 +37,12 @@ $('.titulo').click(function (e){
     
 });
  
-
+//Registro
 $('#GuardarEquipo').click(function(){
     
     //Columna principal del hardware
     var columnaHardware= $("#FormPrincipal");  
-
+ 
     //Propiedades del Hardware
     var UserH = $(columnaHardware).find("[name='UserName']").val();
     var UserHNetwork = $(columnaHardware).find("[name='UserNetworkName']").val();
@@ -58,27 +58,34 @@ $('#GuardarEquipo').click(function(){
 
     var DivisionH =   parseInt($(columnaHardware).find("[name='DivisionID']").val());
     var AreaH =  parseInt($(columnaHardware).find("[name='AreaID']").val());
+    if (AreaH  == "" || AreaH  == null)
+        AreaH  = null;
     var SubAreaH = parseInt($(columnaHardware).find("[name='SubAreaID']").val());
+    if (SubAreaH == "" || SubAreaH == null)
+        SubAreaH = null;
     var BrandH = parseInt($(columnaHardware).find("[name='BrandID']").val());
     var TipoHardwareH = parseInt($(columnaHardware).find("[name='TypeHardwareID']").val());
     var FacturaH = $(columnaHardware).find("[name='InvoiceID']").val();
     if (FacturaH == "" || FacturaH == null || FacturaH == "N/A")
         FacturaH = null;
-
+    //Garantia
+    var GarantiaH =  new Date($(columnaHardware).find("[name='Garantia']").val());
+    debugger;
     var Hardware ={
         'SerialNumber' : SerialH,
         'Model' : ModelH,
         'BrandID' : BrandH,
         'TypeHardwareID' : TipoHardwareH,
-        'DivisionID' : null,
+        'DivisionID' : DivisionH,
         'AreaID' : AreaH,
-        'SubAreaID' :  null,
+        'SubAreaID' :  SubAreaH,
         'InvoiceID' : FacturaH,
         'UserName': UserH,
         'UserNetworkName' :UserHNetwork ,
         'NameEquip' : NameEqH,
         'CriticEquip' :  CriticEquip,
-        'SerialAssigned': null
+        'SerialAssigned': null,
+        'DateWarranty' : GarantiaH
 
 
 
@@ -159,8 +166,7 @@ $('#GuardarEquipo').click(function(){
 
    
 });
-$("#crearComponentes").on('click', function () {
-    }); 
+
 
 
 
@@ -183,7 +189,7 @@ $('#agregarComponente').click(function ()
     var nuevoComponente = `<div class="panel panel-default">
                                     <div class="panel-heading color-header" role="tab" id="headingThree">
                                         <h4 class="panel-title">
-                                            <a class="collapsed" role="button" data-toggle="collapse" href="#collapse${num}" aria-expanded="false" aria-controls="collapseThree">
+                                            <a class="collapsed" data-parent="#accordion" role="button" data-toggle="collapse" href="#collapse${num}" aria-expanded="false" aria-controls="collapseThree">
                                                 Item #${num}
                                             </a>
                                         </h4>
