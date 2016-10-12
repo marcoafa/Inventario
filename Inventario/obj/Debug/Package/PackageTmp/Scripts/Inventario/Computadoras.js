@@ -1,23 +1,27 @@
-﻿//$('#myTabs a').click(function (e) {
-//    e.preventDefault()
-//    $(this).tab('show')
-//})
-
-//$('#agregarComponente').click(function ()
-//{
-//    alert('Hola');  
-   
-//    var nuevoComponente = '<button class="btn btn-danger"  type="button" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false"' 
-//    +'aria-controls="collapseExample" style="width:50%;height:50%;">Tipo</button>' 
-//    +'<div class="collapse" id="collapseExample1">;<div class="well"> <div class="componente"><select name="" id=""> <option value="volvo">Monitor</option>'
-//    + '<option value="saab">Teclado</option> <option value="mercedes">Mouse</option> <option value="audi">Dockin</option> </select> </div> <div class="componente"></div>'
-//    + '<div class="componente"></div> <div class="componente"></div> <div class="componente"></div></div></div>';
-//    var papa = $('.columna1')[1];
-//    $(papa).append($(nuevoComponente));
-//});
-
-
-
+﻿//VALIDACION PARA INPUT DEL SERIAL AJAX 
+$('#FormPrincipal').on("keyup","#serialID", function() {
+    var serialID = $('#serialID').val();
+    debugger;
+    $.ajax({
+        type: "POST",
+        url: "../Home/Check",
+        data: {serialID:serialID},
+        success: function(bandera){
+            debugger;
+            if(bandera == "True")
+            {
+                $('#serialID').css("background-color","#ebcccc");
+            }
+            else
+            {
+                $('#serialID').css("background-color","#d0e9c6");
+            }
+           
+            //console.log(output);
+            //notification(output);
+        }
+    });
+});
 
 $('#myTabs a').click(function (e) {
     e.preventDefault()

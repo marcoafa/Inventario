@@ -541,6 +541,21 @@ namespace Inventario.Controllers
 
             return Json(areas);
         }
+        public bool Check(string serialID)
+        {
+            bool bandera = false;
+            var registro = (from a in entidad.Hardwares
+                            where a.SerialNumber == serialID
+                            select a).Count();
+            if(registro > 0)
+            {
+                bandera = true;
+            }
+           
+
+
+            return bandera;
+        }
 
     }
     
