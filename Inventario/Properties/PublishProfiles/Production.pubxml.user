@@ -67,10 +67,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/14/2016 11:54:33</publishTime>
     </File>
     <File Include="bin/Inventario.dll">
-      <publishTime>10/11/2016 13:12:46</publishTime>
+      <publishTime>10/12/2016 12:14:16</publishTime>
     </File>
     <File Include="bin/Inventario.pdb">
-      <publishTime>10/11/2016 13:12:46</publishTime>
+      <publishTime>10/12/2016 12:14:16</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
       <publishTime>08/24/2016 08:37:38</publishTime>
@@ -172,10 +172,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/24/2016 08:37:21</publishTime>
     </File>
     <File Include="Scripts/Inventario/Computadoras.js">
-      <publishTime>10/11/2016 13:11:39</publishTime>
+      <publishTime>10/12/2016 09:37:16</publishTime>
     </File>
     <File Include="Scripts/Inventario/Editar.js">
-      <publishTime>10/10/2016 15:01:18</publishTime>
+      <publishTime>10/12/2016 11:15:19</publishTime>
     </File>
     <File Include="Scripts/Inventario/TablaBusqueda.js">
       <publishTime>09/29/2016 10:53:12</publishTime>
@@ -208,7 +208,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/24/2016 08:54:10</publishTime>
     </File>
     <File Include="Views/Home/inventario.cshtml">
-      <publishTime>10/11/2016 12:51:04</publishTime>
+      <publishTime>10/12/2016 11:11:10</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>08/24/2016 08:37:07</publishTime>
@@ -223,7 +223,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/24/2016 08:37:07</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/11/2016 13:12:54</publishTime>
+      <publishTime>10/12/2016 12:14:26</publishTime>
     </File>
   </ItemGroup>
 </Project>

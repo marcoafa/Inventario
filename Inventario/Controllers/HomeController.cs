@@ -309,7 +309,7 @@ namespace Inventario.Controllers
 
            
         }
-        public ActionResult RegistroEditar(string clUsuario,string clUsuarioRed, string clSerie, string clModelo, string clNoEquipo,int? clDivisionID, int? clAreaID,int? clSubAreaID, int clMarca,int? clFactura, string clEquipoCritico, string serialoriginal)
+        public ActionResult RegistroEditar(string clUsuario, string clUsuarioRed, string clSerie, string clModelo, string clNoEquipo, int? clDivisionID, int? clAreaID, int? clSubAreaID, int clMarca, int? clFactura, DateTime? clFechaGarantia, string clEquipoCritico, string serialoriginal)
         {
             bool criticoOpcion;
             if(clEquipoCritico=="on")
@@ -336,7 +336,7 @@ namespace Inventario.Controllers
                 }
                 entidad.SaveChanges();
                 // Actualizar hardware principal
-                var updateReg = entidad.Database.ExecuteSqlCommand("UPDATE Hardware SET SerialNumber = {0}, Model = {1}, BrandID = {2},DivisionID = {11}, AreaID = {3}, SubAreaID = {10}, InvoiceID = {9}, UserName = {4},UserNetworkName = {5}, NameEquip = {6}, CriticEquip = {7} where SerialNumber = {8}", clSerie, clModelo, clMarca, clAreaID, clUsuario, clUsuarioRed, clNoEquipo, criticoOpcion, serialoriginal, clFactura,clSubAreaID,clDivisionID);
+                var updateReg = entidad.Database.ExecuteSqlCommand("UPDATE Hardware SET SerialNumber = {0}, Model = {1}, BrandID = {2},DivisionID = {11}, AreaID = {3}, SubAreaID = {10}, InvoiceID = {9}, UserName = {4},UserNetworkName = {5}, NameEquip = {6}, CriticEquip = {7}, DateWarranty = {12} where SerialNumber = {8}", clSerie, clModelo, clMarca, clAreaID, clUsuario, clUsuarioRed, clNoEquipo, criticoOpcion, serialoriginal, clFactura, clSubAreaID, clDivisionID, clFechaGarantia);
 
                 // Reasignar serial a hardware asignados
                 foreach (var a in asignados)

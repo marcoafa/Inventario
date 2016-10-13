@@ -2,6 +2,11 @@
 $('#FormPrincipal').on("keyup","#serialID", function() {
     var serialID = $('#serialID').val();
     debugger;
+    if(serialID == "" || serialID == null)
+    {
+        $('#serialID').css("background-color","white");
+        return;
+    }
     $.ajax({
         type: "POST",
         url: "../Home/Check",
@@ -11,10 +16,12 @@ $('#FormPrincipal').on("keyup","#serialID", function() {
             if(bandera == "True")
             {
                 $('#serialID').css("background-color","#ebcccc");
+               
             }
             else
             {
                 $('#serialID').css("background-color","#d0e9c6");
+              
             }
            
             //console.log(output);

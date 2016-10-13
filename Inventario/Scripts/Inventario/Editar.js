@@ -80,7 +80,7 @@ $("body").on("click", ".editarInvetario", function () {
         if (r.UserNetworkName != null) {
             $('#modalUsuarioRed').val(r.UserNetworkName);
         }
-        
+       
         $('#modalModelo').val(r.Model);
         $('#modalNoEquipo').val(r.NameEquip);
         $('#modalFechaGarantia').val(r.DateWarranty);
@@ -195,7 +195,8 @@ $("body").on("click", "#Change", function () {
     $("#modalFactura").removeAttr('disabled');
     $("#modalEquipoCritico").removeAttr('disabled');
     $("#modalUsuarioRed").removeAttr('disabled');
-   
+    $("#modalFechaGarantia").removeAttr('disabled');
+  
    
 });
 

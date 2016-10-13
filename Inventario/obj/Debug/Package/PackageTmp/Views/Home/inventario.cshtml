@@ -722,135 +722,159 @@
 
                                 @*USUARIO EDITAR*@
 
-                                <div class="form-group">
+                                <div class="form-group form-group-lg">
 
-                                    <label class="col-md-2 col-md-offset-1">Usuario (Nombre):</label>
+                                    <label class="col-md-3 control-label">Usuario (Nombre):</label>
 
-                                    <div class="col-md-8">
-                                        <input id="modalUsuario" name="clUsuario" type="text" class="form-control" placeholder="Usuario (Nombre)" required disabled>
-                                    </div>
-                                </div>
-
-                                @*USUARIO RED EDITAR*@
-
-                                <div class="form-group">
-
-                                    <label class="col-md-2 col-md-offset-1">Usuario (Red):</label>
-
-                                    <div class="col-md-8">
-                                        <input id="modalUsuarioRed" name="clUsuarioRed" type="text" class="form-control" placeholder="Usuario (Red)" required disabled>
-                                    </div>
-                                </div>
-
-                                @*SERIE EDITAR*@
-
-                                <div class="form-group">
-                                    <label class="col-md-2 col-md-offset-1 text-left">SERIE:</label>
-
-                                    <div class="col-md-8">
-                                        <input id="modalSerie" name="clSerie" type="text" class="form-control cajas" placeholder="Serie" required disabled>
-                                    </div>
-                                </div>
-
-
-                                @*SERIE MODELO*@
-
-                                <div class="form-group">
-                                    <label class="col-md-2 col-md-offset-1 text-left">MODELO:</label>
-                                    <div class="col-md-8">
-                                        <input id="modalModelo" name="clModelo" type="text" class="form-control cajas" placeholder="Modelo" required disabled>
-                                    </div>
-                                </div>
-
-                                @*NOMBREQUIPO EDITAR*@
-                                <div class="form-group">
-                                    <label class="col-md-2 col-md-offset-1 text-left">NOM.EQUIPO:</label>
-                                    <div class="col-md-8">
-                                        <input id="modalNoEquipo" name="clNoEquipo" type="text" class="form-control cajas" placeholder="Nombre del Equipo" disabled>
-                                    </div>
-                                </div>
-                                
-                                @*DIVISION EDITAR*@
-                                <div class="form-group form-group-lg" id="editContainerDivision">
-                                    <label class="col-md-3 control-label">Division:</label>
-                                    <div class="col-md-8 selectContainer">
+                                    <div class="col-md-8 inputGroupContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                                            <select name="clDivisionID"  id="modalDivisionSelect" class="form-control selectpicker input-lg" disabled>
-                                                <option value="">Selecciona una Division</option>
-                                                @foreach (var item in Model.listaDivisions)
-                                                {
-                                                    <option value="@item.DivisionID">@item.Name</option>
-
-                                                }
-                                            </select>
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                            <input id="modalUsuario" name="clUsuario" type="text" class="form-control input-lg" placeholder="Usuario (Nombre)" required disabled>
                                         </div>
                                     </div>
                                 </div>
 
                                
-                                @*MARCA EDITAR*@
+
+                                @*USUARIO RED EDITAR*@
+
                                 <div class="form-group form-group-lg">
-                                    <label class="col-md-2 control-label col-md-offset-1">
-                                        MARCA:
-                                    </label>
 
-                                    <div class="col-md-6">
+                                    <label class="col-md-3 control-label">Usuario (Red):</label>
+
+                                    <div class="col-md-8 inputGroupContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-tag"></i></span>
-                                            <select name="clMarca" id="modalMarcaSelect" class="form-control selectpicker input-lg" data-style="btn-primary" disabled>
-                                                @{foreach (var item in Model.listaBrand)
-                                                {
-                                                    <option value="@item.BrandID">@item.Name</option>
-                                                }
-
-                                                }
-
-                                            </select>
-                                        </div>
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-signal"></i></span>
+                                            <input id="modalUsuarioRed" name="clUsuarioRed" type="text" class="form-control  input-lg" placeholder="Usuario (Red)" required disabled>
                                         </div>
                                     </div>
-                                 
-                                     @*input escondido para saber el tipo de hardaware en la base de Datos 
-                                    <div class="col-md-6">
-                                        <input id="modalhardware" type="text" name="tipoHardware" hidden>
-                                    </div>*@
-                                    <div class="col-md-12">
-                                        <input id="modalserialorig" type="text" name="serialoriginal" hidden>
-                                    </div>
+                                </div>
 
-                                  @*FACTURA EDITAR*@
-                                    <div id="divfactura" class="form-group">
-                                        <label class="col-md-2 col-md-offset-1 text-left">FACTURA:</label>
-                                        <div class="col-md-4">
-                                            <input id="modalFactura" name="clFactura" type="text" class="form-control cajas autocomplete" placeholder="Factura del Equipo" disabled>
+                                    @*SERIE EDITAR*@
+
+                                <div class="form-group form-group-lg">
+                                    <label class="col-md-3 control-label">Serie:</label>
+
+                                    <div class="col-md-8 inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+                                            <input id="modalSerie" name="clSerie" type="text" class="form-control input-lg" placeholder="Serie" required disabled>
                                         </div>
-                                        <div class="col-md-3">
-                                            <button type="button" class="btn btn-success" aria-label="Left Align" data-toggle="modal" data-target="#modal2">
-                                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                @*SERIE MODELO*@
-
-                                <div class="form-group">
-                                    <label class="col-md-2 col-md-offset-1 text-left">Fin Garantía:</label>
-                                    <div class="col-md-8">
-                                        <input id="modalFechaGarantia" name="clFechaGarantia" type="text" class="form-control cajas" placeholder="yyyy-mm-dd" required disabled>
                                     </div>
                                 </div>
 
 
-                                 @*EQUIPO CRITICO EDITAR*@
-                                    <div class="form-group">
-                                        <label class="col-md-2 col-md-offset-1 text-left">EQUIPO CRITICO:</label>
-                                        <div class="col-md-8">
-                                            <input id="modalEquipoCritico" name="clEquipoCritico" type="checkbox" class="micheckbox" disabled>
+                                    @*SERIE MODELO*@
+
+                                <div class="form-group form-group-lg">
+                                    <label class="col-md-3 control-label">Modelo:</label>
+                                    <div class="col-md-8 inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-tag"></i></span>
+                                            <input id="modalModelo" name="clModelo" type="text" class="form-control input-lg" placeholder="Modelo" required disabled>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                    @*NOMBREQUIPO EDITAR*@
+                                <div class="form-group form-group-lg">
+                                    <label class="col-md-3 control-label">Nombre del Equipo:</label>
+                                    <div class="col-md-8 inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
+                                            <input id="modalNoEquipo" name="clNoEquipo" type="text" class="form-control input-lg" placeholder="Nombre del Equipo" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                    @*DIVISION EDITAR*@
+                                    <div class="form-group form-group-lg" id="editContainerDivision">
+                                        <label class="col-md-3 control-label">Division:</label>
+                                        <div class="col-md-8 selectContainer">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                                                <select name="clDivisionID" id="modalDivisionSelect" class="form-control selectpicker input-lg" disabled>
+                                                    <option value="">Selecciona una Division</option>
+                                                    @foreach (var item in Model.listaDivisions)
+                                                    {
+                                                        <option value="@item.DivisionID">@item.Name</option>
+
+                                                    }
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
 
-                            </form>
+
+                                    @*MARCA EDITAR*@
+                                    <div class="form-group form-group-lg">
+                                        <label class="col-md-2 control-label col-md-offset-1">
+                                            Marca:
+                                        </label>
+
+                                        <div class="col-md-6">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-tag"></i></span>
+                                                <select name="clMarca" id="modalMarcaSelect" class="form-control selectpicker input-lg" data-style="btn-primary" disabled>
+                                                    @{foreach (var item in Model.listaBrand)
+                                                    {
+                                                        <option value="@item.BrandID">@item.Name</option>
+                                                    }
+
+                                                    }
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @*input escondido para saber el tipo de hardaware en la base de Datos
+            <div class="col-md-6">
+                <input id="modalhardware" type="text" name="tipoHardware" hidden>
+            </div>*@
+                                    <div class="col-md-12">
+                                        <input id="modalserialorig" type="text" name="serialoriginal" hidden>
+                                    </div>
+
+                                    @*FACTURA EDITAR*@
+                                <div id="divfactura" class="form-group form-group-lg">
+                                    <label class="col-md-3 control-label">Factura:</label>
+                                    <div class="col-md-5 inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-file"></i></span>
+                                            <input id="modalFactura" name="clFactura" type="text" class="form-control cajas autocomplete input-lg" placeholder="Factura del Equipo" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="button" class="btn btn-success" aria-label="Left Align" data-toggle="modal" data-target="#modal2">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
+                                        </button>
+                                    </div>
+                                </div>
+
+                               
+                                    @*GARANTIA*@
+
+                                <div class="form-group form-group-lg">
+                                    <label class="col-md-3 control-label">Fin Garantía:</label>
+                                    <div class="col-md-8 inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                                            <input id="modalFechaGarantia" name="clFechaGarantia" type="date" class="form-control cajas input-lg" placeholder="yyyy-mm-dd" required disabled>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                    @*EQUIPO CRITICO EDITAR*@
+                                <div class="form-group form-group-lg">
+                                    <label class="col-md-3 control-label">Equipo Crítico:</label>
+                                    <div class="col-md-8 inputGroupContainer">
+                                        <input id="modalEquipoCritico" name="clEquipoCritico" type="checkbox" class="micheckbox" disabled>
+                                    </div>
+                                </div>
+
+</form>
 
                             </div>
                     </div>
