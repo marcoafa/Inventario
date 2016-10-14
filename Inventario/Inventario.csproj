@@ -129,7 +129,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Archivos\" />
     <Folder Include="Scripts\Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -249,12 +248,15 @@
     <Content Include="Models\InventoryBDM.edmx.diagram">
       <DependentUpon>InventoryBDM.edmx</DependentUpon>
     </Content>
+    <Content Include="Archivos\codigo-ascii.pdf" />
     <None Include="Properties\PublishProfiles\Production.pubxml" />
     <Content Include="Scripts\Inventario\Computadoras.js" />
     <Content Include="Scripts\Inventario\Editar.js" />
     <Content Include="Scripts\Inventario\TablaBusqueda.js" />
+    <Content Include="Scripts\Inventario\VerFactura.js" />
     <Content Include="Scripts\jquery-3.1.0.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\pdfobject.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Web.config" />

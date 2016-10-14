@@ -418,7 +418,14 @@ namespace Inventario.Controllers
 
             return RedirectToAction("inventario");
         }
-
+        public string VerFactura(string id)
+        {
+            
+            var ruta = (from h in entidad.Invoices
+                           where h.PO == id
+                             select h.rutaArchivo).FirstOrDefault();
+            return ruta;
+        }
         [HttpPost]
         public ActionResult CrearFactura(string clPO, string clNumPedimento, HttpPostedFileBase fileup)
         {
