@@ -276,7 +276,7 @@ $(".guardarFactura").on("click", function () {
 //});
 
 $(document).ready(function () {
-    $("#Facturas").find(".bs-bars").append(`<button type="button" class="btn btn-default" aria-label="Left Align" data-toggle="modal" data-target="#modal2">
+    $("#facturas").find(".bs-bars").append(`<button type="button" class="btn btn-default" aria-label="Left Align" data-toggle="modal" data-target="#modal2">
                         <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span> Agregar
                     </button>`);
 

@@ -9,6 +9,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <_PublishTargetUrl>Z:\InvertoryBDM</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
+    <File Include="Archivos/codigo-ascii.pdf">
+      <publishTime>10/07/2016 09:05:11</publishTime>
+    </File>
     <File Include="Areas/HelpPage/HelpPage.css">
       <publishTime>10/04/2016 12:36:02</publishTime>
     </File>
@@ -67,10 +70,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/14/2016 11:54:33</publishTime>
     </File>
     <File Include="bin/Inventario.dll">
-      <publishTime>10/12/2016 12:14:16</publishTime>
+      <publishTime>10/14/2016 09:09:38</publishTime>
     </File>
     <File Include="bin/Inventario.pdb">
-      <publishTime>10/12/2016 12:14:16</publishTime>
+      <publishTime>10/14/2016 09:09:38</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
       <publishTime>08/24/2016 08:37:38</publishTime>
@@ -172,13 +175,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/24/2016 08:37:21</publishTime>
     </File>
     <File Include="Scripts/Inventario/Computadoras.js">
-      <publishTime>10/12/2016 09:37:16</publishTime>
+      <publishTime>10/13/2016 11:55:08</publishTime>
     </File>
     <File Include="Scripts/Inventario/Editar.js">
-      <publishTime>10/12/2016 11:15:19</publishTime>
+      <publishTime>10/13/2016 08:45:31</publishTime>
     </File>
     <File Include="Scripts/Inventario/TablaBusqueda.js">
       <publishTime>09/29/2016 10:53:12</publishTime>
+    </File>
+    <File Include="Scripts/Inventario/VerFactura.js">
+      <publishTime>10/14/2016 08:55:51</publishTime>
     </File>
     <File Include="Scripts/jquery-1.10.2.js">
       <publishTime>08/24/2016 08:37:24</publishTime>
@@ -195,6 +201,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/modernizr-2.6.2.js">
       <publishTime>08/24/2016 08:37:42</publishTime>
     </File>
+    <File Include="Scripts/pdfobject.min.js">
+      <publishTime>10/13/2016 11:17:03</publishTime>
+    </File>
     <File Include="Scripts/respond.js">
       <publishTime>08/24/2016 08:37:43</publishTime>
     </File>
@@ -202,19 +211,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/24/2016 08:37:43</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>09/28/2016 09:07:36</publishTime>
+      <publishTime>10/13/2016 11:17:05</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
       <publishTime>08/24/2016 08:54:10</publishTime>
     </File>
     <File Include="Views/Home/inventario.cshtml">
-      <publishTime>10/12/2016 11:11:10</publishTime>
+      <publishTime>10/14/2016 08:55:38</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>08/24/2016 08:37:07</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>10/07/2016 09:05:12</publishTime>
+      <publishTime>10/13/2016 11:32:46</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>08/24/2016 08:37:07</publishTime>
@@ -223,7 +232,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/24/2016 08:37:07</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/12/2016 12:14:26</publishTime>
+      <publishTime>10/14/2016 09:09:59</publishTime>
     </File>
   </ItemGroup>
 </Project>

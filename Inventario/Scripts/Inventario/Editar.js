@@ -56,12 +56,14 @@ $("body").on("click", ".editarInvetario", function () {
     
     var url;
     url = "../Home/EditarInventario?id=" + $(this).data("id");
+    var inputsEditar = $("#f1").find("input");
+    inputsEditar.value = "";
     $("#modalUsuario").attr('disabled','disabled');
     $("#modalSerie").attr('disabled','disabled');
     $("#modalModelo").attr('disabled','disabled');
     $("#modalNoEquipo").attr('disabled', 'disabled');
     $("#modalDivisionSelect").attr('disabled', 'disabled');
-    $("#modalAreaSelect").attr('disabled', 'disabled');
+    $("#modalAreaSelect").attr('disabled', 'disabled'); 
     $("#modalSubAreaSelect").attr('disabled', 'disabled');
     $("#modalMarcaSelect").attr('disabled','disabled');
     $("#modalFactura").attr('disabled', 'disabled');
