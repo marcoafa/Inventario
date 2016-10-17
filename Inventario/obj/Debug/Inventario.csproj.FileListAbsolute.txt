@@ -144,6 +144,6 @@ C:\Users\IVANA1\Desktop\Inventario\Inventario\obj\Debug\Inventario.pdb
 \\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\bin\System.Web.WebPages.Deployment.xml
 \\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\bin\System.Web.WebPages.Razor.xml
 \\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\bin\Antlr3.Runtime.pdb
-\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\obj\Debug\Inventario.csprojResolveAssemblyReference.cache
 \\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\obj\Debug\Inventario.dll
 \\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\obj\Debug\Inventario.pdb
+\\s07dc2\IT\Users\Aplicaciones\Inventario\Inventario\obj\Debug\Inventario.csprojResolveAssemblyReference.cache

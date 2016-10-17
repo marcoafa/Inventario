@@ -192,6 +192,51 @@ namespace Inventario.Controllers
                 return View(ent);
             }
         }
+        public  ActionResult DesasignarComponente(string id)
+        { 
+            
+            var componente = (from p in entidad.Hardwares
+                                where p.SerialNumber == id
+                                select p).FirstOrDefault();
+
+            componente.SerialAssigned = null;
+
+            entidad.SaveChanges();
+
+            return RedirectToAction("inventario");
+            
+        }
+        public ActionResult AsignarComponente(string idComponente, string idHardware)
+        {
+
+            var componente = (from p in entidad.Hardwares
+                              where p.SerialNumber == idComponente
+                              select p).FirstOrDefault();
+
+
+            var hardware = (from p in entidad.Hardwares
+                            where p.SerialNumber == idHardware
+                              select p).FirstOrDefault();
+
+            componente.DivisionID = hardware.DivisionID;
+            componente.AreaID = hardware.AreaID;
+            componente.SubAreaID = hardware.SubAreaID;
+            //factura?
+            componente.UserName = hardware.UserName;
+            componente.UserNetworkName = hardware.UserNetworkName;
+            componente.NameEquip = hardware.NameEquip;
+            componente.CriticEquip = hardware.CriticEquip;
+
+
+
+
+            componente.SerialAssigned = hardware.SerialNumber;
+
+            entidad.SaveChanges();
+
+            return RedirectToAction("inventario");
+
+        }
         //Guardar registro de un solo item
         public ActionResult Registro(string UserName,string UserNetworkName, string SerialNumber, string Model, string NameEquip, string CriticalEquip,int? DivisionID ,int? AreaID,int? SubAreaID, int BrandID, int TypeHardwareID,  string InvoiceID)
         {
