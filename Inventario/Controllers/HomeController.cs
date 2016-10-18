@@ -288,10 +288,71 @@ namespace Inventario.Controllers
                 return RedirectToAction("inventario");
         }
         //Guardar registro de un item con varios componentes
+         public ActionResult   GuardarComponentesEditar(List<Componentes> listaComponentes)
+        {
+            bool criticoOpcion;
+           
+            try
+            {
+
+                if (listaComponentes != null)
+                {
+                    foreach (var item in listaComponentes)
+                    {
+                        if (item.ComponentCriticalEquip == "on")
+                        {
+                            criticoOpcion = true;
+                        }
+                        else
+                        {
+                            criticoOpcion = false;
+
+                        }
+
+                        if (item.ComponentSerial != null)
+                        {
+                            Hardware H = new Hardware
+                            {
+                                SerialNumber = item.ComponentSerial,
+                                Model = item.ComponentModel,
+                                BrandID = item.ComponentMarca,
+                                TypeHardwareID = item.TipoHardware,
+                                DivisionID = null,
+                                SubAreaID = null,
+                                AreaID = null,
+                                InvoiceID = null,
+                                UserName = item.ComponentUser,
+                                UserNetworkName = null,
+                                NameEquip = null,
+                                CriticEquip = criticoOpcion,
+                                SerialAssigned = item.serialAsignacion
+                            };
+                            entidad.Hardwares.Add(H);
+                            entidad.SaveChanges();
+
+                        }
+                    }
+                }
+                TempData["verificacion"] = "Guardar";
+               
+                return Json("Registro guardado!",JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception ex)
+            {
+                //TempData["verificacion"] = "False";
+                //TempData["error"] = ex.Message;
+                return Json("Registro guardado con falta de componentes!, " + ex.Message,JsonRequestBehavior.AllowGet);
+            }
+
+
+
+
+           
+        }
         public ActionResult GuardarComponentes(Hardware Principal, List<Componentes> listaComponentes)
         {
             bool criticoOpcion;
-
+          
             try
             {
 

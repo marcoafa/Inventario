@@ -48,6 +48,81 @@ $('.titulo').click(function (e){
     
 });
  
+
+//Registro para asignacion de componentes en la modal de editar
+$('#GuardarEquipoComponentes').click(function(){
+    
+    //Columna principal del hardware
+    var columnaHardware= $("#f1");  
+ 
+    //Propiedades del Hardware
+    
+   
+    var SerialH = $(columnaHardware).find("[name='clSerie']").val();
+   
+
+
+    //Columna principal de los Componentes del Hardware
+    var columnaComponentes = $("#accordion1");  
+  
+    //Numero de Componentes
+    var num = $("#accordion1").children().length;
+    //Arreglo
+    var listaComponentes = [];
+    //Datos principales de la Compuradora Principal
+   
+    //COMPONENTES    
+
+    for(var i = 0; i < num; i++)
+    {
+        
+        TipoHardware =  parseInt($($(columnaComponentes).children()[i]).find(".tipoComponente").val());
+        Serie = $($($(columnaComponentes).children()[i])).find(".SerialNumberComponente").val();
+        Marca =  parseInt($($(columnaComponentes).children()[i]).find(".MarcaComponente").val());
+        Modelo = $($(columnaComponentes).children()[i]).find(".ModeloComponente").val();         
+        listaComponentes[i]={
+            ComponentUser: 'COMPONENTES',
+            ComponentUserRed: null,
+            ComponentSerial  :  Serie,
+            ComponentModel :  Modelo,
+            ComponentNameEquip: null,
+            ComponentCriticalEquip:'on',
+            ComponentDivision: null,
+            ComponentArea : null,
+            ComponentSubArea: null,
+            ComponentMarca : Marca,
+            TipoHardware :TipoHardware,
+            serialAsignacion: SerialH
+          
+        }
+        debugger;
+    }
+    
+    //Crear Arreglo de Objetos
+    //Url de la Accion
+    var url =  "../Home/GuardarComponentesEditar";
+    //listaComponentes = JSON.stringify({ 'listaComponentes': listaComponentes });
+    //Hardware = JSON.stringify({ 'Hardware': Hardware });
+    debugger;
+    $.ajax({
+        
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        type: 'POST',
+        url: url,
+        data: JSON.stringify({listaComponentes:listaComponentes}),
+        success: function (r) {          
+            url = "../Home/inventario";
+
+            window.location = url;
+        },
+        failure: function (response) {          
+            alert('Error Al Guardar');
+        }
+    });
+
+   
+});
 //Registro
 $('#GuardarEquipo').click(function(){
     
