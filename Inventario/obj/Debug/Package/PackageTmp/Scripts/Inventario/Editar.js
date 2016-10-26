@@ -143,16 +143,43 @@ function createComponent(component)
                                         </div>
 
                                         <div class="col-sm-4 text-center">
-                                            <button type="button" class="btn btn-success" aria-label="Left Align">
-                                                <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
-                                            </button>
-                                            <button type="button" class="btn btn-danger"  aria-label="Left Align">
+                                           
+                                            <button data-id="${component.SerialNumber}" type="button" class="btn btn-primary DesasignarC"  aria-label="Left Align">
                                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                             </button>
                                         </div>`;
 
     $('#componentesHardware').append(structureComponent);
 }
+
+$("body").on("click", ".DataC", function () {
+    var serial = $(this).data("id");
+    $(".AsignarC").attr("data-id",serial);
+   
+
+});
+$("body").on("click", ".AsignarC", function () {
+    
+    var idComponente =$(this).data("serial");
+    if (confirm("Deseas Asignar este Componente?") == true) {
+        var url;
+        url = "../Home/AsignarComponente?idComponente=" + idComponente + "&idHardware=" + $(this).data("id");
+        debugger;
+        window.location = url;
+    }
+});
+
+
+$("body").on("click", ".DesasignarC", function () {
+
+    if (confirm("Deseas Desasignar el Componente?") == true) {
+        var url;
+        url = "../Home/DesasignarComponente?id=" + $(this).data("id");
+
+        window.location = url;
+    }
+});
+
 
 $("body").on("click", ".Eliminar", function () {
 

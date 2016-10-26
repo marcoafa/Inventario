@@ -8,6 +8,51 @@
 @model InventarioModal
 
 @*CONTROL TAB PAGE*@
+
+<!--Template-->
+<template id="mytemplate">
+    <!--Selects invisibles para capturar el hardware y la marca al perder los datos-->
+    <select class="form-control selectpicker input-lg tipoComponente">
+        <option value="">Selecciona un Dispositivo</option>
+        @{foreach (var item in Model.listaTypeHardware)
+        {
+            if (@item.Description == "Desktop" || @item.Description == "Laptop" || @item.Description == "Server" || @item.Description == "Touch")
+            {
+
+            }
+            else
+            {
+                <option value="@item.TypeHardwareID">@item.Description</option>
+            }
+        }
+        }
+
+    </select>
+
+
+
+
+
+
+  
+
+
+</template>
+<template id="mytemplate1">
+    <select class="form-control selectpicker input-lg MarcaComponente">
+        <option value="">Selecciona un Dispositivo</option>
+        @{foreach (var item in Model.listaBrand)
+        {
+
+            <option value="@item.BrandID">@item.Name</option>
+
+        }
+        }
+
+    </select>
+
+</template>
+
 <div id="exTab2" class="container" style="padding-top: 20px; max-width:94%;">
     
     <div class="panel panel-default">   
@@ -146,7 +191,7 @@
                                             <select name="TypeHardwareID" class="form-control selectpicker input-lg">
                                                 <option value="">Selecciona un Dispositivo</option>
                                                 @{foreach (var item in Model.listaTypeHardware)
-                                            {
+                                                {
                                                 if (@item.Description == "Desktop" || @item.Description == "Laptop" || @item.Description == "Server" || @item.Description == "Touch" || @item.Description == "Impresora")
                                                 {
                                                     <option value="@item.TypeHardwareID">@item.Description</option>
@@ -614,6 +659,13 @@
                                     </div>
                                 </div>
 
+
+                            </div>
+                            <div>
+                             
+
+
+
                             </div>
                          </div> 
                     </div>
@@ -925,10 +977,10 @@
                             @* boton para agregar el nuevo componente teclado.. mouse.. pantalla.. etc *@
                             <label class="control-label">Componentes:</label>
 
-                            <button id="eliminarComponente" class="btn btn-danger pull-right">
+                            <button id="eliminarComponenteModal" class="btn btn-danger pull-right">
                                 <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                             </button>
-                            <button id="agregarComponente" class="btn btn-success pull-right">
+                            <button id="agregarComponenteModal" class="btn btn-success pull-right">
                                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                             </button>
 
@@ -1230,6 +1282,7 @@
                         <button id="GuardarEquipoComponentes" class="btn btn-success pull-right">
                             Asginar Componentes
                         </button>
+
                        
                     </div>
                 </div>
