@@ -4,56 +4,56 @@
     <EntitySetMapping Name="Areas">
       <EntityTypeMapping TypeName="InventoryBDMModel.Area">
         <MappingFragment StoreEntitySet="Area">
-          <ScalarProperty Name="DivisionID" ColumnName="DivisionID" />
-          <ScalarProperty Name="Floor" ColumnName="Floor" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="AreaID" ColumnName="AreaID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Brands">
-      <EntityTypeMapping TypeName="InventoryBDMModel.Brand">
-        <MappingFragment StoreEntitySet="Brand">
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="BrandID" ColumnName="BrandID" />
+          <ScalarProperty Name="Floor" ColumnName="Floor" />
+          <ScalarProperty Name="DivisionID" ColumnName="DivisionID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Divisions">
       <EntityTypeMapping TypeName="InventoryBDMModel.Division">
         <MappingFragment StoreEntitySet="Division">
-          <ScalarProperty Name="Order" ColumnName="Order" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="DivisionID" ColumnName="DivisionID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Order" ColumnName="Order" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Hardwares">
       <EntityTypeMapping TypeName="InventoryBDMModel.Hardware">
         <MappingFragment StoreEntitySet="Hardware">
-          <ScalarProperty Name="DateWarranty" ColumnName="DateWarranty" />
-          <ScalarProperty Name="SerialAssigned" ColumnName="SerialAssigned" />
-          <ScalarProperty Name="CriticEquip" ColumnName="CriticEquip" />
-          <ScalarProperty Name="NameEquip" ColumnName="NameEquip" />
-          <ScalarProperty Name="UserNetworkName" ColumnName="UserNetworkName" />
-          <ScalarProperty Name="UserName" ColumnName="UserName" />
-          <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
-          <ScalarProperty Name="SubAreaID" ColumnName="SubAreaID" />
-          <ScalarProperty Name="AreaID" ColumnName="AreaID" />
-          <ScalarProperty Name="DivisionID" ColumnName="DivisionID" />
-          <ScalarProperty Name="TypeHardwareID" ColumnName="TypeHardwareID" />
-          <ScalarProperty Name="BrandID" ColumnName="BrandID" />
-          <ScalarProperty Name="Model" ColumnName="Model" />
           <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="BrandID" ColumnName="BrandID" />
+          <ScalarProperty Name="TypeHardwareID" ColumnName="TypeHardwareID" />
+          <ScalarProperty Name="DivisionID" ColumnName="DivisionID" />
+          <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+          <ScalarProperty Name="SubAreaID" ColumnName="SubAreaID" />
+          <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserNetworkName" ColumnName="UserNetworkName" />
+          <ScalarProperty Name="NameEquip" ColumnName="NameEquip" />
+          <ScalarProperty Name="CriticEquip" ColumnName="CriticEquip" />
+          <ScalarProperty Name="SerialAssigned" ColumnName="SerialAssigned" />
+          <ScalarProperty Name="DateWarranty" ColumnName="DateWarranty" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Invoices">
       <EntityTypeMapping TypeName="InventoryBDMModel.Invoice">
         <MappingFragment StoreEntitySet="Invoice">
-          <ScalarProperty Name="rutaArchivo" ColumnName="rutaArchivo" />
-          <ScalarProperty Name="RequestDocument" ColumnName="RequestDocument" />
           <ScalarProperty Name="PO" ColumnName="PO" />
+          <ScalarProperty Name="RequestDocument" ColumnName="RequestDocument" />
+          <ScalarProperty Name="rutaArchivo" ColumnName="rutaArchivo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="InventoryBDMModel.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+          <ScalarProperty Name="Product1" ColumnName="Product" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -64,28 +64,55 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Softwares">
+      <EntityTypeMapping TypeName="InventoryBDMModel.Software">
+        <MappingFragment StoreEntitySet="Software">
+          <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+          <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+          <ScalarProperty Name="idBrand" ColumnName="idBrand" />
+          <ScalarProperty Name="PO" ColumnName="PO" />
+          <ScalarProperty Name="SerialKey" ColumnName="SerialKey" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="SubAreas">
       <EntityTypeMapping TypeName="InventoryBDMModel.SubArea">
         <MappingFragment StoreEntitySet="SubArea">
-          <ScalarProperty Name="AreaID" ColumnName="AreaID" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="SubAreaID" ColumnName="SubAreaID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="AreaID" ColumnName="AreaID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="TypeHardwares">
       <EntityTypeMapping TypeName="InventoryBDMModel.TypeHardware">
         <MappingFragment StoreEntitySet="TypeHardware">
-          <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="TypeHardwareID" ColumnName="TypeHardwareID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="InventoryBDMModel.User">
         <MappingFragment StoreEntitySet="User">
-          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BrandSoftwares">
+      <EntityTypeMapping TypeName="InventoryBDMModel.BrandSoftware">
+        <MappingFragment StoreEntitySet="BrandSoftware">
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="idBrandSoftware" ColumnName="idBrandSoftware" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Brands">
+      <EntityTypeMapping TypeName="InventoryBDMModel.Brand">
+        <MappingFragment StoreEntitySet="Brand">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="BrandID" ColumnName="BrandID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

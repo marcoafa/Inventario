@@ -26,13 +26,16 @@ namespace Inventario.Models
         }
     
         public virtual DbSet<Area> Areas { get; set; }
-        public virtual DbSet<Brand> Brands { get; set; }
         public virtual DbSet<Division> Divisions { get; set; }
         public virtual DbSet<Hardware> Hardwares { get; set; }
         public virtual DbSet<Invoice> Invoices { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Responsable> Responsables { get; set; }
+        public virtual DbSet<Software> Softwares { get; set; }
         public virtual DbSet<SubArea> SubAreas { get; set; }
         public virtual DbSet<TypeHardware> TypeHardwares { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<BrandSoftware> BrandSoftwares { get; set; }
+        public virtual DbSet<Brand> Brands { get; set; }
     }
 }

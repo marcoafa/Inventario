@@ -12,16 +12,16 @@ namespace Inventario.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Brand
+    public partial class Product
     {
-        public Brand()
+        public Product()
         {
-            this.Hardwares = new HashSet<Hardware>();
+            this.Softwares = new HashSet<Software>();
         }
     
-        public int BrandID { get; set; }
-        public string Name { get; set; }
+        public int idProduct { get; set; }
+        public string Product1 { get; set; }
     
-        public virtual ICollection<Hardware> Hardwares { get; set; }
+        public virtual ICollection<Software> Softwares { get; set; }
     }
 }

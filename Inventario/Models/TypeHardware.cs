@@ -14,7 +14,6 @@ namespace Inventario.Models
     
     public partial class TypeHardware
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TypeHardware()
         {
             this.Hardwares = new HashSet<Hardware>();
@@ -23,7 +22,6 @@ namespace Inventario.Models
         public int TypeHardwareID { get; set; }
         public string Description { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Hardware> Hardwares { get; set; }
     }
 }

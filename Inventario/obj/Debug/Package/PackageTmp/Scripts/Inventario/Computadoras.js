@@ -172,9 +172,6 @@ $('#GuardarEquipo').click(function(){
         'CriticEquip' :  CriticEquip,
         'SerialAssigned': null,
         'DateWarranty' : GarantiaH
-
-
-
     };
   
     
@@ -262,6 +259,7 @@ $('#eliminarComponente').click(function(){
     var componente = $("#accordion .panel").last()
     componente.remove();
 });
+
 $('#agregarComponente').click(function ()
 {
     //Columna de los componentes
@@ -270,7 +268,7 @@ $('#agregarComponente').click(function ()
 
     //Tamano de los los componentes
     var num = $('#accordion').children().length + 1;
-
+    debugger;
     //Agregar nuevo componente
     var nuevoComponente = `<div class="panel panel-default">
                                     <div class="panel-heading color-header" role="tab" id="headingThree">
@@ -287,20 +285,9 @@ $('#agregarComponente').click(function ()
                                             <div class="row">
                                                 <label class="col-md-3 control-label">Hardware:</label>
                                                 <div class="col-md-8 selectContainer">
-                                                    <div class="input-group">
+                                                    <div class="input-group DatosHardware">
                                                         <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-facetime-video"></i></span>
-                                                        <select @*name="TypeHardwareID"*@ class="form-control selectpicker input-lg">
-                                                            <option value="">Selecciona un Dispositivo</option>
-                                                            @{foreach (var item in Model.listaTypeHardware)
-                                            {
-                                                if (@item.Description != "Desktop" || @item.Description != "Laptop" || @item.Description != "Server" || @item.Description != "Touch" || @item.Description != "Impresora")
-                                                {
-                                                    <option value="@item.TypeHardwareID">@item.Description</option>
-                                                }
-                                            }
-                                        }
-
-                                        </select>
+                                                        
                                     </div>
                                     </div>
                                     </div>
@@ -325,19 +312,9 @@ $('#agregarComponente').click(function ()
 
                                         <label class="col-md-3 control-label">Marca:</label>
                                         <div class="col-md-8 selectContainer">
-                                            <div class="input-group">
+                                            <div class="input-group DatosMarca">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-facetime-video"></i></span>
-                                                <select @*name="TypeHardwareID"*@ class="form-control selectpicker input-lg">
-                                                    <option value="">Selecciona un Dispositivo</option>
-                                                                                                @{foreach (var item in Model.listaBrand)
-                                            {
-
-                                                <option value="@item.BrandID">@item.Name</option>
-
-                                            }
-                                        }
-
-                                        </select>
+                                                
                                     </div>
                                     </div>
 
@@ -363,11 +340,145 @@ $('#agregarComponente').click(function ()
                                     </div>
                                     </div>`;
 
+         var $nuevoComponente = $(nuevoComponente);
+    // template  
+       var t = document.querySelector('#mytemplate');
+       var t1 = document.querySelector('#mytemplate1');
+       var hardware = document.importNode(t.content, true);
+       var marca = document.importNode(t1.content, true);
       
-      
-
+        
+        debugger;
+        $nuevoComponente.find(".DatosHardware").append(hardware);
+        $nuevoComponente.find(".DatosMarca").append(marca);
         var papa = $('#accordion');
-        $(papa).append($(nuevoComponente));
+        $(papa).append($nuevoComponente);
+
+    
+
+   
+  
+        
+       
+        
+   
+      
+       
+      
+    
+        //document.body.appendChild(clone);
+        //var hardware = $("#hiddenHardwareC");
+        //var marca = $("#hiddenMarcaC");
+        //var datosH = $(".DatosHwardware")[0];
+        //var datosM = $(".DatosMarca")[0];
+        //debugger;
+        //$(datosH).append(hardware);
+        //debugger;
+        //datosM.append(marca);
+    
+
+
+});
+$('#eliminarComponenteModal').click(function(){
+
+    //Columna de los componentes
+    var componente = $("#accordion1 .panel").last()
+    componente.remove();
+});
+
+$('#agregarComponenteModal').click(function ()
+{
+    //Columna de los componentes
+    var columna = $("#accordion1");
+  
+
+    //Tamano de los los componentes
+    var num = $('#accordion1').children().length + 1;
+    debugger;
+    //Agregar nuevo componente
+    var nuevoComponente = `<div class="panel panel-default">
+                                    <div class="panel-heading color-header" role="tab" id="headingThree1">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" data-parent="#accordion1" role="button" data-toggle="collapse" href="#collapse1${num}" aria-expanded="false" aria-controls="collapseThree">
+                                                Item #${num}
+    </a>
+</h4>
+</div>
+<div id="collapse1${num}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree1">
+    <!-- CONTENIDO 3--> 
+    <div class="panel-body">
+        <!-- TIPO DE HARDWARE-->
+        <div class="row">
+            <label class="col-md-3 control-label">Hardware:</label>
+            <div class="col-md-8 selectContainer">
+                <div class="input-group DatosHardware">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-facetime-video"></i></span>
+                                                        
+</div>
+</div>
+</div>
+<br />
+
+<!-- SERIE-->
+<div class="row">
+
+    <label class="col-md-3 control-label">Serie:</label>
+    <div class="col-md-8 inputGroupContainer">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+            <input type="text" name="Model" class="form-control cajas input-lg" placeholder="Serie">
+        </div>
+    </div>
+
+</div>
+<br />
+
+<!-- MARCA-->
+<div class="row">
+
+    <label class="col-md-3 control-label">Marca:</label>
+    <div class="col-md-8 selectContainer">
+        <div class="input-group DatosMarca">
+            <span class="input-group-addon"><i class="glyphicon glyphicon glyphicon-facetime-video"></i></span>
+                                                
+</div>
+</div>
+
+</div>
+<br />
+
+<!-- MODELO-->
+<div class="row">
+
+    <label class="col-md-3 control-label">Modelo:</label>
+    <div class="col-md-8 inputGroupContainer">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-tag"></i></span>
+            <input type="text" name="Model" class="form-control cajas input-lg" placeholder="Modelo">
+        </div>
+    </div>
+
+</div>
+
+
+
+</div>
+</div>
+</div>`;
+
+    var $nuevoComponente = $(nuevoComponente);
+    // template  
+    var t = document.querySelector('#mytemplate');
+    var t1 = document.querySelector('#mytemplate1');
+    var hardware = document.importNode(t.content, true);
+    var marca = document.importNode(t1.content, true);
+      
+        
+    debugger;
+    $nuevoComponente.find(".DatosHardware").append(hardware);
+    $nuevoComponente.find(".DatosMarca").append(marca);
+    var papa = $('#accordion1');
+    $(papa).append($nuevoComponente);
 
     
 

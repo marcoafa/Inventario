@@ -21,6 +21,12 @@ namespace Inventario.Models
 
         public List<Invoice> listaFacturas;
 
+        public List<Product> listaProductos;
+
+        public List<BrandSoftware> listaBrandSoftware;
+
+        public List<Software> listaSoftware;
+
         public string veriFicacion;
        
         public bool garantia;
@@ -50,9 +56,16 @@ namespace Inventario.Models
                           select a).ToList();
 
              veriFicacion = "";
-            
-            
 
+
+             listaProductos = (from a in inv.Products
+                              select a).ToList();
+
+             listaBrandSoftware = (from a in inv.BrandSoftwares
+                              select a).ToList();
+
+             listaSoftware = (from a in inv.Softwares
+                                   select a).ToList();
         }
 
     }

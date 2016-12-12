@@ -14,7 +14,6 @@ namespace Inventario.Models
     
     public partial class Hardware
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Hardware()
         {
             this.Hardware1 = new HashSet<Hardware>();
@@ -36,12 +35,11 @@ namespace Inventario.Models
         public Nullable<System.DateTime> DateWarranty { get; set; }
     
         public virtual Area Area { get; set; }
-        public virtual Brand Brand { get; set; }
         public virtual Division Division { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Hardware> Hardware1 { get; set; }
         public virtual Hardware Hardware2 { get; set; }
         public virtual Invoice Invoice { get; set; }
         public virtual TypeHardware TypeHardware { get; set; }
+        public virtual Brand Brand { get; set; }
     }
 }

@@ -45,6 +45,33 @@ namespace Inventario.Controllers
 
             return resultStream;
         }
+        public ActionResult RegistroSoftware(string SerialNumber, int ProductoID, int BrandID, string PO, string KEY)
+        {
+
+            Software S = new Software
+                    {
+                        SerialNumber = SerialNumber,
+                        idProduct = ProductoID,
+                        idBrand = BrandID,
+                        PO = PO,
+                        SerialKey = KEY
+                    };
+
+            try
+            {
+                entidad.Softwares.Add(S);
+                entidad.SaveChanges();
+                TempData["verificacion"] = "Guardar";
+                return RedirectToAction("inventario");
+            }
+            catch
+            {
+                TempData["verificacion"] = "False";
+                return RedirectToAction("inventario");
+            }
+
+           
+        }
         public ActionResult EditarInventario(string id)
         {
 

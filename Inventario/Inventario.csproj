@@ -163,6 +163,9 @@
     <Compile Include="Models\Brand.cs">
       <DependentUpon>InventoryBDM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BrandSoftware.cs">
+      <DependentUpon>InventoryBDM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Componentes.cs" />
     <Compile Include="Models\Division.cs">
       <DependentUpon>InventoryBDM.tt</DependentUpon>
@@ -189,7 +192,13 @@
     <Compile Include="Models\Invoice.cs">
       <DependentUpon>InventoryBDM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Product.cs">
+      <DependentUpon>InventoryBDM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Responsable.cs">
+      <DependentUpon>InventoryBDM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Software.cs">
       <DependentUpon>InventoryBDM.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SubArea.cs">
@@ -218,16 +227,6 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\InventoryBDM.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>InventoryBDM.edmx</DependentUpon>
-      <LastGenOutput>InventoryBDM.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\InventoryBDM.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>InventoryBDM.edmx</DependentUpon>
-      <LastGenOutput>InventoryBDM.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -241,17 +240,28 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\HelpPageApiModel.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <Content Include="Archivos\codigo-ascii.pdf" />
     <EntityDeploy Include="Models\InventoryBDM.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>InventoryBDM.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Models\InventoryBDM.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>InventoryBDM.edmx</DependentUpon>
+      <LastGenOutput>InventoryBDM.Context.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\InventoryBDM.edmx.diagram">
       <DependentUpon>InventoryBDM.edmx</DependentUpon>
     </Content>
-    <Content Include="Archivos\codigo-ascii.pdf" />
+    <Content Include="Models\InventoryBDM.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>InventoryBDM.edmx</DependentUpon>
+      <LastGenOutput>InventoryBDM.cs</LastGenOutput>
+    </Content>
     <None Include="Properties\PublishProfiles\Production.pubxml" />
     <Content Include="Scripts\Inventario\Computadoras.js" />
     <Content Include="Scripts\Inventario\Editar.js" />
+    <Content Include="Scripts\Inventario\Software.js" />
     <Content Include="Scripts\Inventario\TablaBusqueda.js" />
     <Content Include="Scripts\Inventario\VerFactura.js" />
     <Content Include="Scripts\jquery-3.1.0.min.js" />

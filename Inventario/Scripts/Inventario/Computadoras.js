@@ -172,9 +172,6 @@ $('#GuardarEquipo').click(function(){
         'CriticEquip' :  CriticEquip,
         'SerialAssigned': null,
         'DateWarranty' : GarantiaH
-
-
-
     };
   
     

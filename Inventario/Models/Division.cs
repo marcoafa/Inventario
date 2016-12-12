@@ -14,7 +14,6 @@ namespace Inventario.Models
     
     public partial class Division
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Division()
         {
             this.Areas = new HashSet<Area>();
@@ -25,9 +24,7 @@ namespace Inventario.Models
         public string Name { get; set; }
         public Nullable<int> Order { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Area> Areas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Hardware> Hardwares { get; set; }
     }
 }

@@ -14,7 +14,6 @@ namespace Inventario.Models
     
     public partial class Invoice
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Invoice()
         {
             this.Hardwares = new HashSet<Hardware>();
@@ -24,7 +23,6 @@ namespace Inventario.Models
         public string RequestDocument { get; set; }
         public string rutaArchivo { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Hardware> Hardwares { get; set; }
     }
 }

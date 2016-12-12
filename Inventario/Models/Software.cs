@@ -12,16 +12,15 @@ namespace Inventario.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Brand
+    public partial class Software
     {
-        public Brand()
-        {
-            this.Hardwares = new HashSet<Hardware>();
-        }
+        public string SerialNumber { get; set; }
+        public Nullable<int> idProduct { get; set; }
+        public Nullable<int> idBrand { get; set; }
+        public string PO { get; set; }
+        public string SerialKey { get; set; }
     
-        public int BrandID { get; set; }
-        public string Name { get; set; }
-    
-        public virtual ICollection<Hardware> Hardwares { get; set; }
+        public virtual Product Product { get; set; }
+        public virtual BrandSoftware BrandSoftware { get; set; }
     }
 }
